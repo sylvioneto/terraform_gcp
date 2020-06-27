@@ -1,0 +1,8 @@
+.idea
+.terraform
+examples
+*key.json
+*.json
+*.tfplan
+*.tfstate
+*.backup
