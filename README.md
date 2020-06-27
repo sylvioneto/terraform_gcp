@@ -14,7 +14,7 @@ linkedin: https://www.linkedin.com/in/spedrozaneto/?locale=en_US
 - google provider 3.12 or later
 
 ## Modules
-- [core](./core): it creates resources that are used project-wise. VPC, subnets, firewall rules, and buckets.
+- [core](./core): it creates resources that are used project-wise. VPC, subnets, firewall rules, Nat, router, and buckets.
 - [mig](./mig): it creates a regional Managed Instance Group in a given subnet. It includes Logging and Monitoring agents, and Autoscaling.
 
 ## Examples
@@ -47,12 +47,10 @@ module "core" {
   subnets = [
     {
       name = "subnet-a"
-      region = local.region
       ip_cidr_range = "10.0.4.0/22"
     },
     {
       name = "subnet-b"
-      region = local.region
       ip_cidr_range = "10.0.8.0/22"
     }
   ]
