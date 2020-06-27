@@ -65,8 +65,8 @@ module "front_end" {
   owner       = "ordermngt"
 
   network = module.core.vpc.id
-  region  = "us-central1"
-  subnet  = "subnet-a"
+  region  = local.region
+  subnet  = module.core.subnets[0]
 
   network_tags = [
     "front-end",
@@ -86,8 +86,8 @@ module "back_end" {
   owner       = "ordermngt"
 
   network = module.core.vpc.id
-  region  = "us-west1"
-  subnet  = "subnet-b"
+  region  = local.region
+  subnet  = module.core.subnets[0]
 
   network_tags = [
     "allow-internal-all",
