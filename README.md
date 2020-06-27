@@ -27,8 +27,15 @@ Also, it attaches two tags to the VMs:
 As a result, you can ssh both of them using gcloud, and the front-end can access the back-end instances. You can use `ping` to test this.
 
 ```hcl-terraform
+terraform {
+  backend "gcs" {
+    bucket = "myproject-tf-state"
+    prefix = "mysystem/sanbox"
+  }
+}
+
 locals {
-  project_id = "my-test-project"
+  project_id = "myproject"
   region     = "us-central1"
   env        = "sandbox"
 }
@@ -40,25 +47,25 @@ provider "google" {
 }
 
 module "core" {
-  source     = "../../modules/core"
+  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core"
   project_id = local.project_id
   region     = local.region
   env        = local.env
   subnets = [
     {
-      name = "subnet-a"
+      name          = "subnet-a"
       ip_cidr_range = "10.0.4.0/22"
     },
     {
-      name = "subnet-b"
+      name          = "subnet-b"
       ip_cidr_range = "10.0.8.0/22"
     }
   ]
-  ssh_cidr = "174.99.99.99/32"
+  ssh_cidr = "111.11.11.11/32"
 }
 
 module "front_end" {
-  source = "../../modules/mig"
+  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/mig"
 
   name        = "front-end-servers"
   description = "Order management website"
@@ -76,10 +83,12 @@ module "front_end" {
   metadata = {
     log_bucket = module.core.vm_log_bucket
   }
+
+  startup_script = file("startup.bash")
 }
 
 module "back_end" {
-  source = "../../modules/mig"
+  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/mig"
 
   name        = "back-end-servers"
   description = "Order management APIs"
@@ -87,7 +96,7 @@ module "back_end" {
 
   network = module.core.vpc.id
   region  = local.region
-  subnet  = module.core.subnets[0]
+  subnet  = module.core.subnets[1]
 
   network_tags = [
     "allow-internal-all",
