@@ -21,27 +21,6 @@ resource "google_compute_firewall" "allow_internal_all" {
   }
 }
 
-resource "google_compute_firewall" "allow_egress_all" {
-  name               = "allow-egress-all"
-  description        = "Allow egress to everywhere"
-  network            = google_compute_network.vpc.self_link
-  direction          = "EGRESS"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["0-65535"]
-  }
-
-  allow {
-    protocol = "udp"
-    ports    = ["0-65535"]
-  }
-
-  allow {
-    protocol = "icmp"
-  }
-}
-
 resource "google_compute_firewall" "allow_external_ssh" {
   name          = "allow-ssh"
   description   = "Allow SSH to the instances from external source"
@@ -53,5 +32,31 @@ resource "google_compute_firewall" "allow_external_ssh" {
   allow {
     protocol = "tcp"
     ports    = ["22"]
+  }
+}
+
+resource "google_compute_firewall" "allow_ingress_http" {
+  name          = "allow-http"
+  description   = "Allow HTTP ingress traffic from the internet"
+  network       = google_compute_network.vpc.self_link
+  direction     = "INGRESS"
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["front-end"]
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80","8080"]
+  }
+}
+
+resource "google_compute_firewall" "allow_google_hc" {
+  name          = "allow-google-health-checks"
+  description   = "Allow Google Health Checks"
+  network       = google_compute_network.vpc.self_link
+  direction     = "INGRESS"
+  source_ranges = ["35.191.0.0/16","130.211.0.0/22"]
+
+  allow {
+    protocol = "tcp"
   }
 }

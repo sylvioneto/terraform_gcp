@@ -30,14 +30,14 @@ variable "machine_type" {
 
 variable "startup_script" {
   description = "Startup script. By default it installs Cloud Logging and Cloud Monitoring agents"
-  default     = <<EOF
-  #! /bin/bash
+  default     = <<EOT
+  #!/bin/bash
   curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh
   sudo bash install-monitoring-agent.sh
 
   curl -sSO https://dl.google.com/cloudagents/install-logging-agent.sh
   sudo bash install-logging-agent.sh
-  EOF
+  EOT
 }
 
 variable "image" {
@@ -68,7 +68,7 @@ variable "network_tags" {
 variable "scopes" {
   description = "Compute Engine scopes. Full list available in https://cloud.google.com/sdk/gcloud/reference/alpha/compute/instances/set-scopes#--scopes"
   type        = list(string)
-  default     = ["logging-write", "monitoring-write", "storage-ro", "userinfo-email", "service-management", "pubsub"]
+  default     = ["logging-write", "monitoring-write", "storage-ro", "compute-ro", "userinfo-email", "service-management"]
 }
 
 variable "autoscaler_config" {

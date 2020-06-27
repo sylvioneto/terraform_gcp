@@ -1,13 +1,7 @@
-resource "google_compute_target_pool" "target_pool" {
-  name       = "${var.name}-tgt-pool"
-  region     = var.region
-}
-
 resource "google_compute_region_instance_group_manager" "instance_group" {
   name               = "${var.name}-group"
   region             = var.region
   base_instance_name = var.name
-  target_pools       = [google_compute_target_pool.target_pool.self_link]
 
   version {
     instance_template = google_compute_instance_template.template.id
