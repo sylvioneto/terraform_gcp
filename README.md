@@ -1,4 +1,4 @@
-# Terraform for Google Cloud Platform
+# Terraform modules and examples for Google Cloud Platform
 
 ## Description
 Terraform modules to use on Google Cloud Platform - GCP  
