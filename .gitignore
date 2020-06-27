@@ -1,6 +1,6 @@
 .idea
 .terraform
-examples
+tests
 *key.json
 *.json
 *.tfplan
