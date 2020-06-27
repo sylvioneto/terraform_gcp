@@ -1,5 +1,5 @@
 resource "google_compute_instance_template" "template" {
-  name        = var.name
+  name_prefix = "${var.name}-"
   description = var.description
 
   instance_description    = "Instance created from template - ${var.name}"
@@ -33,5 +33,9 @@ resource "google_compute_instance_template" "template" {
   service_account {
     email  = local.service_account
     scopes = var.scopes
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }

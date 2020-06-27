@@ -42,7 +42,7 @@ variable "startup_script" {
 
 variable "image" {
   description = "OS Image"
-  default     = "debian-cloud/debian-9"
+  default     = "debian-cloud/debian-10"
 }
 
 variable "preemptible" {

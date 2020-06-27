@@ -1,6 +1,6 @@
 resource "google_compute_target_pool" "target_pool" {
-  name   = "${var.name}-tgt-pool"
-  region = var.region
+  name       = "${var.name}-tgt-pool"
+  region     = var.region
 }
 
 resource "google_compute_region_instance_group_manager" "instance_group" {
