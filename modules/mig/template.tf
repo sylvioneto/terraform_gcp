@@ -28,9 +28,6 @@ resource "google_compute_instance_template" "template" {
   network_interface {
     network    = var.network
     subnetwork = data.google_compute_subnetwork.subnetwork.id
-    access_config {
-      // external ip
-    }
   }
 
   service_account {
