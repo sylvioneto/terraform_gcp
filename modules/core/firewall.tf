@@ -22,15 +22,15 @@ resource "google_compute_firewall" "allow_internal_all" {
 }
 
 resource "google_compute_firewall" "allow_external_ssh" {
-  name          = "allow-ssh"
-  description   = "Allow SSH to the instances from external source"
-  network       = google_compute_network.vpc.self_link
-  direction     = "INGRESS"
+  name        = "allow-ssh"
+  description = "Allow SSH to the instances from external source"
+  network     = google_compute_network.vpc.self_link
+  direction   = "INGRESS"
   source_ranges = [
     "35.235.240.0/20", // Google IAP https://cloud.google.com/iap/docs/using-tcp-forwarding
     var.ssh_cidr
   ]
-  target_tags   = ["allow-ssh"]
+  target_tags = ["allow-ssh"]
 
   allow {
     protocol = "tcp"
@@ -48,7 +48,7 @@ resource "google_compute_firewall" "allow_ingress_http" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80","8080"]
+    ports    = ["80", "8080"]
   }
 }
 
@@ -57,7 +57,7 @@ resource "google_compute_firewall" "allow_google_hc" {
   description   = "Allow Google Health Checks"
   network       = google_compute_network.vpc.self_link
   direction     = "INGRESS"
-  source_ranges = ["35.191.0.0/16","130.211.0.0/22"]
+  source_ranges = ["35.191.0.0/16", "130.211.0.0/22"]
 
   allow {
     protocol = "tcp"

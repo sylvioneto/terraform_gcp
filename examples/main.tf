@@ -12,9 +12,9 @@ locals {
 }
 
 provider "google" {
-  project     = local.project_id
-  region      = local.region
-  version     = "3.22.0"
+  project = local.project_id
+  region  = local.region
+  version = "3.22.0"
 }
 
 module "core" {
@@ -36,7 +36,7 @@ module "core" {
 }
 
 module "front_end" {
-  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/mig"
+  source = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/mig"
 
   name        = "front-end-servers"
   description = "Order management website"
@@ -59,7 +59,7 @@ module "front_end" {
 }
 
 module "back_end" {
-  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/mig"
+  source = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/mig"
 
   name        = "back-end-servers"
   description = "Order management APIs"

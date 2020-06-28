@@ -45,10 +45,10 @@ resource "google_storage_bucket" "cloudbuild_artifacts" {
 
 # This bucket stores Ms startup/shutdown script logs.
 resource "google_storage_bucket" "vm_logs" {
-  name               = "${var.project_id}-vm-logs"
-  location           = var.region
-  storage_class      = "STANDARD"
-  force_destroy      = true
+  name          = "${var.project_id}-vm-logs"
+  location      = var.region
+  storage_class = "STANDARD"
+  force_destroy = true
 
   labels = {
     project = var.project_id
@@ -73,10 +73,10 @@ resource "google_storage_bucket" "vm_logs" {
 # This bucket is used as a Helm Chart private repository
 # For more information: https://github.com/hayorov/helm-gcs
 resource "google_storage_bucket" "helm_charts" {
-  name               = "${var.project_id}-helm-charts"
-  location           = var.region
-  storage_class      = "STANDARD"
-  force_destroy      = true
+  name          = "${var.project_id}-helm-charts"
+  location      = var.region
+  storage_class = "STANDARD"
+  force_destroy = true
 
   labels = {
     project = var.project_id

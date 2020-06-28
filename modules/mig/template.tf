@@ -16,6 +16,7 @@ resource "google_compute_instance_template" "template" {
   scheduling {
     automatic_restart   = true
     on_host_maintenance = "MIGRATE"
+    preemptible         = var.preemptible
   }
 
   // Create a new boot disk from an image
