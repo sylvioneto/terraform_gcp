@@ -84,7 +84,19 @@ variable "service_account" {
 }
 
 variable "labels" {
-  type = map
-  default = {}
+  type        = map
+  default     = {}
   description = "(optional) Labels to be attached to the instances"
+}
+
+variable "automatic_restart" {
+  type        = bool
+  description = "Automatic restart the vms"
+  default     = false
+}
+
+variable "on_host_maintenance" {
+  type        = string
+  description = "On host maintenance action"
+  default     = "MIGRATE"
 }

@@ -11,8 +11,8 @@ resource "google_compute_instance_template" "template" {
   labels = var.labels
 
   scheduling {
-    automatic_restart   = true
-    on_host_maintenance = "MIGRATE"
+    automatic_restart   = var.automatic_restart
+    on_host_maintenance = var.on_host_maintenance
     preemptible         = var.preemptible
   }
 
