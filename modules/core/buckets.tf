@@ -1,15 +1,12 @@
-# Users can set this bucket in logBucket cloudbuild.yaml for output
+# Bucket to store Cloud Build logs
+# Ref: https://cloud.google.com/cloud-build/docs/securing-builds/store-manage-build-logs#store-default-bucket
 resource "google_storage_bucket" "cloudbuild_logs" {
   name          = "${var.project_id}-cloudbuild-logs"
   location      = var.region
   storage_class = "STANDARD"
   force_destroy = true
 
-  labels = {
-    project = var.project_id
-    purpose = "cloudbuild-logs"
-    env     = var.env
-  }
+  labels = merge(locals.labels, "purpose=cloud-build")
 
   versioning {
     enabled = false
@@ -25,7 +22,8 @@ resource "google_storage_bucket" "cloudbuild_logs" {
   }
 }
 
-# Users can use this bucket to store Cloud Build artifacts
+# Bucket to store Cloud Build artifacts
+# Ref: https://cloud.google.com/cloud-build/docs/building/store-build-artifacts
 resource "google_storage_bucket" "cloudbuild_artifacts" {
   name          = "${var.project_id}-cloudbuild-artifacts"
   location      = var.region
@@ -34,7 +32,7 @@ resource "google_storage_bucket" "cloudbuild_artifacts" {
 
   labels = {
     project = var.project_id
-    purpose = "cloudbuild-artifacts"
+    labels = merge(locals.labels, "purpose=cloud-build")
     env     = var.env
   }
 
@@ -43,18 +41,14 @@ resource "google_storage_bucket" "cloudbuild_artifacts" {
   }
 }
 
-# This bucket stores Ms startup/shutdown script logs.
+# Bucket to store VM startup logs
 resource "google_storage_bucket" "vm_logs" {
   name          = "${var.project_id}-vm-logs"
   location      = var.region
   storage_class = "STANDARD"
   force_destroy = true
 
-  labels = {
-    project = var.project_id
-    purpose = "vm-logs"
-    env     = var.env
-  }
+  labels = merge(locals.labels, "purpose=vm-logs")
 
   versioning {
     enabled = false
@@ -70,19 +64,30 @@ resource "google_storage_bucket" "vm_logs" {
   }
 }
 
-# This bucket is used as a Helm Chart private repository
+# Bucket to store Helm Charts
 # For more information: https://github.com/hayorov/helm-gcs
 resource "google_storage_bucket" "helm_charts" {
   name          = "${var.project_id}-helm-charts"
   location      = var.region
   storage_class = "STANDARD"
   force_destroy = true
+  
+  labels = merge(locals.labels, "purpose=helm-charts")
 
-  labels = {
-    project = var.project_id
-    purpose = "store-helm-charts"
-    env     = var.env
+  versioning {
+    enabled = false
   }
+}
+
+# Bucket to store Terraform states
+# For more information: https://github.com/hayorov/helm-gcs
+resource "google_storage_bucket" "helm_charts" {
+  name          = "${var.project_id}-terraform-states"
+  location      = var.region
+  storage_class = "STANDARD"
+  force_destroy = true
+  
+  labels = merge(locals.labels, "purpose=tf-states")
 
   versioning {
     enabled = false
