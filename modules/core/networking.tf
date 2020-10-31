@@ -7,7 +7,7 @@ resource "google_compute_network" "vpc" {
 
 # Create NAT and Router
 resource "google_compute_router" "nat_router" {
-  name    = "${var.project_id}-router"
+  name    = "${var.project_id}-nat-router"
   network = google_compute_network.vpc.id
 
   bgp {
@@ -15,7 +15,7 @@ resource "google_compute_router" "nat_router" {
   }
 }
 
-resource "google_compute_router_nat" "nat" {
+resource "google_compute_router_nat" "nat_gateway" {
   name                               = "${var.project_id}-nat"
   router                             = google_compute_router.nat_router.name
   region                             = google_compute_router.nat_router.region
@@ -27,4 +27,3 @@ resource "google_compute_router_nat" "nat" {
     filter = "ERRORS_ONLY"
   }
 }
-
