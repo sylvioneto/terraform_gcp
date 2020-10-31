@@ -10,5 +10,5 @@ However, Google might change free-tier eligibility so please double check https:
 - google provider 3.12 or later
 
 ## Modules
-- [core](./core): It creates core resources that are useful in any GCP project.
-- [mig](./mig): It creates a regional Managed Instance Group in a given subnet. It includes Logging and Monitoring agents, and Autoscaling.
+- [core](./modules/core): It creates core resources that are useful in any GCP project.
+- [mig](./modules/mig): It creates a regional Managed Instance Group in a given subnet. It includes Logging and Monitoring agents, and Autoscaling.
