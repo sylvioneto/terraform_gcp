@@ -30,7 +30,7 @@ resource "google_compute_firewall" "allow_external_ssh" {
     "35.235.240.0/20", // Google IAP https://cloud.google.com/iap/docs/using-tcp-forwarding
     var.ssh_cidr
   ]
-  target_tags = ["allow-ssh"]
+  target_tags = ["allow-ext-ssh"]
 
   allow {
     protocol = "tcp"
@@ -44,11 +44,13 @@ resource "google_compute_firewall" "allow_ingress_http" {
   network       = google_compute_network.vpc.self_link
   direction     = "INGRESS"
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["front-end"]
+  target_tags   = ["allow-http"]
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8080"]
+    ports    = [
+      "80", "8080", "443"
+    ]
   }
 }
 

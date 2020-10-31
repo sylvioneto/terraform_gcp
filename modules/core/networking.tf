@@ -1,3 +1,11 @@
+# Create VPC
+resource "google_compute_network" "vpc" {
+  name                    = "${var.project_id}-vpc"
+  description             = "VPC managed by terraform"
+  auto_create_subnetworks = false
+}
+
+# Create NAT and Router
 resource "google_compute_router" "nat_router" {
   name    = "${var.project_id}-router"
   network = google_compute_network.vpc.id
@@ -19,3 +27,4 @@ resource "google_compute_router_nat" "nat" {
     filter = "ERRORS_ONLY"
   }
 }
+
