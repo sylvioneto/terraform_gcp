@@ -5,6 +5,6 @@ resource "google_bigquery_dataset" "gke_usage_metering" {
   description = "This dataset stores GKE usage metrics"
   location    = var.bq_location
 
-  labels = merge(local.labels, {purpose="gke-metering"})
+  labels                     = merge(local.labels, { purpose = "gke-metering" })
   delete_contents_on_destroy = true
 }

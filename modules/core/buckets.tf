@@ -44,7 +44,7 @@ resource "google_storage_bucket" "vm_logs" {
   storage_class = "STANDARD"
   force_destroy = true
 
-  labels = merge(local.labels, {purpose="vm-logs"})
+  labels = merge(local.labels, { purpose = "vm-logs" })
 
   versioning {
     enabled = false
@@ -67,8 +67,8 @@ resource "google_storage_bucket" "helm_charts" {
   location      = var.region
   storage_class = "STANDARD"
   force_destroy = true
-  
-  labels = merge(local.labels, {purpose="helm-charts"})
+
+  labels = merge(local.labels, { purpose = "helm-charts" })
 
   versioning {
     enabled = false
@@ -82,8 +82,8 @@ resource "google_storage_bucket" "terraform_state" {
   location      = var.region
   storage_class = "STANDARD"
   force_destroy = true
-  
-  labels = merge(local.labels, {purpose="tf-state"})
+
+  labels = merge(local.labels, { purpose = "tf-state" })
 
   versioning {
     enabled = false

@@ -1,7 +1,8 @@
 locals {
   _labels = {
-    project = var.project_id
-    env     = var.env
+    project   = var.project_id
+    env       = var.env
+    tf-module = "core"
   }
   labels = merge(local._labels, var.labels)
 }
@@ -35,5 +36,5 @@ variable "ssh_cidr" {
 
 variable "labels" {
   description = "Additional labels"
-  default = {}
+  default     = {}
 }

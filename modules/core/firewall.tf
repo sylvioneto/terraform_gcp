@@ -48,7 +48,7 @@ resource "google_compute_firewall" "allow_ingress_http" {
 
   allow {
     protocol = "tcp"
-    ports    = [
+    ports = [
       "80", "8080", "443"
     ]
   }
