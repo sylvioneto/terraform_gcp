@@ -1,8 +1,9 @@
 locals {
-  labels = {
+  _labels = {
     project = var.project_id
     env     = var.env
   }
+  labels = merge(local._labels, var.labels)
 }
 
 variable "project_id" {
@@ -30,4 +31,9 @@ variable "vpc_cidr" {
 
 variable "ssh_cidr" {
   description = "Allow this CIDR to ssh to the instances with the tag allow-ssh"
+}
+
+variable "labels" {
+  description = "Additional labels"
+  default = {}
 }

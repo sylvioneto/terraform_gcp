@@ -6,7 +6,7 @@ resource "google_storage_bucket" "cloudbuild_logs" {
   storage_class = "STANDARD"
   force_destroy = true
 
-  labels = merge(locals.labels, "purpose=cloud-build")
+  labels = local.labels
 
   versioning {
     enabled = false
@@ -30,11 +30,7 @@ resource "google_storage_bucket" "cloudbuild_artifacts" {
   storage_class = "STANDARD"
   force_destroy = true
 
-  labels = {
-    project = var.project_id
-    labels = merge(locals.labels, "purpose=cloud-build")
-    env     = var.env
-  }
+  labels = local.labels
 
   versioning {
     enabled = false
@@ -48,7 +44,7 @@ resource "google_storage_bucket" "vm_logs" {
   storage_class = "STANDARD"
   force_destroy = true
 
-  labels = merge(locals.labels, "purpose=vm-logs")
+  labels = merge(local.labels, {purpose="vm-logs"})
 
   versioning {
     enabled = false
@@ -72,7 +68,7 @@ resource "google_storage_bucket" "helm_charts" {
   storage_class = "STANDARD"
   force_destroy = true
   
-  labels = merge(locals.labels, "purpose=helm-charts")
+  labels = merge(local.labels, {purpose="helm-charts"})
 
   versioning {
     enabled = false
@@ -80,14 +76,14 @@ resource "google_storage_bucket" "helm_charts" {
 }
 
 # Bucket to store Terraform states
-# For more information: https://github.com/hayorov/helm-gcs
-resource "google_storage_bucket" "helm_charts" {
-  name          = "${var.project_id}-terraform-states"
+# Ref: https://www.terraform.io/docs/backends/types/gcs.html
+resource "google_storage_bucket" "terraform_state" {
+  name          = "${var.project_id}-terraform-state"
   location      = var.region
   storage_class = "STANDARD"
   force_destroy = true
   
-  labels = merge(locals.labels, "purpose=tf-states")
+  labels = merge(local.labels, {purpose="tf-state"})
 
   versioning {
     enabled = false
