@@ -5,3 +5,7 @@ output "gke_metering_dataset" {
 output "vpc" {
   value = google_compute_network.vpc
 }
+
+output "vm_log_bucket" {
+  value = google_storage_bucket.vm_logs
+}

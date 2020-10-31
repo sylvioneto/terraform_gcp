@@ -14,7 +14,6 @@ resource "google_compute_region_autoscaler" "autoscaler" {
   region = var.region
   target = google_compute_region_instance_group_manager.instance_group.self_link
 
-
   autoscaling_policy {
     min_replicas    = lookup(var.autoscaler_config, "min_replicas")
     max_replicas    = lookup(var.autoscaler_config, "max_replicas")

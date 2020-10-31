@@ -8,10 +8,7 @@ resource "google_compute_instance_template" "template" {
   metadata_startup_script = var.startup_script
   tags                    = var.network_tags
 
-  labels = {
-    terraform = "true"
-    owner     = var.owner
-  }
+  labels = var.labels
 
   scheduling {
     automatic_restart   = true
@@ -28,7 +25,7 @@ resource "google_compute_instance_template" "template" {
 
   network_interface {
     network    = var.network
-    subnetwork = data.google_compute_subnetwork.subnetwork.id
+    subnetwork = var.subnet
   }
 
   service_account {

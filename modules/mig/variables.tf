@@ -47,11 +47,7 @@ variable "image" {
 
 variable "preemptible" {
   description = "Preemptible VM"
-  default     = true
-}
-
-variable "owner" {
-  description = "Who owns the vms created by this template"
+  default     = false
 }
 
 variable "metadata" {
@@ -77,7 +73,7 @@ variable "autoscaler_config" {
   default = {
     max_replicas    = 5
     min_replicas    = 1
-    cpu_target      = 0.75
+    cpu_target      = 0.90
     cooldown_period = 90
   }
 }
@@ -87,3 +83,8 @@ variable "service_account" {
   default     = null
 }
 
+variable "labels" {
+  type = map
+  default = {}
+  description = "(optional) Labels to be attached to the instances"
+}
