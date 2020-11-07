@@ -70,3 +70,15 @@ variable "master_authorized_cidr_blocks" {
   description = "List of CIDR authorized to access the GKE cluster control plane."
   default     = []
 }
+
+variable "iam_roles" {
+  type        = list
+  description = "List of cluster service account roles"
+  default = [
+    "roles/storage.objectViewer",
+    "roles/logging.logWriter",
+    "roles/monitoring.admin",
+    "roles/cloudtrace.admin",
+    "roles/servicemanagement.reporter"
+  ]
+}
