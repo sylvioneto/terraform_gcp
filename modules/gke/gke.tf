@@ -40,8 +40,9 @@ resource "google_container_cluster" "gke" {
 
   // Nodes config
   node_config {
-    preemptible  = true
-    machine_type = var.machine_type
+    service_account = google_service_account.service_account.email
+    preemptible     = true
+    machine_type    = var.machine_type
 
     metadata = {
       disable-legacy-endpoints = "true"
