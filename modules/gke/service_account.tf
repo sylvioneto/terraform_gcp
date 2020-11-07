@@ -1,5 +1,5 @@
 resource "google_service_account" "service_account" {
-  account_id   = "gke-${var.name}"
+  account_id   = "gke-${var.region}-${var.name}"
   display_name = "GKE Cluster ${var.name}"
 }
 
