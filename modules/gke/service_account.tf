@@ -7,7 +7,6 @@ resource "google_project_iam_member" "storage" {
   role = "roles/storage.objectViewer"
 
   member = "serviceAccount:${google_service_account.service_account.name}"
-
 }
 
 resource "google_project_iam_member" "logging" {
@@ -20,7 +19,6 @@ resource "google_project_iam_member" "monitoring" {
   role = "roles/monitoring.admin"
 
   member = "serviceAccount:${google_service_account.service_account.name}"
-
 }
 
 resource "google_project_iam_member" "trace" {
