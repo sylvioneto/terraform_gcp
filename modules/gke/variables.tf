@@ -67,6 +67,6 @@ variable "default_max_pods_per_node" {
 
 variable "master_authorized_cidr_blocks" {
   type        = list
-  description = "List of CIDR authorized to access the GKE cluster"
+  description = "List of CIDR authorized to access the GKE cluster control plane."
   default     = []
 }
