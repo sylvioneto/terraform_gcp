@@ -9,9 +9,12 @@ Example of a backend servers deployment.
 
 ```hcl-terraform
 locals {
-  project_id = "myname-sandbox"
   region     = "us-central1"
-  env        = "sandbox"
+  labels = {
+    terraform   = "true"
+    cost-center = "training"
+    env        = "sandbox"
+  }
 }
 
 provider "google" {
@@ -24,11 +27,7 @@ module "core" {
   source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core"
   project_id = local.project_id
   region     = local.region
-  env        = local.env
-  ssh_cidr   = "XXX.XXX.XXX.XXX/32"
-  labels = {
-      cost-center="training"
-  }
+  labels = local.labels
 }
 
 resource "google_compute_subnetwork" "be_servers" {
@@ -56,10 +55,6 @@ module "order_man_be" {
     log_bucket = module.core.vm_log_bucket.name
   }
 
-  labels = {
-    terraform   = "true"
-    cost-center = "training"
-    env         = "sandbox"
-  }
+  labels = local.labels
 }
 ```

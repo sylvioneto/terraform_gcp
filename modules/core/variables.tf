@@ -1,14 +1,9 @@
 locals {
   _labels = {
     project   = data.google_project.project.project_id
-    env       = var.env
     tf-module = "core"
   }
   labels = merge(local._labels, var.labels)
-}
-
-variable "env" {
-  description = "Describe the environment type: sandbox, dev, qa, prod"
 }
 
 variable "region" {

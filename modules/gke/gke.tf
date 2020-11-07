@@ -28,6 +28,15 @@ resource "google_container_cluster" "gke" {
     cluster_secondary_range_name  = "pods"
     services_secondary_range_name = "services"
   }
+  master_authorized_networks_config {
+    dynamic "cidr_blocks" {
+      for_each = var.master_authorized_cidr_blocks
+      content {
+        cidr_block   = cidr_blocks.value["cidr_block"]
+        display_name = cidr_blocks.value["display_name"]
+      }
+    }
+  }
 
   // Nodes config
   node_config {
