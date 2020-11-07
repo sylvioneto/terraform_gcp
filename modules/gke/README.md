@@ -1,7 +1,7 @@
 # GKE module
 
 ## Description
-This modules create a Google Kubernetes cluster.
+This modules create a regional Google Kubernetes cluster.
 
 ### Usage
 
@@ -37,11 +37,5 @@ module "gke_cluster" {
   vpc                      = module.core.vpc.self_link
   labels                   = local.labels
   remove_default_node_pool = false
-  master_authorized_cidr_blocks = [
-    {
-      cidr_block   = "10.0.0.0/8"
-      display_name = "vpc"
-    }
-  ]
 }
 ```
