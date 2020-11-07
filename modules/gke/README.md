@@ -6,7 +6,7 @@ Please explore the variables.tf file to see the values you can set.
 
 ### Usage
 
-Example of a basic cluster creation.
+Example of a basic cluster, with default IP ranges from module, and nodes with ssh firewall tag.
 
 ```hcl-terraform
 locals {
@@ -26,17 +26,18 @@ provider "google" {
 }
 
 module "core" {
-  source = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core"
+  source = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core?ref=v1.1"
   region = local.region
   labels = local.labels
 }
 
 module "gke_cluster" {
-  source                   = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/gke"
-  name                     = "my-first-cluster"
+  source                   = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/gke?ref=v1.1"
+  name                     = "test-1"
   region                   = local.region
   vpc                      = module.core.vpc.self_link
-  labels                   = local.labels
   remove_default_node_pool = false
+  resource_labels          = local.labels
+  tags                     = ["allow-ext-ssh"]
 }
 ```

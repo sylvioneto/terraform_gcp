@@ -25,7 +25,7 @@ provider "google" {
 }
 
 module "core" {
-  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core"
+  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core?ref=v1.1"
   project_id = data.google_project.project.project_id
   region     = local.region
   env        = local.env

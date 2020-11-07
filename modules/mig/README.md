@@ -24,7 +24,7 @@ provider "google" {
 }
 
 module "core" {
-  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core"
+  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core?ref=v1.1"
   project_id = local.project_id
   region     = local.region
   labels = local.labels
@@ -38,7 +38,7 @@ resource "google_compute_subnetwork" "be_servers" {
 }
 
 module "order_man_be" {
-  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/mig"
+  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/mig?ref=v1.1"
 
   name        = "order-man-be"
   description = "Order Management backend servers"
