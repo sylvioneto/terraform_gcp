@@ -8,7 +8,7 @@ Please explore the variables.tf file to see the values you can set.
 
 Example of a basic cluster, with default IP ranges from module, and nodes with ssh firewall tag.
 
-```json
+```hcl
 locals {
   project_id = "myname-sandbox"
   region     = "us-central1"
