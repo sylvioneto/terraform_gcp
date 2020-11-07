@@ -1,14 +1,10 @@
 locals {
   _labels = {
-    project   = var.project_id
+    project   = data.google_project.project.project_id
     env       = var.env
     tf-module = "core"
   }
   labels = merge(local._labels, var.labels)
-}
-
-variable "project_id" {
-  description = "project_id"
 }
 
 variable "env" {

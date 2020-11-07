@@ -17,14 +17,14 @@ locals {
 }
 
 provider "google" {
-  project     = local.project_id
+  project     = data.google_project.project.project_id
   region      = local.region
   version     = "3.41.0"
 }
 
 module "core" {
   source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core"
-  project_id = local.project_id
+  project_id = data.google_project.project.project_id
   region     = local.region
   env        = local.env
   ssh_cidr   = "XXX.XXX.XXX.XXX/32"
