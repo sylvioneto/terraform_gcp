@@ -7,7 +7,7 @@ It creates a regional Managed Instance Group in a given subnet. It includes Logg
 
 Example of a backend servers deployment.
 
-```hcl-terraform
+```json
 locals {
   region     = "us-central1"
   labels = {

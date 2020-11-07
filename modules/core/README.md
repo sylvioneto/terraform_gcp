@@ -11,7 +11,7 @@ Please explore the variables.tf file to see the values you can set.
 
 ### Usage
 
-```hcl-terraform
+```json
 locals {
   project_id = "myname-sandbox"
   region     = "us-central1"
