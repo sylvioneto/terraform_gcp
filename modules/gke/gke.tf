@@ -21,7 +21,7 @@ resource "google_container_cluster" "gke" {
   subnetwork = google_compute_subnetwork.gke_subnet.self_link
   private_cluster_config {
     enable_private_nodes    = true
-    enable_private_endpoint = true
+    enable_private_endpoint = false
     master_ipv4_cidr_block  = var.ip_allocation_ranges["master"]
   }
   ip_allocation_policy {
