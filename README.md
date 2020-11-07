@@ -12,3 +12,4 @@ However, Google might change free-tier eligibility so please double check https:
 ## Modules
 - [core](./modules/core): It creates core resources that are useful in any GCP project.
 - [mig](./modules/mig): It creates a regional Managed Instance Group in a given subnet. It includes Logging and Monitoring agents, and Autoscaling.
+- [gke](./modules/gke): It creates a Google Kubernetes Engine with subnet and service account.

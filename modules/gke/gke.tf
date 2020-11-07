@@ -5,7 +5,7 @@ resource "google_container_cluster" "gke" {
   default_max_pods_per_node = var.default_max_pods_per_node
   remove_default_node_pool  = var.remove_default_node_pool
   initial_node_count        = 1
-  resource_labels = local.resource_labels
+  resource_labels           = local.resource_labels
   master_auth {
     client_certificate_config {
       issue_client_certificate = false
@@ -41,7 +41,7 @@ resource "google_container_cluster" "gke" {
   // Nodes config
   node_config {
     service_account = google_service_account.service_account.email
-    preemptible     = true
+    preemptible     = var.preemptible
     machine_type    = var.machine_type
 
     metadata = {
@@ -51,7 +51,7 @@ resource "google_container_cluster" "gke" {
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
-    tags            = var.tags
+    tags = var.tags
   }
 
   timeouts {

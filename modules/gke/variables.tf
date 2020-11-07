@@ -1,6 +1,6 @@
 locals {
   _labels = {
-    tf-module = "gke",
+    tf-module   = "gke",
     gke-cluster = var.name
   }
   resource_labels = merge(local._labels, var.resource_labels)
@@ -21,31 +21,43 @@ variable "vpc" {
   description = "VPC name or self-link"
 }
 
-variable "ip_cidr_range" {
-  type        = string
-  description = "CIDR where the nodes will be placed."
-  default     = "10.1.0.0/22"
-}
-
 variable "ip_allocation_ranges" {
   type        = map
   description = "CIDR map for master, pods, and services."
   default = {
-    pods     = "10.1.4.0/22",
-    services = "10.1.8.0/24",
-    master   = "10.1.9.0/28",
+    pods     = "10.1.0.0/22",
+    services = "10.1.4.0/24",
+    master   = "10.1.5.0/28",
   }
 }
 
-variable "resource_labels" {
-  description = "Resource labels"
-  default     = {}
+variable "ip_cidr_range" {
+  type        = string
+  description = "CIDR where the nodes will be placed."
+  default     = "10.1.6.0/24"
+}
+
+variable "master_authorized_cidr_blocks" {
+  type        = list
+  description = "List of CIDR authorized to access the GKE cluster control plane. It's highly recommended to use private blocks."
+  default = [
+    {
+      cidr_block   = "0.0.0.0/0"
+      display_name = "internet"
+    },
+  ]
 }
 
 variable "machine_type" {
   type        = string
   description = "GCP machine type"
   default     = "g1-small"
+}
+
+variable "preemptible" {
+  type        = bool
+  description = "Preemptible VMs"
+  default     = true
 }
 
 variable "remove_default_node_pool" {
@@ -66,12 +78,6 @@ variable "default_max_pods_per_node" {
   default     = 32
 }
 
-variable "master_authorized_cidr_blocks" {
-  type        = list
-  description = "List of CIDR authorized to access the GKE cluster control plane."
-  default     = []
-}
-
 variable "iam_roles" {
   type        = list
   description = "List of cluster service account roles"
@@ -82,6 +88,11 @@ variable "iam_roles" {
     "roles/cloudtrace.admin",
     "roles/servicemanagement.reporter"
   ]
+}
+
+variable "resource_labels" {
+  description = "Resource labels"
+  default     = {}
 }
 
 variable "tags" {

@@ -2,6 +2,7 @@
 
 ## Description
 This modules create a regional Google Kubernetes cluster.
+Please explore the variables.tf file to see the values you can set.
 
 ### Usage
 
@@ -25,14 +26,14 @@ provider "google" {
 }
 
 module "core" {
-  source     = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core"
+  source = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core"
   region = local.region
   labels = local.labels
 }
 
 module "gke_cluster" {
   source                   = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/gke"
-  name                     = "test1"
+  name                     = "my-first-cluster"
   region                   = local.region
   vpc                      = module.core.vpc.self_link
   labels                   = local.labels

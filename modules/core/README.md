@@ -7,6 +7,8 @@ It creates core resources that are useful in any GCP project:
 - VPC, NAT and Router
 - Firewall rules
 
+Please explore the variables.tf file to see the values you can set.
+
 ### Usage
 
 ```hcl-terraform
