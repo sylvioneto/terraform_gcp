@@ -1,8 +1,9 @@
 locals {
   _labels = {
-    tf-module = "gke"
+    tf-module = "gke",
+    gke-cluster = var.name
   }
-  labels = merge(local._labels, var.labels)
+  resource_labels = merge(local._labels, var.resource_labels)
 }
 
 variable "region" {
@@ -36,8 +37,8 @@ variable "ip_allocation_ranges" {
   }
 }
 
-variable "labels" {
-  description = "Additional labels"
+variable "resource_labels" {
+  description = "Resource labels"
   default     = {}
 }
 
@@ -81,4 +82,9 @@ variable "iam_roles" {
     "roles/cloudtrace.admin",
     "roles/servicemanagement.reporter"
   ]
+}
+
+variable "tags" {
+  description = "Network tags"
+  default     = []
 }
