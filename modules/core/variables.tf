@@ -30,8 +30,9 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/8"
 }
 
-variable "ssh_cidr" {
-  description = "Allow this CIDR to ssh to the instances with the tag allow-ssh"
+variable "ssh_cidrs" {
+  description = "Allow a list of CIDR to ssh to the instances with the tag allow-ext-ssh"
+  default     = []
 }
 
 variable "labels" {
