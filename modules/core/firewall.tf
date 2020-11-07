@@ -31,7 +31,7 @@ resource "google_compute_firewall" "allow_external_ssh" {
     // Google IAP https://cloud.google.com/iap/docs/using-tcp-forwarding
     ["35.235.240.0/20"],
   )
-  
+
   target_tags = ["allow-ext-ssh"]
 
   allow {
