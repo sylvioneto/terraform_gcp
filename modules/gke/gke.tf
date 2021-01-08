@@ -1,3 +1,5 @@
+data "google_project" "project" {}
+
 resource "google_container_cluster" "gke" {
   name     = var.name
   location = var.region
