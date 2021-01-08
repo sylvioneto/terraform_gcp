@@ -4,26 +4,6 @@
 This modules create a regional Google Kubernetes cluster.
 Please explore the variables.tf file to see the values you can set.
 
-## Input variables
-You can define a input variables file, for example:
-```hcl
-name                     = "cluster-1"
-vpc                      = "test-vpc"
-remove_default_node_pool = false
-ip_allocation_ranges = {
-  pods     = "10.1.0.0/22",
-  services = "10.1.4.0/24",
-  master   = "10.1.5.0/28",
-  nodes    = "10.1.6.0/24",
-}
-resource_labels = {
-  terraform   = "true"
-  cost-center = "training"
-  env         = "sandbox"
-}
-
-```
-
 ### Usage
 
 Example of a basic cluster, with default IP ranges from module, and nodes with ssh firewall tag.
