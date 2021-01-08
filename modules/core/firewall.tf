@@ -4,20 +4,10 @@ resource "google_compute_firewall" "allow_internal_all" {
   network       = google_compute_network.vpc.self_link
   direction     = "INGRESS"
   source_ranges = [var.vpc_cidr]
-  target_tags   = ["allow-internal-all"]
 
   allow {
-    protocol = "tcp"
-    ports    = ["0-65535"]
-  }
-
-  allow {
-    protocol = "udp"
-    ports    = ["0-65535"]
-  }
-
-  allow {
-    protocol = "icmp"
+    protocol = "all"
+    ports    = []
   }
 }
 
