@@ -33,13 +33,13 @@ provider "google" {
 }
 
 module "core" {
-  source = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core"
+  source = "git::https://github.com/sylvioneto/terraform_gcp.git//modules/core"
   region = local.region
   labels = local.resource_labels
 }
 
 module "gke_cluster" {
-  source                   = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/gke"
+  source                   = "git::https://github.com/sylvioneto/terraform_gcp.git//modules/gke"
   name                     = "test-1"
   region                   = local.region
   vpc                      = module.core.vpc.self_link
