@@ -54,6 +54,10 @@ resource "google_container_cluster" "gke" {
       disable-legacy-endpoints = "true"
     }
 
+    workload_metadata_config {
+      node_metadata = "GKE_METADATA_SERVER"
+    }
+
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
