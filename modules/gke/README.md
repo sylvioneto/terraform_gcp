@@ -40,7 +40,6 @@ module "core" {
 
 module "gke_cluster" {
   source                   = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/gke"
-  source                   = "../../modules/gke"
   name                     = "test-1"
   region                   = local.region
   vpc                      = module.core.vpc.self_link
