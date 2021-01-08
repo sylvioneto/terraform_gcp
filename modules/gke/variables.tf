@@ -23,18 +23,7 @@ variable "vpc" {
 
 variable "ip_allocation_ranges" {
   type        = map
-  description = "CIDR map for master, pods, and services."
-  default = {
-    pods     = "10.1.0.0/22",
-    services = "10.1.4.0/24",
-    master   = "10.1.5.0/28",
-  }
-}
-
-variable "ip_cidr_range" {
-  type        = string
-  description = "CIDR where the nodes will be placed."
-  default     = "10.1.6.0/24"
+  description = "CIDR map for master, nodes, pods, and services. Please look at the readme.md for examples."
 }
 
 variable "master_authorized_cidr_blocks" {
