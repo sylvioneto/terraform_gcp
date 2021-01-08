@@ -38,6 +38,10 @@ resource "google_container_cluster" "gke" {
     }
   }
 
+  workload_identity_config {
+    identity_namespace = "${data.google_project.project.project_id}.svc.id.goog"
+  }
+
   // Nodes config
   node_config {
     service_account = google_service_account.service_account.email
