@@ -1,6 +1,6 @@
 # Ref https://github.com/bitnami/charts/tree/master/bitnami/external-dns
 domainFilters:
-- <SET-DNS-DOMAIN>
+- <SET-DNS-NAME>
 provider: google
 sources:
 - ingress
