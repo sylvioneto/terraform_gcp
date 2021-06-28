@@ -3,7 +3,7 @@ controller:
   replicaCount: 2
   service:
     # nginx ingress load balance. Reserve a static IP for it.
-    loadBalancerIP: "<UPDATE-WITH-INGRESS-IP>"
+    loadBalancerIP: ""
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:

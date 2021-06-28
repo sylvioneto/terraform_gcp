@@ -37,29 +37,14 @@ resource "google_service_account_iam_member" "cert_manager_wi" {
     module.gke
   ]
 }
-  
-# prometheus service account
-resource "google_service_account" "prometheus" {
-  account_id   = "prometheus"
-  display_name = "prometheus"
-}
 
-resource "google_project_iam_member" "prometheus_role" {
-  role   = "roles/bigquery.dataViewer"
-  member = "serviceAccount:${google_service_account.cert_manager.email}"
-}
-
-resource "google_service_account_iam_member" "prometheus_wi" {
-  service_account_id = google_service_account.cert_manager.id
-  role               = "roles/iam.workloadIdentityUser"
-  member             = "serviceAccount:${data.google_project.project.project_id}.svc.id.goog[prometheus/prometheus]"
-  depends_on = [
-    module.gke
-  ]
-}
-
-# Cloud Build permission to deploy to GKE
-resource "google_project_iam_member" "cloudbuild_role" {
+# Cloud Build permissions
+resource "google_project_iam_member" "gke_admin" {
   role   = "roles/container.admin"
+  member = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+}
+
+resource "google_project_iam_member" "network_user" {
+  role   = "roles/compute.networkUser"
   member = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
 }

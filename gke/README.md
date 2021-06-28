@@ -29,8 +29,7 @@ $ terraform init
 $ terraform plan -out gke.tfplan
 $ terraform apply "gke.tfplan"
 ```
-5. Find and replace the `<UPDATE-WITH-INGRESS-IP>` by the IP created after you ran Terraform.
-6. Run Cloud Build to deploy applications to GKE:
+5. Run Cloud Build to deploy applications to GKE:
 ```
 $ gcloud builds submit --config kubernetes.yaml --project <UPDATE-WITH-YOUR-PROJECT-ID> . 
 ```
