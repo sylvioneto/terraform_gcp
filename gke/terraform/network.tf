@@ -6,7 +6,7 @@ module "vpc" {
   version = "~> 3.0"
 
   project_id   = var.project_id
-  network_name = vpc_name
+  network_name = local.vpc_name
   description  = "VPC for testing GKE cluster"
   routing_mode = "GLOBAL"
 
@@ -35,7 +35,7 @@ module "vpc" {
 
 # NAT and Router
 resource "google_compute_router" "nat_router" {
-  name    = "${vpc_name}-nat-router"
+  name    = "${local.vpc_name}-nat-router"
   network = module.vpc.network_self_link
 
   bgp {
@@ -44,7 +44,7 @@ resource "google_compute_router" "nat_router" {
 }
 
 resource "google_compute_router_nat" "nat_gateway" {
-  name                               = "${vpc_name}-nat-router"
+  name                               = "${local.vpc_name}-nat-router"
   router                             = google_compute_router.nat_router.name
   region                             = google_compute_router.nat_router.region
   nat_ip_allocate_option             = "AUTO_ONLY"
@@ -65,7 +65,7 @@ resource "google_compute_address" "ingress_external_ip" {
 
 resource "google_dns_managed_zone" "public" {
   name          = "my-public-zone"
-  dns_name      = "${local.dns_domain}."
+  dns_name      = "${var.dns_domain}."
   description   = "My test DNS domain"
   visibility    = "public"
   force_destroy = true
@@ -73,7 +73,7 @@ resource "google_dns_managed_zone" "public" {
 }
 
 resource "google_dns_record_set" "root" {
-  name = "${local.dns_domain}."
+  name = "${var.dns_domain}."
   type = "A"
   ttl  = 300
 
