@@ -17,11 +17,11 @@ Also, it deploys useful applications to the GKE cluster created:
 
 1. Clone this repo
 2. Find and replace:
-```
-<SET-PROJECT-ID>: GCP Project ID
-<SET-DNS-NAME>: DNS name
-```
+- `<SET-PROJECT-ID>`: GCP Project ID
+- `<SET-DNS-NAME>`: DNS name
+
 3. Update the Terraform state bucket in [main.tf](./terraform/main.tf)
+
 4. Run terraform to create Google Cloud resources.
 ```
 $ cd terraform
@@ -29,10 +29,14 @@ $ terraform init
 $ terraform plan -out gke.tfplan
 $ terraform apply "gke.tfplan"
 ```
-5. Run Cloud Build to deploy applications to GKE.
+
+5. Set the NGINX_IP env var.
 ```
 $ export NGINX_IP=$(gcloud compute addresses describe my-dev-cluster-ingress-nginx --region us-central1 --format="value(address)")
+```
 
+6. Run Cloud Build to deploy applications to GKE.
+```
 $ gcloud builds submit . \
 --config kubernetes.yaml \
 --substitutions _NGINX_IP=$NGINX_IP
