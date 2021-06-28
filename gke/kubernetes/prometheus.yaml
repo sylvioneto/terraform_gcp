@@ -1,0 +1,25 @@
+# Ref https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
+alertmanager:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+    - alertmanager.<SET-DNS-NAME>
+grafana:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+    - grafana.<SET-DNS-NAME>
+prometheus:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+    - prometheus.<SET-DNS-NAME>
