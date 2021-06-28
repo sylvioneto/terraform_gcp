@@ -29,12 +29,13 @@ $ terraform init
 $ terraform plan -out gke.tfplan
 $ terraform apply "gke.tfplan"
 ```
-5. Run Cloud Build to deploy applications to GKE. Replace the [`<NGINX-IP>`](https://console.cloud.google.com/networking/addresses/list):
+5. Run Cloud Build to deploy applications to GKE.
 ```
+$ export NGINX_IP=$(gcloud compute addresses describe my-dev-cluster-ingress-nginx --region us-central1 --format="value(address)")
+
 $ gcloud builds submit . \
 --config kubernetes.yaml \
---project $TF_VAR_project_id \
---substitutions _NGINX_IP=<NGINX-IP>
+--substitutions _NGINX_IP=$NGINX_IP
 ```
 
 ## Uninstall
