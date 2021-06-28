@@ -1,7 +1,7 @@
 terraform {
   backend "gcs" {
     bucket  = "spedroza-tf-state-dev"
-    prefix  = "terraform/state"
+    prefix  = "system1"
   }
 }
 

@@ -6,15 +6,15 @@ module "vpc" {
   version = "~> 3.0"
 
   project_id   = var.project_id
-  network_name = local.vpc
+  network_name = vpc_name
   description  = "VPC for testing GKE cluster"
   routing_mode = "GLOBAL"
 
   subnets = [
     {
       subnet_name           = local.cluster_name
-      subnet_ip             = local.ip_allocation_ranges["nodes"]
-      subnet_region         = local.region
+      subnet_ip             = "10.1.6.0/24"
+      subnet_region         = var.region
       subnet_private_access = true
     },
   ]
@@ -23,11 +23,11 @@ module "vpc" {
     "${local.cluster_name}" = [
       {
         range_name    = "pods"
-        ip_cidr_range = local.ip_allocation_ranges["pods"]
+        ip_cidr_range = "10.1.0.0/22"
       },
       {
         range_name    = "services"
-        ip_cidr_range = local.ip_allocation_ranges["services"]
+        ip_cidr_range = "10.1.4.0/24"
       },
     ]
   }
@@ -35,7 +35,7 @@ module "vpc" {
 
 # NAT and Router
 resource "google_compute_router" "nat_router" {
-  name    = "${local.vpc}-nat-router"
+  name    = "${vpc_name}-nat-router"
   network = module.vpc.network_self_link
 
   bgp {
@@ -44,7 +44,7 @@ resource "google_compute_router" "nat_router" {
 }
 
 resource "google_compute_router_nat" "nat_gateway" {
-  name                               = "${local.vpc}-nat-router"
+  name                               = "${vpc_name}-nat-router"
   router                             = google_compute_router.nat_router.name
   region                             = google_compute_router.nat_router.region
   nat_ip_allocate_option             = "AUTO_ONLY"

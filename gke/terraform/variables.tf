@@ -1,15 +1,6 @@
 locals {
-  # networking
-  vpc = "my-vpc"
-
-  # gke 
+  vpc_name     = "my-vpc"
   cluster_name = "my-cluster"
-  ip_allocation_ranges = {
-    pods     = "10.1.0.0/22",
-    services = "10.1.4.0/24",
-    master   = "10.1.5.0/28",
-    nodes    = "10.1.6.0/24",
-  }
 
   resource_labels = {
     terraform   = "true"
