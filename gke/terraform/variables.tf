@@ -1,8 +1,8 @@
 locals {
   project_id = "<SET-PROJECT-ID>"
-  region     = "us-central1"
-  dns_domain = "<SET-DNS-DOMAIN>"
+  dns_name   = "<SET-DNS-NAME>"
 
+  region   = "us-central1"
   vpc_name = "my-vpc"
 
   cluster_name = "my-dev-cluster"

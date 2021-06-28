@@ -65,7 +65,7 @@ resource "google_compute_address" "ingress_external_ip" {
 # DNS
 resource "google_dns_managed_zone" "public" {
   name          = "my-public-zone"
-  dns_name      = "${local.dns_domain}."
+  dns_name      = "${local.dns_name}."
   description   = "My test DNS domain"
   visibility    = "public"
   force_destroy = true
@@ -73,7 +73,7 @@ resource "google_dns_managed_zone" "public" {
 }
 
 resource "google_dns_record_set" "root" {
-  name = "${local.dns_domain}."
+  name = "${local.dns_name}."
   type = "A"
   ttl  = 300
 
