@@ -8,6 +8,7 @@ module "gke" {
   region                   = var.region
   network                  = module.vpc.network_name
   subnetwork               = local.cluster_name
+  master_ipv4_cidr_block   = "10.1.7.0/24"
   ip_range_pods            = "pods"
   ip_range_services        = "services"
   http_load_balancing      = false

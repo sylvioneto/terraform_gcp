@@ -14,18 +14,12 @@ steps:
   args: ['apply', '-f', 'kubernetes/namespaces.yaml']
   id: create-namespaces
 
-- id: get-ingress-ip
-  name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: bash
-  args: ['-c', 'export NGINX_IP=$(gcloud compute addresses describe my-cluster-ingress-nginx --format="value(address)")']
-
 - id: deploy-ingress-nginx
   name: 'gcr.io/$PROJECT_ID/helm:latest'
   args: ['upgrade', '--install', 'ingress-nginx', 'ingress-nginx/ingress-nginx',
    '--version', '3.19.0', 
    '--namespace', 'nginx',
    '-f', 'kubernetes/ingress-nginx.yaml',
-   '--set',controller.service.loadBalancerIP=$$NGINX_IP
   ]
   env:
   - 'HELM_REPO_NAME=ingress-nginx'
@@ -54,7 +48,6 @@ steps:
 #   - 'HELM_REPO_URL=https://charts.jetstack.io'
 
 options:
-  substitution_option: 'ALLOW_LOOSE'
   env:
   - 'CLOUDSDK_COMPUTE_REGION=us-central1'
   - 'CLOUDSDK_CONTAINER_CLUSTER=my-cluster'
