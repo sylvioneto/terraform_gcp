@@ -2,4 +2,4 @@ installCRDs: true
 serviceAccount:
   name: cert-manager
   annotations:
-    iam.gke.io/gcp-service-account: cert-manager@<UPDATE-WITH-YOUR-PROJECT-ID>.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: cert-manager@<SET-PROJECT-ID>.iam.gserviceaccount.com

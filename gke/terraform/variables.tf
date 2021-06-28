@@ -1,4 +1,8 @@
 locals {
+  project_id = "<SET-PROJECT-ID>"
+  region     = "us-central1"
+  dns_domain = "<SET-DNS-DOMAIN>"
+
   vpc_name = "my-vpc"
 
   cluster_name = "my-dev-cluster"
@@ -16,17 +20,4 @@ locals {
     owner       = "team1"
     feature     = "system1"
   }
-}
-
-variable "project_id" {
-  description = "GCP Project ID"
-}
-
-variable "dns_domain" {
-  description = "DNS domain"
-}
-
-variable "region" {
-  description = "Region"
-  default     = "us-central1"
 }

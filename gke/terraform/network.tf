@@ -5,7 +5,7 @@ module "vpc" {
   source  = "terraform-google-modules/network/google"
   version = "~> 3.0"
 
-  project_id   = var.project_id
+  project_id   = local.project_id
   network_name = local.vpc_name
   description  = "VPC for testing GKE cluster"
   routing_mode = "GLOBAL"
@@ -14,7 +14,7 @@ module "vpc" {
     {
       subnet_name           = local.cluster_name
       subnet_ip             = local.cluster_ip_ranges.nodes
-      subnet_region         = var.region
+      subnet_region         = local.region
       subnet_private_access = true
     },
   ]
@@ -65,7 +65,7 @@ resource "google_compute_address" "ingress_external_ip" {
 # DNS
 resource "google_dns_managed_zone" "public" {
   name          = "my-public-zone"
-  dns_name      = "${var.dns_domain}."
+  dns_name      = "${local.dns_domain}."
   description   = "My test DNS domain"
   visibility    = "public"
   force_destroy = true
@@ -73,7 +73,7 @@ resource "google_dns_managed_zone" "public" {
 }
 
 resource "google_dns_record_set" "root" {
-  name = "${var.dns_domain}."
+  name = "${local.dns_domain}."
   type = "A"
   ttl  = 300
 
