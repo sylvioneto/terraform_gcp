@@ -1,0 +1,44 @@
+# gcp_kubernetes
+This project demonstrates how to deploy a GKE cluster using [Google CFT](https://github.com/GoogleCloudPlatform/cloud-foundation-toolkit/blob/master/docs/terraform.md) modules.
+
+It creates VPC, Subnet, NAT, DNS Zone, and GKE.
+
+Also, it deploys useful applications to the GKE cluster created:
+- Nginx Ingress controller
+- External DNS
+- cert-manager
+- Prometheus
+
+## Pre-req
+- terraform >=0.14
+- helm >=3.4.0
+
+## Deploy
+
+1. Clone this repo
+2. Set the env vars:
+```
+export TF_VAR_project_id=<YOUR-PROJECT-ID>
+export TF_VAR_dns_domain=<YOUR-DNS-DOMAIN>
+```
+3. Update the Terraform state bucket in [main.tf](./terraform/main.tf)
+4. Run terraform to create Google Cloud resources.
+```
+$ cd terraform
+$ terraform init
+$ terraform plan -out gke.tfplan
+$ terraform apply "gke.tfplan"
+```
+5. Find and replace the `<UPDATE-WITH-INGRESS-IP>` by the IP created after you ran Terraform.
+6. Run Cloud Build to deploy applications to GKE:
+```
+$ gcloud builds submit --config kubernetes.yaml --project <UPDATE-WITH-YOUR-PROJECT-ID> . 
+```
+
+## Uninstall
+Run the commands below.
+```
+$ cd terraform
+$ terraform init
+$ terraform destroy
+```

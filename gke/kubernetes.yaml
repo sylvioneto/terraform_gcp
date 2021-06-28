@@ -1,0 +1,65 @@
+steps:
+# Build Helm Deployment Image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/helm', '.']
+  id: build-helm
+- name: 'gcr.io/$PROJECT_ID/helm:latest'
+  args: ['version', '--client']
+  env:
+    - SKIP_CLUSTER_CONFIG=true
+  id: test-helm
+
+# Kubernetes deployment
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'kubernetes/namespaces.yaml']
+  id: create-namespaces
+
+- id: deploy-ingress-nginx
+  name: 'gcr.io/$PROJECT_ID/helm:latest'
+  args: ['upgrade', '--install', 'ingress-nginx', 'ingress-nginx/ingress-nginx',
+   '--version', '3.19.0', 
+   '--namespace', 'nginx',
+   '-f', 'kubernetes/ingress-nginx.yaml',
+  ]
+  env:
+  - 'HELM_REPO_NAME=ingress-nginx'
+  - 'HELM_REPO_URL=https://kubernetes.github.io/ingress-nginx'
+
+- id: deploy-external-dns
+  name: 'gcr.io/$PROJECT_ID/helm:latest'
+  args: ['upgrade', '--install', 'external-dns', 'bitnami/external-dns',
+   '--version', '4.5.0', 
+   '--namespace', 'external-dns',
+   '-f', 'kubernetes/external-dns.yaml',
+  ]
+  env:
+  - 'HELM_REPO_NAME=bitnami'
+  - 'HELM_REPO_URL=https://charts.bitnami.com/bitnami'
+
+- id: deploy-cert-manager
+  name: 'gcr.io/$PROJECT_ID/helm:latest'
+  args: ['upgrade', '--install', 'cert-manager', 'jetstack/cert-manager',
+   '--version', 'v1.4.0', 
+   '--namespace', 'cert-manager',
+   '-f', 'kubernetes/cert-manager.yaml',
+  ]
+  env:
+  - 'HELM_REPO_NAME=jetstack'
+  - 'HELM_REPO_URL=https://charts.jetstack.io'
+
+- id: deploy-prometheus-stack
+  name: 'gcr.io/$PROJECT_ID/helm:latest'
+  args: ['upgrade', '--install', 'kube-prometheus-stack', 
+    'prometheus-community/kube-prometheus-stack',
+    '--version', '12.10.6', 
+    '--namespace', 'prometheus',
+    '-f', 'kubernetes/prometheus.yaml',
+  ]
+  env:
+  - 'HELM_REPO_NAME=prometheus-community'
+  - 'HELM_REPO_URL=https://prometheus-community.github.io/helm-charts'
+
+options:
+  env:
+  - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=my-cluster'
