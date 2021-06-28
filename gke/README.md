@@ -1,4 +1,4 @@
-# gcp_kubernetes
+# gke
 This project demonstrates how to deploy a GKE cluster using [Google CFT](https://github.com/GoogleCloudPlatform/cloud-foundation-toolkit/blob/master/docs/terraform.md) modules.
 
 It creates VPC, Subnet, NAT, DNS Zone, and GKE.
@@ -29,9 +29,12 @@ $ terraform init
 $ terraform plan -out gke.tfplan
 $ terraform apply "gke.tfplan"
 ```
-5. Run Cloud Build to deploy applications to GKE:
+5. Run Cloud Build to deploy applications to GKE. Replace the [`<NGINX-IP>`](https://console.cloud.google.com/networking/addresses/list):
 ```
-$ gcloud builds submit --config kubernetes.yaml --project <UPDATE-WITH-YOUR-PROJECT-ID> . 
+$ gcloud builds submit . \
+--config kubernetes.yaml \
+--project $TF_VAR_project_id \
+--substitutions _NGINX_IP=<NGINX-IP>
 ```
 
 ## Uninstall

@@ -20,6 +20,7 @@ steps:
    '--version', '3.19.0', 
    '--namespace', 'nginx',
    '-f', 'kubernetes/ingress-nginx.yaml',
+   '--set', 'controler.service.loadBalancerIP=$_NGINX_IP'
   ]
   env:
   - 'HELM_REPO_NAME=ingress-nginx'

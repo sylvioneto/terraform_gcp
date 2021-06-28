@@ -13,7 +13,7 @@ module "vpc" {
   subnets = [
     {
       subnet_name           = local.cluster_name
-      subnet_ip             = "10.1.6.0/24"
+      subnet_ip             = local.cluster_ip_ranges.nodes
       subnet_region         = var.region
       subnet_private_access = true
     },
@@ -23,11 +23,11 @@ module "vpc" {
     "${local.cluster_name}" = [
       {
         range_name    = "pods"
-        ip_cidr_range = "10.1.0.0/22"
+        ip_cidr_range = local.cluster_ip_ranges.pods
       },
       {
         range_name    = "services"
-        ip_cidr_range = "10.1.4.0/24"
+        ip_cidr_range = local.cluster_ip_ranges.services
       },
     ]
   }
@@ -56,13 +56,13 @@ resource "google_compute_router_nat" "nat_gateway" {
   }
 }
 
-# DNS
 resource "google_compute_address" "ingress_external_ip" {
   name         = "${local.cluster_name}-ingress-nginx"
-  description  = "NGINX Load balancer IP for ${local.cluster_name}"
+  description  = "Nginx IP for ${local.cluster_name}"
   address_type = "EXTERNAL"
 }
 
+# DNS
 resource "google_dns_managed_zone" "public" {
   name          = "my-public-zone"
   dns_name      = "${var.dns_domain}."
