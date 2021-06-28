@@ -15,19 +15,18 @@ module "gke" {
   network_policy      = false
 
   // Private cluster setup
-  enable_private_endpoint = true
-  enable_private_nodes    = true
-  master_ipv4_cidr_block  = local.cluster_ip_ranges.master
+  enable_private_nodes   = true
+  master_ipv4_cidr_block = local.cluster_ip_ranges.master
   master_authorized_networks = [
     {
-      display_name = "cloudshell"
+      display_name = "canada-office"
       cidr_block   = "34.83.12.168/32"
     },
-    # {
-    #     # not recommended!
-    #     display_name="internet"
-    #     cidr_block="0.0.0.0/0"
-    # }
+    {
+      # not recommended - testing only!
+      display_name = "internet"
+      cidr_block   = "0.0.0.0/0"
+    }
   ]
 
   cluster_resource_labels  = local.resource_labels
