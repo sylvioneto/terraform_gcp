@@ -1,7 +1,7 @@
 locals {
   vpc_name = "my-vpc"
 
-  cluster_name = "my-cluster"
+  cluster_name = "my-dev-cluster"
   cluster_ip_ranges = {
     pods     = "10.1.0.0/22"
     services = "10.1.4.0/24"

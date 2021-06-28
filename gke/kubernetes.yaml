@@ -20,22 +20,23 @@ steps:
    '--version', '3.19.0', 
    '--namespace', 'nginx',
    '-f', 'kubernetes/ingress-nginx.yaml',
-   '--set', 'controler.service.loadBalancerIP=$_NGINX_IP'
+   '--set', controler.service.loadBalancerIP=$_NGINX_IP
   ]
   env:
   - 'HELM_REPO_NAME=ingress-nginx'
   - 'HELM_REPO_URL=https://kubernetes.github.io/ingress-nginx'
 
-# - id: deploy-external-dns
-#   name: 'gcr.io/$PROJECT_ID/helm:latest'
-#   args: ['upgrade', '--install', 'external-dns', 'bitnami/external-dns',
-#    '--version', '4.5.0', 
-#    '--namespace', 'external-dns',
-#    '-f', 'kubernetes/external-dns.yaml',
-#   ]
-#   env:
-#   - 'HELM_REPO_NAME=bitnami'
-#   - 'HELM_REPO_URL=https://charts.bitnami.com/bitnami'
+- id: deploy-external-dns
+  name: 'gcr.io/$PROJECT_ID/helm:latest'
+  args: ['upgrade', '--install', 'external-dns', 'bitnami/external-dns',
+   '--version', '4.5.0', 
+   '--namespace', 'external-dns',
+   '-f', 'kubernetes/external-dns.yaml',
+   '--set',
+  ]
+  env:
+  - 'HELM_REPO_NAME=bitnami'
+  - 'HELM_REPO_URL=https://charts.bitnami.com/bitnami'
 
 # - id: deploy-cert-manager
 #   name: 'gcr.io/$PROJECT_ID/helm:latest'
