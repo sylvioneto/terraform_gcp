@@ -18,6 +18,6 @@ locals {
     cost-center = "training"
     env         = "dev"
     owner       = "team1"
-    feature     = "system1"
+    feature     = "feature2"
   }
 }
