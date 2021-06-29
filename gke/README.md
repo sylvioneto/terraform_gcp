@@ -25,11 +25,10 @@ $ terraform apply "gke.tfplan"
 - external-dns.yaml: set domain and service accounts created in step 3.
 - ingress-nginx: set the external-ip created in step 3.
 
-5. Run Cloud Build to deploy applications to GKE.
+5. Run Cloud Build to deploy applications to GKE. 
+Note: Update the project name.
 ```
-$ gcloud builds submit . \
---config kubernetes.yaml \
---substitutions _NGINX_IP=$NGINX_IP
+$ gcloud builds submit . --config kubernetes.yaml --project sylvio-terraform-demo
 ```
 
 ## Uninstall
