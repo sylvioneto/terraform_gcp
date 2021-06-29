@@ -1,0 +1,13 @@
+# Ref https://github.com/bitnami/charts/tree/master/bitnami/external-dns
+domainFilters:
+- <SET-DNS-NAME>
+provider: google
+sources:
+- ingress
+google:
+  project: <SET-PROJECT-ID>
+serviceAccount:
+  create: true
+  name: external-dns
+  annotations:
+    iam.gke.io/gcp-service-account: external-dns@<SET-PROJECT-ID>.iam.gserviceaccount.com
