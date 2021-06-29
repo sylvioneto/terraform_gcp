@@ -10,6 +10,5 @@ However, Google might change free-tier eligibility so please double check https:
 - google provider 3.12 or later
 
 ## Example
-- [cicd](./cicd): CI/CD project.
-- [gke](./gke): A GKE ready to go.
-- [mig](./mig): Managed Instance Group with Autoscaling.
+- [gke](./gke): A GKE cluster ready to receive deployments.
+- [cicd](./cicd): CI/CD project. (wip)
