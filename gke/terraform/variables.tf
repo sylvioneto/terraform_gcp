@@ -1,11 +1,11 @@
 locals {
-  project_id = "<SET-PROJECT-ID>"
-  dns_name   = "<SET-DNS-NAME>"
+  project_id = "sylvio-terraform-demo"
+  dns_name   = "dev.example.com"
 
   region   = "us-central1"
-  vpc_name = "my-vpc"
+  vpc_name = "my-vpc-dev"
 
-  cluster_name = "my-dev-cluster"
+  cluster_name = "my-cluster-dev"
   cluster_ip_ranges = {
     pods     = "10.1.0.0/22"
     services = "10.1.4.0/24"

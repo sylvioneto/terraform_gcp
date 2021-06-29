@@ -40,4 +40,4 @@ steps:
 options:
   env:
   - 'CLOUDSDK_COMPUTE_REGION=us-central1'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=my-dev-cluster'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=my-cluster-dev'
