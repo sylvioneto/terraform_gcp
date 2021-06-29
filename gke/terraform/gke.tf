@@ -39,7 +39,7 @@ module "gke" {
       name            = "base"
       machine_type    = "e2-medium"
       min_count       = 1
-      max_count       = 5
+      max_count       = 10
       local_ssd_count = 0
       disk_size_gb    = 100
       disk_type       = "pd-standard"
