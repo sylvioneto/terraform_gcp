@@ -1,9 +1,9 @@
 # Ref https://github.com/kubernetes/ingress-nginx/tree/master/charts/ingress-nginx
 controller:
   replicaCount: 2
-  # service:
-  #   # nginx ingress load balance. Reserve a static external IP for it.
-  #   loadBalancerIP: ""
+  service:
+    # nginx ingress load balance. Reserve a static external IP for it.
+    loadBalancerIP: ""
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
