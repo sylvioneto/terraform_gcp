@@ -18,7 +18,8 @@ resource "google_compute_instance" "app_server_win" {
   }
 
   network_interface {
-    network = google_compute_subnetwork.subnet.name
+    subnetwork = google_compute_subnetwork.subnet.self_link
+
   }
 }
 
@@ -36,7 +37,7 @@ resource "google_compute_instance" "db_server_linux" {
   }
 
   network_interface {
-    network = google_compute_subnetwork.subnet.name
+    subnetwork = google_compute_subnetwork.subnet.self_link
   }
 
 }
@@ -56,6 +57,9 @@ resource "google_compute_instance" "stratozone_collector" {
   }
 
   network_interface {
-    network = google_compute_subnetwork.subnet.name
+    subnetwork = google_compute_subnetwork.subnet.self_link
+    access_config {
+      // Ephemeral IP
+    }
   }
 }
