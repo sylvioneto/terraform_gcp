@@ -17,6 +17,10 @@ resource "google_compute_firewall" "allow_stratozone" {
   network = google_compute_network.vpc_network.id
 
   allow {
+    protocol = "icmp"
+  }
+
+  allow {
     protocol = "tcp"
     ports    = ["22", "3389"]
   }
