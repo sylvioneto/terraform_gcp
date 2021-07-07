@@ -16,9 +16,20 @@ $ terraform plan -out gce.tfplan
 $ terraform apply gce.tfplan
 ```
 
-### Set Passwords
+### Stratozone user/password
+Create a user/pass common for Linux and Windows machines. Stratozone will use this credential to access the other machines.
 
+E.g stratozone/W&lcome@2021
+
+#### Windows
+
+Create the user, then change the password.
 ```
-gcloud compute reset-windows-password app-server-001 --user admin --zone us-central1-a
-gcloud compute reset-windows-password stratozone-collector --user admin --zone us-central1-a
+$ gcloud compute reset-windows-password app-server-001 --user stratozone --zone us-central1-a
+```
+
+#### Linux
+Connect to the machine using the `gcloud compute ssh` command or the console, then create the user
+```
+$ sudo adduser stratozone 
 ```
