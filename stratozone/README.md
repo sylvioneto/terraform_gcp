@@ -26,6 +26,7 @@ E.g stratozone/W&lcome@2021
 Create the user, then change the password.
 ```
 $ gcloud compute reset-windows-password app-server-001 --user stratozone --zone us-central1-a
+$ gcloud compute reset-windows-password stratozone-collector --user stratozone --zone us-central1-a
 ```
 
 #### Linux

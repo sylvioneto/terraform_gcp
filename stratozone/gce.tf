@@ -24,6 +24,10 @@ resource "google_compute_instance" "app_server_win" {
       // Ephemeral IP
     }
   }
+
+  lifecycle {
+    ignore_changes = [metadata]
+  }
 }
 
 
@@ -46,6 +50,7 @@ resource "google_compute_instance" "db_server_linux" {
       // Ephemeral IP
     }
   }
+
 }
 
 
@@ -67,5 +72,9 @@ resource "google_compute_instance" "stratozone_collector" {
     access_config {
       // Ephemeral IP
     }
+  }
+
+  lifecycle {
+    ignore_changes = [metadata]
   }
 }
