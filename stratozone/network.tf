@@ -12,7 +12,7 @@ resource "google_compute_subnetwork" "subnet" {
   network       = google_compute_network.vpc_network.id
 }
 
-resource "google_compute_firewall" "strato_probe" {
+resource "google_compute_firewall" "allow_stratozone" {
   name    = "allow-stratozone"
   network = google_compute_network.vpc_network.id
 
@@ -21,8 +21,7 @@ resource "google_compute_firewall" "strato_probe" {
     ports    = ["22", "3389"]
   }
 
-  source_tags        = ["strato-probe"]
-  destination_ranges = ["10.0.0.0/8"]
+  source_tags = ["stratozone"]
 }
 
 resource "google_compute_firewall" "allow_iap" {
@@ -35,6 +34,6 @@ resource "google_compute_firewall" "allow_iap" {
     ports    = ["22", "3389"]
   }
 
-  source_ranges    = ["35.235.240.0/20"]
-  destination_tags = ["allow-iap"]
+  source_ranges = ["35.235.240.0/20"]
+  target_tags   = ["allow-iap"]
 }
