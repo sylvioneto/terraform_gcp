@@ -11,33 +11,3 @@ resource "google_compute_subnetwork" "subnet" {
   region        = "us-central1"
   network       = google_compute_network.vpc_network.id
 }
-
-resource "google_compute_firewall" "allow_stratozone" {
-  name    = "allow-stratozone"
-  network = google_compute_network.vpc_network.id
-
-  allow {
-    protocol = "icmp"
-  }
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22", "3389"]
-  }
-
-  source_tags = ["stratozone"]
-}
-
-resource "google_compute_firewall" "allow_iap" {
-  name        = "allow-iap"
-  description = "Allow SSH and RDP with IAP"
-  network     = google_compute_network.vpc_network.id
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22", "3389"]
-  }
-
-  source_ranges = ["35.235.240.0/20"]
-  target_tags   = ["allow-iap"]
-}
