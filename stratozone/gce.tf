@@ -10,7 +10,6 @@ resource "google_compute_instance" "app_server_win" {
   machine_type = "e2-medium"
   zone         = "us-central1-a"
   labels       = local.labels
-  tags         = ["allow-ssh-from-office"]
 
   boot_disk {
     initialize_params {
@@ -36,7 +35,6 @@ resource "google_compute_instance" "db_server_linux" {
   machine_type = "e2-medium"
   zone         = "us-central1-a"
   labels       = local.labels
-  tags         = ["allow-ssh-from-office"]
 
   boot_disk {
     initialize_params {
@@ -59,7 +57,7 @@ resource "google_compute_instance" "stratozone_collector" {
   machine_type = "e2-medium"
   zone         = "us-central1-a"
   labels       = local.labels
-  tags         = ["allow-ssh-from-office", "stratozone"]
+  tags         = ["stratozone"]
 
   boot_disk {
     initialize_params {

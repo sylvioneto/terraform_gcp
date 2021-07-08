@@ -11,3 +11,19 @@ resource "google_compute_subnetwork" "subnet" {
   region        = "us-central1"
   network       = google_compute_network.vpc_network.id
 }
+
+resource "google_compute_firewall" "stratozone" {
+  name    = "allow-stratozone"
+  network = google_compute_network.vpc_network.name
+
+  allow {
+    protocol = "icmp"
+  }
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22", "135", "49152-65535", "1025-5000"]
+  }
+
+  source_tags = ["stratozone"]
+}
