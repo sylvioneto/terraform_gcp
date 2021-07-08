@@ -13,8 +13,9 @@ resource "google_compute_subnetwork" "subnet" {
 }
 
 resource "google_compute_firewall" "stratozone" {
-  name    = "allow-stratozone"
-  network = google_compute_network.vpc_network.name
+  name     = "allow-stratozone"
+  network  = google_compute_network.vpc_network.name
+  priority = 1100
 
   allow {
     protocol = "icmp"
