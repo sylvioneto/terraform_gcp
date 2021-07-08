@@ -10,5 +10,6 @@ However, Google might change free-tier eligibility so please double check https:
 - google provider 3.12 or later
 
 ## Example
-- [gke](./gke): A GKE cluster ready to receive deployments.
 - [cicd](./cicd): CI/CD project. (wip)
+- [gke](./gke): A GKE cluster ready to receive deployments.
+- [stratozone](./stratozone): Test environment to demonstrate Stratozone Assessment.
