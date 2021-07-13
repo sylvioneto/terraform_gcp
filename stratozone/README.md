@@ -34,3 +34,8 @@ Connect to the machine using the `gcloud compute ssh` command or the console, th
 ```
 $ sudo adduser stratozone 
 ```
+
+### Install Strato-Probe
+
+Connect to the stratozone-collector vm, install and activate the Strato Probe.
+Once it's done, you can monitor the collected metrics in the Stratozone Portal.
