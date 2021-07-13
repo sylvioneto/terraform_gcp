@@ -1,6 +1,8 @@
 # Windows Sole-Tenant
 
-This example creates an environment to demonstrate how to use Sole Tenant nodes to host your Windows Servers VMs on GCP for lift and shift scenarios.
+This example creates an environment to demonstrate how to use Sole Tenant nodes to host your Windows Servers VMs.
+
+You can use this approach to lift and shift your VMs to Google Cloud using bringing your own licenses ([BYOL](https://cloud.google.com/compute/docs/nodes/bringing-your-own-licenses)).
 
 Resources created:
 - VPC and Subnet
