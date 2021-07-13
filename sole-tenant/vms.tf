@@ -1,12 +1,7 @@
-resource "google_service_account" "windows" {
-  account_id   = "windows"
-  display_name = "Service Account used in Windows Server VMs"
-}
-
 resource "google_compute_instance" "app1" {
   name         = "srv-app-001"
   machine_type = "n1-standard-2"
-  zone         = "us-central1-f"
+  zone         = "us-central1-a"
 
   boot_disk {
     initialize_params {
@@ -15,17 +10,12 @@ resource "google_compute_instance" "app1" {
   }
 
   network_interface {
-    network    = google_compute_network.vpc_network.id
+    network    = google_compute_network.vpc.id
     subnetwork = google_compute_subnetwork.subnet.id
 
     access_config {
       // Ephemeral IP
     }
-  }
-
-  service_account {
-    email  = google_service_account.windows.email
-    scopes = ["cloud-platform"]
   }
 
   scheduling {
@@ -40,7 +30,7 @@ resource "google_compute_instance" "app1" {
 resource "google_compute_instance" "app2" {
   name         = "srv-app-002"
   machine_type = "n1-standard-2"
-  zone         = "us-central1-f"
+  zone         = "us-central1-a"
 
   boot_disk {
     initialize_params {
@@ -49,17 +39,12 @@ resource "google_compute_instance" "app2" {
   }
 
   network_interface {
-    network    = google_compute_network.vpc_network.id
+    network    = google_compute_network.vpc.id
     subnetwork = google_compute_subnetwork.subnet.id
 
     access_config {
       // Ephemeral IP
     }
-  }
-
-  service_account {
-    email  = google_service_account.windows.email
-    scopes = ["cloud-platform"]
   }
 
   scheduling {
@@ -74,7 +59,7 @@ resource "google_compute_instance" "app2" {
 resource "google_compute_instance" "db1" {
   name         = "srv-db-001"
   machine_type = "n1-standard-4"
-  zone         = "us-central1-f"
+  zone         = "us-central1-a"
 
   boot_disk {
     initialize_params {
@@ -83,17 +68,12 @@ resource "google_compute_instance" "db1" {
   }
 
   network_interface {
-    network    = google_compute_network.vpc_network.id
+    network    = google_compute_network.vpc.id
     subnetwork = google_compute_subnetwork.subnet.id
 
     access_config {
       // Ephemeral IP
     }
-  }
-
-  service_account {
-    email  = google_service_account.windows.email
-    scopes = ["cloud-platform"]
   }
 
   scheduling {

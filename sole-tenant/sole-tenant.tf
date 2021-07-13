@@ -6,7 +6,7 @@ resource "google_compute_node_template" "soletenant_tmpl" {
 
 resource "google_compute_node_group" "soletenant_grp" {
   name        = "soletenant-group"
-  zone        = "us-central1-f"
+  zone        = "us-central1-a"
   description = "Sole-tenant nodes to host Windows VMs"
 
   size          = 1

@@ -1,14 +1,14 @@
-resource "google_compute_network" "vpc_network" {
+resource "google_compute_network" "vpc" {
   name                    = "sole-tenant"
   description             = "VPC for testing Sole-Tenant"
   auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "subnet" {
-  name                     = "subnet-win-us"
+  name                     = "subnet-win"
   description              = "Subnet to host Windows Server VMs"
-  ip_cidr_range            = "10.0.0.0/22"
+  ip_cidr_range            = "10.1.0.0/16"
   region                   = "us-central1"
-  network                  = google_compute_network.vpc_network.id
+  network                  = google_compute_network.vpc.id
   private_ip_google_access = true
 }
