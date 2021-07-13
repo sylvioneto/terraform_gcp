@@ -1,6 +1,6 @@
 # Stratozone
 
-This example create an environment to demonstrate how to execute an assessment with Stratozone.
+This example creates an environment to demonstrate how to execute an assessment with Stratozone.
 
 Resources created:
 - app-server-001 (Windows)
