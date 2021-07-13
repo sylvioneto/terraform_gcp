@@ -1,5 +1,5 @@
 terraform {
-  backend "google" {
+  backend "gcs" {
     bucket = "sylvio-tf-state"
     prefix = "terraform-examples/sole-tenant"
   }
