@@ -5,6 +5,7 @@
 *.tfstate
 *.tfplan
 *.lock.hcl
+terraform.tfvars
 
 tests
 *key.json
