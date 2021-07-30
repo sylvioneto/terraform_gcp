@@ -5,11 +5,15 @@ resource "google_compute_network" "admin_vpc" {
 }
 
 resource "google_active_directory_domain" "ad_domain" {
-  domain_name = "dev.example.com"
-  locations   = ["us-central1"]
-  authorized_networks = [
-    google_compute_network.admin_vpc.name
-  ]
+  domain_name       = "dev.example.com"
+  locations         = ["us-central1"]
   reserved_ip_range = "10.1.0.0/24"
-}
+  authorized_networks = [
+    google_compute_network.admin_vpc.id
+  ]
 
+  timeouts {
+    create = "60m"
+    delete = "2h"
+  }
+}
