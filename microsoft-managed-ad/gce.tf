@@ -1,17 +1,21 @@
 
-resource "google_compute_subnetwork" "bastion_hosts" {
-  name          = "bastion-hosts"
+resource "google_compute_subnetwork" "ad_admin_subnet" {
+  name          = "ad-admins"
   description   = "It hosts VMs used to connect with the Managed AD"
-  network       = google_compute_network.admin_vpc.id
-  ip_cidr_range = "10.1.1.0/24"
+  network       = google_compute_network.ad_vpc.id
+  ip_cidr_range = "10.0.2.0/24"
 }
 
-resource "google_compute_instance" "ad_bastion_host" {
-  name         = "ad-bastion-host"
+resource "google_compute_instance" "ad_admin_vm" {
+  name         = "ad-admin"
   machine_type = "e2-medium"
   zone         = "us-central1-a"
 
-  tags = ["bastion"]
+  tags = ["allow-ingress-from-iap"]
+  shielded_instance_config {
+    enable_secure_boot = true
+
+  }
 
   boot_disk {
     initialize_params {
@@ -20,12 +24,7 @@ resource "google_compute_instance" "ad_bastion_host" {
   }
 
   network_interface {
-    # network = google_compute_network.admin_vpc.id
-    subnetwork = google_compute_subnetwork.bastion_hosts.self_link
-
-    access_config {
-      // Ephemeral IP
-    }
+    subnetwork = google_compute_subnetwork.ad_admin_subnet.self_link
   }
 
   metadata = {
