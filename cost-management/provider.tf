@@ -6,6 +6,6 @@ terraform {
 }
 
 provider "google" {
-  project = local.project
-  region  = local.region
+  project = "gce-test--terraform-demo"
+  region  = "us-central1"
 }

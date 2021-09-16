@@ -14,9 +14,9 @@ resource "google_compute_instance" "prod1" {
   }
 
   labels = {
-    team = "finance"
+    team        = "finance"
     cost-center = "CC-09"
-    env = "prod"
+    env         = "prod"
   }
 }
 
@@ -36,9 +36,9 @@ resource "google_compute_instance" "prod2" {
   }
 
   labels = {
-    team = "human-resources"
+    team        = "human-resources"
     cost-center = "CC-09"
-    env = "prod"
+    env         = "prod"
   }
 }
 
@@ -58,9 +58,9 @@ resource "google_compute_instance" "prod3" {
   }
 
   labels = {
-    team = "marteting"
+    team        = "marteting"
     cost-center = "CC-09"
-    env = "prod"
+    env         = "prod"
   }
 }
 
