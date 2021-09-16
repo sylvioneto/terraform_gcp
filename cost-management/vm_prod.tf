@@ -1,6 +1,6 @@
-resource "google_compute_instance" "dev1" {
-  name         = "vm-dev-001"
-  machine_type = "e2-standard-2"
+resource "google_compute_instance" "prod1" {
+  name         = "vm-prod-001"
+  machine_type = "e2-standard-4"
   zone         = "us-central1-a"
 
   boot_disk {
@@ -8,24 +8,21 @@ resource "google_compute_instance" "dev1" {
       image = "debian-cloud/debian-9"
     }
   }
-  scheduling {
-    preemptible = true
-  }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.dev
+    subnetwork = google_compute_subnetwork.subnet.prod
   }
 
   labels = {
-    team        = "development"
-    cost-center = "BC-09"
-    env         = "dev"
+    team = "finance"
+    cost-center = "CC-09"
+    env = "prod"
   }
 }
 
-resource "google_compute_instance" "dev2" {
-  name         = "vm-dev-002"
-  machine_type = "e2-standard-2"
+resource "google_compute_instance" "prod2" {
+  name         = "vm-prod-002"
+  machine_type = "e2-standard-4"
   zone         = "us-central1-a"
 
   boot_disk {
@@ -33,17 +30,37 @@ resource "google_compute_instance" "dev2" {
       image = "debian-cloud/debian-9"
     }
   }
-  scheduling {
-    preemptible = true
-  }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.dev
+    subnetwork = google_compute_subnetwork.subnet.prod
   }
 
   labels = {
-    team        = "research"
-    cost-center = "BC-09"
-    env         = "dev"
+    team = "human-resources"
+    cost-center = "CC-09"
+    env = "prod"
   }
 }
+
+resource "google_compute_instance" "prod3" {
+  name         = "vm-prod-003"
+  machine_type = "e2-standard-4"
+  zone         = "us-central1-a"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
+    }
+  }
+
+  network_interface {
+    subnetwork = google_compute_subnetwork.subnet.prod
+  }
+
+  labels = {
+    team = "marteting"
+    cost-center = "CC-09"
+    env = "prod"
+  }
+}
+

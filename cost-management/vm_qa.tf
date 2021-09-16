@@ -1,6 +1,6 @@
-resource "google_compute_instance" "dev1" {
-  name         = "vm-dev-001"
-  machine_type = "e2-standard-2"
+resource "google_compute_instance" "qa1" {
+  name         = "vm-qa-001"
+  machine_type = "e2-standard-4"
   zone         = "us-central1-a"
 
   boot_disk {
@@ -13,19 +13,19 @@ resource "google_compute_instance" "dev1" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.dev
+    subnetwork = google_compute_subnetwork.subnet.qa
   }
 
   labels = {
-    team        = "development"
-    cost-center = "BC-09"
-    env         = "dev"
+    team = "finance"
+    cost-center = "CC-01"
+    env = "qa"
   }
 }
 
-resource "google_compute_instance" "dev2" {
-  name         = "vm-dev-002"
-  machine_type = "e2-standard-2"
+resource "google_compute_instance" "qa2" {
+  name         = "vm-qa-002"
+  machine_type = "e2-standard-4"
   zone         = "us-central1-a"
 
   boot_disk {
@@ -38,12 +38,12 @@ resource "google_compute_instance" "dev2" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.dev
+    subnetwork = google_compute_subnetwork.subnet.qa
   }
 
   labels = {
-    team        = "research"
-    cost-center = "BC-09"
-    env         = "dev"
+    team = "research"
+    cost-center = "CC-02"
+    env = "qa"
   }
 }
