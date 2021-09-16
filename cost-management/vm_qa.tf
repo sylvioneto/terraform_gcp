@@ -18,7 +18,7 @@ resource "google_compute_instance" "qa1" {
 
   labels = {
     team        = "finance"
-    cost-center = "CC-01"
+    cost-center = "002-01"
     env         = "qa"
   }
 }
@@ -43,7 +43,7 @@ resource "google_compute_instance" "qa2" {
 
   labels = {
     team        = "research"
-    cost-center = "CC-02"
+    cost-center = "002-02"
     env         = "qa"
   }
 }

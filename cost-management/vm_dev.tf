@@ -18,7 +18,7 @@ resource "google_compute_instance" "dev1" {
 
   labels = {
     team        = "marketplace"
-    cost-center = "BC-09"
+    cost-center = "001-09"
     env         = "dev"
   }
 }
@@ -43,7 +43,7 @@ resource "google_compute_instance" "dev2" {
 
   labels = {
     team        = "payments"
-    cost-center = "BC-09"
+    cost-center = "001-08"
     env         = "dev"
   }
 }
