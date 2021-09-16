@@ -13,7 +13,7 @@ resource "google_compute_instance" "qa1" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.qa
+    subnetwork = google_compute_subnetwork.qa.self_link
   }
 
   labels = {
@@ -38,7 +38,7 @@ resource "google_compute_instance" "qa2" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.qa
+    subnetwork = google_compute_subnetwork.qa.self_link
   }
 
   labels = {

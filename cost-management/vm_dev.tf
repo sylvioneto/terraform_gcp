@@ -13,7 +13,7 @@ resource "google_compute_instance" "dev1" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.dev
+    subnetwork = google_compute_subnetwork.dev.self_link
   }
 
   labels = {
@@ -38,7 +38,7 @@ resource "google_compute_instance" "dev2" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.dev
+    subnetwork = google_compute_subnetwork.dev.self_link
   }
 
   labels = {

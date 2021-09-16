@@ -10,7 +10,7 @@ resource "google_compute_instance" "prod1" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.prod
+    subnetwork = google_compute_subnetwork.prod.self_link
   }
 
   labels = {
@@ -32,7 +32,7 @@ resource "google_compute_instance" "prod2" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.prod
+    subnetwork = google_compute_subnetwork.prod.self_link
   }
 
   labels = {
@@ -54,7 +54,7 @@ resource "google_compute_instance" "prod3" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.prod
+    subnetwork = google_compute_subnetwork.prod.name
   }
 
   labels = {
