@@ -10,6 +10,7 @@ resource "google_compute_instance" "dev1" {
   }
   scheduling {
     preemptible = true
+    automatic_restart = false
   }
 
   network_interface {
@@ -35,6 +36,7 @@ resource "google_compute_instance" "dev2" {
   }
   scheduling {
     preemptible = true
+    automatic_restart = false
   }
 
   network_interface {
