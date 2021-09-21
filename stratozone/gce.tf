@@ -19,13 +19,14 @@ resource "google_compute_instance" "app_server_win" {
 
   network_interface {
     subnetwork = google_compute_subnetwork.subnet.self_link
-    access_config {
-      // Ephemeral IP
-    }
   }
 
   lifecycle {
     ignore_changes = [metadata]
+  }
+
+  shielded_instance_config {
+    enable_secure_boot = true
   }
 }
 
@@ -38,17 +39,17 @@ resource "google_compute_instance" "db_server_linux" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10-buster-v20210916"
     }
   }
 
   network_interface {
     subnetwork = google_compute_subnetwork.subnet.self_link
-    access_config {
-      // Ephemeral IP
-    }
   }
 
+  shielded_instance_config {
+    enable_secure_boot = true
+  }
 }
 
 
@@ -67,12 +68,13 @@ resource "google_compute_instance" "stratozone_collector" {
 
   network_interface {
     subnetwork = google_compute_subnetwork.subnet.self_link
-    access_config {
-      // Ephemeral IP
-    }
   }
 
   lifecycle {
     ignore_changes = [metadata]
+  }
+
+  shielded_instance_config {
+    enable_secure_boot = true
   }
 }
