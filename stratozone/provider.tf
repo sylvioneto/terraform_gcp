@@ -1,4 +1,4 @@
 provider "google" {
-  project = "sylvio-terraform-demo"
+  project = "<YOUR-PROJECT-ID>"
   region  = "us-central1"
 }
