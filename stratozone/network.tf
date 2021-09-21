@@ -28,3 +28,18 @@ resource "google_compute_firewall" "stratozone" {
 
   source_tags = ["stratozone"]
 }
+
+resource "google_compute_firewall" "allow_iap" {
+  name     = "allow-ingress-from-iap"
+  network  = google_compute_network.vpc_network.name
+  priority = 1100
+  
+  allow {
+    protocol = "tcp"
+    ports    = ["22", "3389"]
+  }
+
+  source_range = ["35.235.240.0/20"]
+}
+
+
