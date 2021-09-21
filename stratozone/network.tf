@@ -39,7 +39,7 @@ resource "google_compute_firewall" "allow_iap" {
     ports    = ["22", "3389"]
   }
 
-  source_range = ["35.235.240.0/20"]
+  source_ranges = ["35.235.240.0/20"]
 }
 
 
