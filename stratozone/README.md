@@ -42,14 +42,14 @@ Once it's done, you can monitor the collected metrics in the Stratozone Portal.
 
 
 ## Known Issues
-Problem: Linux Target - No authentication methods (server sent: publickey) when trying to access Linux machines.  
-Solutions: There are 2 options for this case.
+### Linux Target - No authentication methods (server sent: publickey) when trying to access Linux machines.  
+There are 2 options for this case.
   1) use a key file instead of user/passo
   2) Edit the /etc/ssh/sshd_config, change `PasswordAuthentication` to `yes`, and restart the service `sudo service ssh restart`.
 
-Problem: Windows Target - The RPC server is unavailable.  
-Solution: The Windows firewall is blocking Stratozone collector to reach the target. Turn off the firewall or whitelist the Stratozone collector.
+### Windows Target - The RPC server is unavailable.  
+The Windows firewall in the target machine might be blocking Stratozone collector to reach the target. Turn off the firewall or whitelist the Stratozone collector.
 
-Problem: Windows Target - Access denied with right user/pass.
-Solution: It might happen when machines are not in the same domain or the stratozone user is local. Add a `.\`before the user to indicate is a local login.
+### Windows Target - Access denied with right user/pass.
+It might happen when machines are not in the same domain, or the stratozone user is local. Add a `.\`before the user to indicate is a local login.
 
