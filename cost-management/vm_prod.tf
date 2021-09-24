@@ -9,6 +9,10 @@ resource "google_compute_instance" "prod1" {
     }
   }
 
+  shielded_instance_config {
+    enable_secure_boot = true
+  }
+
   network_interface {
     subnetwork = google_compute_subnetwork.prod.self_link
   }
@@ -29,6 +33,10 @@ resource "google_compute_instance" "prod2" {
     initialize_params {
       image = "debian-cloud/debian-10-buster-v20210916"
     }
+  }
+
+  shielded_instance_config {
+    enable_secure_boot = true
   }
 
   network_interface {
@@ -53,6 +61,10 @@ resource "google_compute_instance" "prod3" {
     }
   }
 
+  shielded_instance_config {
+    enable_secure_boot = true
+  }
+  
   network_interface {
     subnetwork = google_compute_subnetwork.prod.name
   }

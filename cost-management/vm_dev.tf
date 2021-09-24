@@ -8,6 +8,11 @@ resource "google_compute_instance" "dev1" {
       image = "debian-cloud/debian-10-buster-v20210916"
     }
   }
+
+  shielded_instance_config {
+    enable_secure_boot = true
+  }
+  
   scheduling {
     preemptible = true
     automatic_restart = false
@@ -34,6 +39,11 @@ resource "google_compute_instance" "dev2" {
       image = "debian-cloud/debian-10-buster-v20210916"
     }
   }
+
+  shielded_instance_config {
+    enable_secure_boot = true
+  }
+
   scheduling {
     preemptible = true
     automatic_restart = false
