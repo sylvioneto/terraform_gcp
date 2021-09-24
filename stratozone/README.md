@@ -19,7 +19,7 @@ $ terraform apply gce.tfplan
 ### Stratozone user/password
 Create a user/pass common for Linux and Windows machines. Stratozone will use this credential to access the other machines.
 
-E.g stratozone/W&lcome@2021
+E.g stratozone/Welcome@2021
 
 #### Windows
 
