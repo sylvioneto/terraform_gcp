@@ -1,7 +1,7 @@
 locals {
   labels = {
     owner   = "sylvio"
-    purpose = "training"
+    purpose = "stratozone"
   }
 }
 

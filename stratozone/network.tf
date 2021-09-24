@@ -1,6 +1,6 @@
 resource "google_compute_network" "vpc_network" {
-  name                    = "my-vpc"
-  description             = "My test VPC"
+  name                    = "stratozone-test"
+  description             = "VPC for Stratozone testing"
   auto_create_subnetworks = false
 }
 
@@ -41,5 +41,3 @@ resource "google_compute_firewall" "allow_iap" {
 
   source_ranges = ["35.235.240.0/20"]
 }
-
-
