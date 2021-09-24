@@ -5,7 +5,7 @@ resource "google_compute_instance" "prod1" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10-buster-v20210916"
     }
   }
 
@@ -27,7 +27,7 @@ resource "google_compute_instance" "prod2" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10-buster-v20210916"
     }
   }
 
@@ -49,7 +49,7 @@ resource "google_compute_instance" "prod3" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10-buster-v20210916"
     }
   }
 

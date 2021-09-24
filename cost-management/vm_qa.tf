@@ -5,7 +5,7 @@ resource "google_compute_instance" "qa1" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10-buster-v20210916"
     }
   }
   scheduling {
@@ -31,7 +31,7 @@ resource "google_compute_instance" "qa2" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10-buster-v20210916"
     }
   }
   scheduling {
