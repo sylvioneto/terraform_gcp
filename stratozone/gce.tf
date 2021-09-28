@@ -19,6 +19,9 @@ resource "google_compute_instance" "app_server_win" {
 
   network_interface {
     subnetwork = google_compute_subnetwork.subnet.self_link
+    access_config {
+      // Ephemeral public IP
+    }
   }
 
   lifecycle {
@@ -45,6 +48,9 @@ resource "google_compute_instance" "db_server_linux" {
 
   network_interface {
     subnetwork = google_compute_subnetwork.subnet.self_link
+    access_config {
+      // Ephemeral public IP
+    }
   }
 
   shielded_instance_config {
@@ -68,6 +74,10 @@ resource "google_compute_instance" "stratozone_collector" {
 
   network_interface {
     subnetwork = google_compute_subnetwork.subnet.self_link
+
+    access_config {
+      // Ephemeral public IP
+    }
   }
 
   lifecycle {
