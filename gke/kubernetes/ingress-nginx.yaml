@@ -22,3 +22,5 @@ controller:
           topologyKey: kubernetes.io/hostname
 defaultBackend:
   enabled: true
+admissionWebhooks:
+  enabled: false
