@@ -16,7 +16,7 @@ Also, it deploys useful applications to the GKE cluster created:
 2. Clone this repo
 3. Find and replace:
 - `<YOUR-PROJECT-ID>`
-- <`YOUR-DNS-NAME>`
+- `<YOUR-DNS-NAME>`
 
 4. Run terraform to create Google Cloud resources.
 ```
