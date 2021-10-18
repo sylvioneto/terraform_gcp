@@ -32,7 +32,7 @@ $ terraform apply "gke.tfplan"
 6. Run Cloud Build to deploy applications to GKE. 
 Note: Update the project name.
 ```
-$ gcloud builds submit . --config kubernetes.yaml
+$ gcloud builds submit . --config cloudbuild_k8s.yaml
 ```
 
 ## Uninstall
