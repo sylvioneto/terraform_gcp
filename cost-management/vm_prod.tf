@@ -64,7 +64,7 @@ resource "google_compute_instance" "prod3" {
   shielded_instance_config {
     enable_secure_boot = true
   }
-  
+
   network_interface {
     subnetwork = google_compute_subnetwork.prod.name
   }

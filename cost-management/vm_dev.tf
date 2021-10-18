@@ -12,9 +12,9 @@ resource "google_compute_instance" "dev1" {
   shielded_instance_config {
     enable_secure_boot = true
   }
-  
+
   scheduling {
-    preemptible = true
+    preemptible       = true
     automatic_restart = false
   }
 
@@ -45,7 +45,7 @@ resource "google_compute_instance" "dev2" {
   }
 
   scheduling {
-    preemptible = true
+    preemptible       = true
     automatic_restart = false
   }
 

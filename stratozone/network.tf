@@ -33,7 +33,7 @@ resource "google_compute_firewall" "allow_iap" {
   name     = "allow-ingress-from-iap"
   network  = google_compute_network.vpc_network.name
   priority = 1100
-  
+
   allow {
     protocol = "tcp"
     ports    = ["22", "3389"]

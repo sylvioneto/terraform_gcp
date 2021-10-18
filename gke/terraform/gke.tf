@@ -33,19 +33,21 @@ module "gke" {
   release_channel          = "STABLE"
   create_service_account   = true
   remove_default_node_pool = true
+  enable_shielded_nodes    = true
 
   node_pools = [
     {
-      name            = "base"
-      machine_type    = "e2-standard-2"
-      min_count       = 1
-      max_count       = 7
-      local_ssd_count = 0
-      disk_size_gb    = 100
-      disk_type       = "pd-standard"
-      auto_repair     = true
-      auto_upgrade    = true
-      preemptible     = false
+      name               = "base"
+      machine_type       = "e2-standard-2"
+      min_count          = 1
+      max_count          = 10
+      local_ssd_count    = 0
+      disk_size_gb       = 100
+      disk_type          = "pd-standard"
+      auto_repair        = true
+      auto_upgrade       = true
+      preemptible        = false
+      enable_secure_boot = true
     },
   ]
 
