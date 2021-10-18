@@ -7,7 +7,6 @@ module "vpc" {
 
   project_id   = local.project_id
   network_name = local.vpc_name
-  description  = "VPC for testing GKE cluster"
   routing_mode = "GLOBAL"
 
   subnets = [

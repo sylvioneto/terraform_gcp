@@ -19,7 +19,7 @@ module "gke" {
   master_ipv4_cidr_block = local.cluster_ip_ranges.master
   master_authorized_networks = [
     {
-      display_name = "canada-office"
+      display_name = "home-office"
       cidr_block   = "34.83.12.168/32"
     },
     {
@@ -37,7 +37,7 @@ module "gke" {
   node_pools = [
     {
       name            = "base"
-      machine_type    = "e2-medium"
+      machine_type    = "e2-standard-2"
       min_count       = 1
       max_count       = 7
       local_ssd_count = 0
@@ -45,7 +45,7 @@ module "gke" {
       disk_type       = "pd-standard"
       auto_repair     = true
       auto_upgrade    = true
-      preemptible     = true
+      preemptible     = false
     },
   ]
 

@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "sylvio-tf-state"
+    bucket = "<YOUR-PROJECT>-tf-state"
     prefix = "terraform-demo/gke"
   }
 }

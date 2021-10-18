@@ -13,7 +13,10 @@ Also, it deploys useful applications to the GKE cluster created:
 ## Deploy
 
 1. Clone this repo
-2. Update the Terraform state bucket in [main.tf](./terraform/main.tf) and [variables.tf](./terraform/variables.tf) according to your environment.
+2. Find and replace:
+- <YOUR-PROJECT-ID>
+- <YOUR-DNS-NAME>
+
 3. Run terraform to create Google Cloud resources.
 ```
 $ cd terraform
