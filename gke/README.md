@@ -12,26 +12,27 @@ Also, it deploys useful applications to the GKE cluster created:
 
 ## Deploy
 
-1. Clone this repo
-2. Find and replace:
-- <YOUR-PROJECT-ID>
-- <YOUR-DNS-NAME>
+1. Enable Cloud Build on your project.
+2. Clone this repo
+3. Find and replace:
+- `<YOUR-PROJECT-ID>`
+- <`YOUR-DNS-NAME>`
 
-3. Run terraform to create Google Cloud resources.
+4. Run terraform to create Google Cloud resources.
 ```
 $ cd terraform
 $ terraform init
 $ terraform plan -out gke.tfplan
 $ terraform apply "gke.tfplan"
 ```
-4. Update the kubernetes yaml files:
+5. Update the kubernetes yaml files:
 - external-dns.yaml: set domain and service accounts created in step 3.
 - ingress-nginx: set the external-ip created in step 3.
 
-5. Run Cloud Build to deploy applications to GKE. 
+6. Run Cloud Build to deploy applications to GKE. 
 Note: Update the project name.
 ```
-$ gcloud builds submit . --config kubernetes.yaml --project sylvio-terraform-demo
+$ gcloud builds submit . --config kubernetes.yaml
 ```
 
 ## Uninstall
