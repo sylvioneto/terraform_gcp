@@ -1,6 +1,15 @@
 data "google_project" "project" {}
 
-# external-dns service account
+resource "google_project_iam_member" "gke_admin" {
+  role   = "roles/container.admin"
+  member = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+}
+
+resource "google_project_iam_member" "network_user" {
+  role   = "roles/compute.networkUser"
+  member = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+}
+
 resource "google_service_account" "external_dns" {
   account_id   = "external-dns"
   display_name = "External DNS"
