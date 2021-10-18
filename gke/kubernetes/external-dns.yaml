@@ -1,13 +1,11 @@
 # Ref https://github.com/bitnami/charts/tree/master/bitnami/external-dns
-domainFilters:
-- sylvio-terraform-demo
 provider: google
 sources:
 - ingress
 google:
-  project: sylvio-terraform-demo
+  project: <YOUR-PROJECT-ID>
 serviceAccount:
   create: true
   name: external-dns
   annotations:
-    iam.gke.io/gcp-service-account: external-dns@sylvio-terraform-demo.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: external-dns@<YOUR-PROJECT-ID>.iam.gserviceaccount.com
