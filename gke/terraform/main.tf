@@ -1,7 +1,7 @@
 terraform {
   backend "gcs" {
     bucket = "<YOUR-PROJECT-ID>-tf-state"
-    prefix = "terraform-demo/gke"
+    prefix = "terraform-gcp/gke"
   }
 }
 
