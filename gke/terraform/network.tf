@@ -58,28 +58,3 @@ resource "google_compute_router_nat" "nat_gateway" {
     filter = "ERRORS_ONLY"
   }
 }
-
-resource "google_compute_address" "ingress_external_ip" {
-  name         = "${local.cluster_name}-ingress-nginx"
-  description  = "Nginx IP for ${local.cluster_name}"
-  address_type = "EXTERNAL"
-}
-
-# DNS
-resource "google_dns_managed_zone" "public" {
-  name          = "my-public-zone"
-  dns_name      = "${local.dns_name}."
-  description   = "My test DNS domain"
-  visibility    = "public"
-  force_destroy = true
-  labels        = local.resource_labels
-}
-
-resource "google_dns_record_set" "root" {
-  name = "${local.dns_name}."
-  type = "A"
-  ttl  = 300
-
-  managed_zone = google_dns_managed_zone.public.name
-  rrdatas      = [google_compute_address.ingress_external_ip.address]
-}
