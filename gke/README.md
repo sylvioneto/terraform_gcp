@@ -16,7 +16,6 @@ Also, it deploys useful applications to the GKE cluster created:
 2. Clone this repo
 3. Find and replace:
 - `<YOUR-PROJECT-ID>`
-- `<YOUR-DNS-NAME>`
 
 4. Run terraform to create Google Cloud resources.
 ```
@@ -27,7 +26,6 @@ $ terraform apply "gke.tfplan"
 ```
 5. Update the kubernetes yaml files:
 - external-dns.yaml: set domain and service accounts created in step 3.
-- ingress-nginx: set the external-ip created in step 3.
 
 6. Run Cloud Build to deploy applications to GKE. 
 Note: Update the project name.
