@@ -1,7 +1,7 @@
 # gke
 This project demonstrates how to deploy a GKE cluster using [Google CFT](https://github.com/GoogleCloudPlatform/cloud-foundation-toolkit/blob/master/docs/terraform.md) modules.
 
-It creates VPC, Subnet, NAT, DNS Zone, and GKE.
+It creates VPC, Subnet, NAT, and GKE.
 
 Also, it deploys useful applications to the GKE cluster created:
 - Nginx Ingress controller
