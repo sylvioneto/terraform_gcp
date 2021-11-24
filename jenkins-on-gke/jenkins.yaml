@@ -3,8 +3,6 @@ controller:
       welcome-message: |
         jenkins:
           systemMessage: Welcome to our CI\CD server.
-  admin:
-    existingSecret: jenkins-admin-creds
   ingress:
     enabled: true
     hostName: jenkins.sylvio.com
