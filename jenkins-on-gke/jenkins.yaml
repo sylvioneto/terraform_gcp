@@ -5,32 +5,6 @@ controller:
       welcome-message: |
         jenkins:
           systemMessage: Welcome to our CI\CD server.
-    clouds:
-      - kubernetes:
-          podLabels:
-          - key: "jenkins/jenkins-jenkins-agent"
-            value: "true"
-          - key: mykey
-            value: myvalue
-          templates:
-          - containers:
-            - args: "^${computer.jnlpmac} ^${computer.name}"
-              envVars:
-              - envVar:
-                  key: "JENKINS_URL"
-                  value: "http://jenkins.jenkins.svc.cluster.local:8080/"
-              - envVar:
-                  key: "MY_KEY"
-                  key: "MY_VALUE"
-              image: "jenkins/inbound-agent:4.11-1"
-              resourceLimitCpu: "2"
-              resourceLimitMemory: "2048Mi"
-              resourceRequestCpu: "512m"
-              resourceRequestMemory: "512Mi"
-            name: "jenkins-agent"
-            nodeUsageMode: NORMAL
-            podRetention: "never"
-            serviceAccount: "jenkins"
   ingress:
     apiVersion: "networking.k8s.io/v1"
     enabled: true
@@ -46,3 +20,12 @@ persistence:
 serviceAccount:
   annotations:
     iam.gke.io/gcp-service-account: jenkins@<YOUR_PROJECT_ID>.iam.gserviceaccount.com
+
+agent:
+  resources:
+    requests:
+      cpu: "512m"
+      memory: "512Mi"
+    limits:
+      cpu: "2"
+      memory: 2048Mi
