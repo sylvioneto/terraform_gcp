@@ -17,7 +17,7 @@ steps:
 - id: deploy-ingress-nginx
   name: 'gcr.io/$PROJECT_ID/helm:latest'
   args: ['upgrade', '--install', 'ingress-nginx', 'ingress-nginx/ingress-nginx',
-   '--version', '3.19.0', 
+   '--version', '4.0.10', 
    '--namespace', 'nginx',
    '-f', 'kubernetes/ingress-nginx.yaml',
   ]
