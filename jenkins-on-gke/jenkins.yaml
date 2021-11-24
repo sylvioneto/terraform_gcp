@@ -5,7 +5,7 @@ controller:
           systemMessage: Welcome to our CI\CD server.
   ingress:
     enabled: true
-    hostName: jenkins.sylvio.com
+    hostName: jenkins.test.sylvio.com
     # tls:
     #   - secretName: tlsSecret
     #     hosts:
