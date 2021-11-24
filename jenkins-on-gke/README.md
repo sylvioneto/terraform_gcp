@@ -20,7 +20,10 @@ gcloud iam service-accounts create jenkins --description "Jenkins Service Accoun
 ```
 4. Update the jenkins.yaml with the SA's name, domain name.
 
-5. Update cloudbuild.yaml according to your cluster's details.
+5. Update cloudbuild.yaml according to your cluster's details and run it.
+```ssh
+gcloud builds submit . --config cloudbuild.yaml
+```
 
 
 

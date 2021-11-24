@@ -1,16 +1,25 @@
 steps:
 # Build Helm Deployment Image
-- name: 'gcr.io/cloud-builders/docker'
+- id: build-helm
+  name: 'gcr.io/cloud-builders/docker'
   args: ['build', '--tag=gcr.io/$PROJECT_ID/helm', '.']
-  id: build-helm
-- name: 'gcr.io/$PROJECT_ID/helm:latest'
+  dir: docker
+  
+- id: test-helm
+  name: 'gcr.io/$PROJECT_ID/helm:latest'
   args: ['version', '--client']
   env:
     - SKIP_CLUSTER_CONFIG=true
-  id: test-helm
+  dir: docker
 
 # Kubernetes deployment
-- id: deploy-jenkins
+- id: create-namespace
+  name: 'google/cloud-sdk:slim'
+  entrypoint: 'kubectl'
+  args: ['apply', '-f', 'namespace.yaml']
+
+
+- id: helm-install
   name: 'gcr.io/$PROJECT_ID/helm:latest'
   args: ['upgrade', '--install', 'jenkins', '--namespace', 'jenkins',
   'jenkinsci/jenkins', '--version', '3.8.9', 
