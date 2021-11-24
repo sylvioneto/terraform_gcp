@@ -58,3 +58,19 @@ resource "google_compute_router_nat" "nat_gateway" {
     filter = "ERRORS_ONLY"
   }
 }
+
+
+# Firewall
+resource "google_compute_firewall" "nginx_admission" {
+  name        = "gke-master-to-worker"
+  network     = local.vpc_name
+  description = "Creates firewall rule from master to workers"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["8443", "80", "443", "10254"]
+  }
+
+  source_ranges = [local.cluster_ip_ranges.master]
+  destination_ranges = [ local.cluster_ip_ranges.nodes ]
+}
