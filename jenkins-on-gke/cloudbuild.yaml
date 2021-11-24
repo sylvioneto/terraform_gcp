@@ -17,6 +17,10 @@ steps:
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'namespace.yaml']
 
+- id: create-secrets
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'secrets.yaml']
+
 - id: helm-install
   name: 'gcr.io/$PROJECT_ID/helm:latest'
   args: ['upgrade', '--install', 'jenkins', '--namespace', 'jenkins',

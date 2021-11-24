@@ -1,20 +1,10 @@
 controller:
-  JCasC:
-    securityRealm: |-
-      local:
-        allowsSignup: false
-        enableCaptcha: false
-        users:
-        - id: "admin"
-          name: "Jenkins Admin"
-          password: "admin"
-    authorizationStrategy: |-
-      loggedInUsersCanDoAnything:
-        allowAnonymousRead: false
     configScripts:
       welcome-message: |
         jenkins:
           systemMessage: Welcome to our CI\CD server.
+  admin:
+    existingSecret: jenkins-admin-creds
   ingress:
     enabled: true
     hostName: jenkins.sylvio.com
