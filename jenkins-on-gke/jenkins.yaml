@@ -1,5 +1,13 @@
 controller:
   JCasC:
+    securityRealm: |-
+      local:
+        allowsSignup: false
+        enableCaptcha: false
+        users:
+        - id: "admin"
+          name: "Jenkins Admin"
+          password: "admin"
     configScripts:
       welcome-message: |
         jenkins:
