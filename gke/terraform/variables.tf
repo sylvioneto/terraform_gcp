@@ -1,7 +1,7 @@
 locals {
   project_id = "<YOUR-PROJECT-ID>"
-  region   = "us-central1"
-  vpc_name = "gke-vpc"
+  region     = "us-central1"
+  vpc_name   = "gke-vpc"
 
   cluster_name = "gke-dev"
   cluster_ip_ranges = {

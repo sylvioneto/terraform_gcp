@@ -51,6 +51,12 @@ module "gke" {
     },
   ]
 
+  node_pools_tags = {
+    all = [
+      local.cluster_name
+    ]
+  }
+
   depends_on = [
     module.vpc
   ]

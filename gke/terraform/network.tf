@@ -60,7 +60,8 @@ resource "google_compute_router_nat" "nat_gateway" {
 }
 
 
-# Firewall
+# Firewall for nginx
+# https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
 resource "google_compute_firewall" "nginx_admission" {
   name        = "gke-master-to-worker"
   network     = local.vpc_name
@@ -68,9 +69,9 @@ resource "google_compute_firewall" "nginx_admission" {
 
   allow {
     protocol = "tcp"
-    ports    = ["8443", "80", "443", "10254"]
+    ports    = ["80", "443", "8443", "10254"]
   }
 
   source_ranges = [local.cluster_ip_ranges.master]
-  destination_ranges = [ local.cluster_ip_ranges.nodes ]
+  target_tags   = [local.cluster_name]
 }
