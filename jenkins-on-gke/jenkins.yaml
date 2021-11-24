@@ -6,15 +6,12 @@ controller:
           systemMessage: Welcome to our CI\CD server.
   ingress:
     enabled: true
+    ingressClassName: nginx
     hostName: jenkins.test.sylvio.com
     # tls:
     #   - secretName: tlsSecret
     #     hosts:
     #       - jenkins.sylvio.com
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/rewrite-target: /
 persistence:
   enabled: true
   storageClass: premium-rwo
