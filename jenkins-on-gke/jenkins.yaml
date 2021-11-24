@@ -7,11 +7,15 @@ controller:
   ingress:
     enabled: true
     hostName: jenkins.example.com
-    ingressClassName: nginx
-    # tls:
-    #   - secretName: tlsSecret
-    #     hosts:
-    #       - jenkins.example.com
+    tls:
+      - secretName: tlsSecret
+        hosts:
+          - jenkins.example.com
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/rewrite-target: /
+      nginx.ingress.kubernetes.io/add-base-url: "true"
 persistence:
   enabled: true
   storageClass: premium-rwo
