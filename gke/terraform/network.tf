@@ -63,9 +63,9 @@ resource "google_compute_router_nat" "nat_gateway" {
 # Firewall for nginx
 # https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
 resource "google_compute_firewall" "nginx_admission" {
-  name        = "gke-master-to-worker"
+  name        = "${local.cluster_name}-master-to-worker"
   network     = local.vpc_name
-  description = "Creates firewall rule from master to workers"
+  description = "Creates a nginx firewall rule from master to workers"
 
   allow {
     protocol = "tcp"
