@@ -1,0 +1,14 @@
+controller:
+  JCasC:
+    configScripts:
+      welcome-message: |
+        jenkins:
+          systemMessage: Welcome to our CI\CD server.
+  ingress:
+    enabled: true
+    hostName: jenkins.example.com
+    path: /
+persistence:
+  enabled: true
+  storageClass: premium-rwo
+  size: "500Gi"

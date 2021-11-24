@@ -1,0 +1,26 @@
+steps:
+# Build Helm Deployment Image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/helm', '.']
+  id: build-helm
+- name: 'gcr.io/$PROJECT_ID/helm:latest'
+  args: ['version', '--client']
+  env:
+    - SKIP_CLUSTER_CONFIG=true
+  id: test-helm
+
+# Kubernetes deployment
+- id: deploy-jenkins
+  name: 'gcr.io/$PROJECT_ID/helm:latest'
+  args: ['upgrade', '--install', 'jenkins', '--namespace', 'jenkins',
+  'jenkinsci/jenkins', '--version', '3.8.9', 
+   '-f', 'jenkins.yaml',
+  ]
+  env:
+  - 'HELM_REPO_NAME=jenkinsci'
+  - 'HELM_REPO_URL=https://charts.jenkins.io'
+
+options:
+  env:
+  - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=gke-dev'
