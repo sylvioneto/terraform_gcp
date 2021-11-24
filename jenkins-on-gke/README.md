@@ -6,6 +6,7 @@ If you don't have a GKE cluster yet, please take a look at [gke](../gke).
 ## Pre-req
 - [GKE](https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?) and [Cloud Build](https://console.cloud.google.com/marketplace/product/google/cloudbuild.googleapis.com) APIs are enabled.
 - GKE cluster up and running.
+- Knowledge of Workload Identity
 
 ## How to deploy
 
@@ -14,12 +15,15 @@ If you don't have a GKE cluster yet, please take a look at [gke](../gke).
 ```ssh
 gcloud config list
 ```
-3. Create a service account for Jenkins.
+3. Create a GSA for Jenkins and allow the KSA to act as it.
 ```ssh
 gcloud iam service-accounts create jenkins --description "Jenkins Service Account" --display-name jenkins
-```
-4. Update the jenkins.yaml with the SA's name, domain name.
 
+gcloud iam service-accounts add-iam-policy-binding jenkins@<YOUR_PROJECT_ID>.iam.gserviceaccount.com \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:<YOUR_PROJECT_ID>.svc.id.goog[jenkins/jenkins]"
+```
+4. Update the jenkins.yaml replacing the placeholders.
 5. Update cloudbuild.yaml according to your cluster's details and run it.
 ```ssh
 gcloud builds submit . --config cloudbuild.yaml

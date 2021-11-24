@@ -16,3 +16,7 @@ persistence:
   enabled: true
   storageClass: premium-rwo
   size: "500Gi"
+
+serviceAccount:
+  annotations:
+    iam.gke.io/gcp-service-account: jenkins@<YOUR_PROJECT_ID>.iam.gserviceaccount.com
