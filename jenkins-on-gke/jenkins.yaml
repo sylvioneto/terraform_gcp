@@ -8,6 +8,9 @@ controller:
         - id: "admin"
           name: "Jenkins Admin"
           password: "admin"
+    authorizationStrategy: |-
+      loggedInUsersCanDoAnything:
+        allowAnonymousRead: false
     configScripts:
       welcome-message: |
         jenkins:
