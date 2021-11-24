@@ -6,11 +6,11 @@ controller:
           systemMessage: Welcome to our CI\CD server.
   ingress:
     enabled: true
-    hostName: jenkins.example.com
+    hostName: jenkins.sylvio.com
     # tls:
     #   - secretName: tlsSecret
     #     hosts:
-    #       - jenkins.example.com
+    #       - jenkins.sylvio.com
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
