@@ -1,5 +1,5 @@
 resource "google_compute_network" "vpc" {
-  name                    = "sole-tenant"
+  name                    = "sole-tenant-vpc"
   description             = "VPC for testing Sole-Tenant"
   auto_create_subnetworks = false
 }
