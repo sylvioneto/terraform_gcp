@@ -32,12 +32,10 @@ $ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com
 $ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/editor'
 ```
 
-5. Execute Terraform using Cloud Build.
+5. Deploy Terraform using Cloud Build.
 ```
 $ gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
 ```
 
-6. (optional) Destroy all resources.
-```
-$ gcloud builds submit . --config cloudbuild_destroy.yaml --project $GCP_PROJECT_ID
-```
+## Destroy
+Uncomment the `tf destroy` step in the cloudbuild.yaml file, and trigger the deployment again.

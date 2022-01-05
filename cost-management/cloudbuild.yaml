@@ -20,6 +20,12 @@ steps:
   - apply
   - -auto-approve
 
+# - id: 'tf destroy'
+#   name: 'hashicorp/terraform:1.0.0'
+#   args: 
+#   - destroy
+#   - -auto-approve
+
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID

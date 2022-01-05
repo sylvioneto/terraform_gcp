@@ -37,7 +37,5 @@ $ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccoun
 $ gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
 ```
 
-5. (optional) Destroy all resources.
-```
-$ gcloud builds submit . --config cloudbuild_destroy.yaml --project $GCP_PROJECT_ID
-```
+## Destroy
+Uncomment the `tf destroy` step in the cloudbuild.yaml file, and trigger the deployment again.
