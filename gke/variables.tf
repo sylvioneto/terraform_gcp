@@ -1,5 +1,9 @@
+variable "project_id" {
+  description = "GCP Project ID"
+  default = null
+}
+
 locals {
-  project_id = "<YOUR-PROJECT-ID>"
   region     = "us-central1"
   vpc_name   = "gke-vpc"
 

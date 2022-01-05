@@ -1,5 +1,6 @@
 # Cost Management
 
+## Description
 This example demonstrates how to use resource labels and Data Studio to monitor your GCP spending.
 It creates an environment with VMs that have labels: team, cost-center, and env.
 As a result, you can use the Data Studio to explore your GCP Billing data.

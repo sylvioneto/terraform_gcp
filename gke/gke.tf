@@ -3,7 +3,6 @@
 module "gke" {
   source     = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
   version    = "~> 17.0.0"
-  project_id = local.project_id
   region     = local.region
   name       = local.cluster_name
 
@@ -19,7 +18,7 @@ module "gke" {
   master_ipv4_cidr_block = local.cluster_ip_ranges.master
   master_authorized_networks = [
     {
-      display_name = "home-office"
+      display_name = "office-ip"
       cidr_block   = "34.83.12.168/32"
     },
     {
@@ -38,7 +37,7 @@ module "gke" {
   node_pools = [
     {
       name               = "base"
-      machine_type       = "e2-custom-2-4096"
+      machine_type       = "e2-standard-2"
       min_count          = 1
       max_count          = 10
       local_ssd_count    = 0
