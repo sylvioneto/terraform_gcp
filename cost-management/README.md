@@ -20,9 +20,9 @@ $ export GCP_PROJECT_ID="<project-id>"
 $ gsutil mb gs://$GCP_PROJECT_ID-tf-state
 ```
 
-3. Enable Cloud Build API in case it is the first time you use it.
+3. Enable Compute and Cloud Build API in case it is the first time you use it.
 ```
-$ gcloud services enable cloudbuild.googleapis.com
+$ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com
 ```
 
 4. Execute Terraform using Cloud Build.
