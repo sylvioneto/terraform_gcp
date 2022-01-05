@@ -29,10 +29,6 @@ module "vpc" {
       },
     ]
   }
-
-  depends_on = [
-    google_project_service.compute
-  ]
 }
 
 # NAT and Router
