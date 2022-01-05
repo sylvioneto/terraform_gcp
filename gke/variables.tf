@@ -19,7 +19,6 @@ locals {
     terraform   = "true"
     cost-center = "training"
     env         = "dev"
-    owner       = "team1"
-    feature     = "feature2"
+    owner       = "data-engineering"
   }
 }
