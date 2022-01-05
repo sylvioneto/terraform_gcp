@@ -36,7 +36,7 @@ $ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccoun
 $ gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
 ```
 
-6. (optional) Destroy resources.
+6. (optional) Destroy all resources.
 ```
 $ gcloud builds submit . --config cloudbuild_destroy.yaml --project $GCP_PROJECT_ID
 ```
