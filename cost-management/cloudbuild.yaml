@@ -18,5 +18,6 @@ steps:
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
-  - -var='project_id=$PROJECT_ID'
   - -auto-approve
+  env:
+    - TF_VAR_project_id=$PROJECT_ID
