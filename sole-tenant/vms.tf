@@ -77,27 +77,3 @@ resource "google_compute_instance" "db1" {
     }
   }
 }
-
-resource "google_compute_instance" "linux" {
-  name         = "srv-app-003"
-  machine_type = "n1-standard-2"
-  zone         = "us-central1-a"
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-10-buster-v20210916"
-    }
-  }
-
-  network_interface {
-    subnetwork = google_compute_subnetwork.subnet.self_link
-  }
-
-  scheduling {
-    node_affinities {
-      key      = "compute.googleapis.com/node-group-name"
-      operator = "IN"
-      values   = [google_compute_node_group.soletenant_grp.name]
-    }
-  }
-}

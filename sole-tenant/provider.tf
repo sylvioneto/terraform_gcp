@@ -1,11 +1,9 @@
 terraform {
   backend "gcs" {
-    bucket = "sylvio-tf-state"
-    prefix = "terraform-examples/sole-tenant"
   }
 }
 
 provider "google" {
-  project = "sylvio-terraform-demo"
+  project = var.project_id
   region  = "us-central1"
 }
