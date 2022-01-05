@@ -33,7 +33,7 @@ module "vpc" {
 
 # NAT and Router
 resource "google_compute_router" "nat_router" {
-  name    = "${local.vpc_name}-nat-router"
+  name    = "${module.vpc.name}-nat-router"
   network = module.vpc.network_self_link
 
   bgp {
@@ -42,7 +42,7 @@ resource "google_compute_router" "nat_router" {
 }
 
 resource "google_compute_router_nat" "nat_gateway" {
-  name                               = "${local.vpc_name}-nat-router"
+  name                               = "${module.vpc.name}-nat-gw"
   router                             = google_compute_router.nat_router.name
   region                             = google_compute_router.nat_router.region
   nat_ip_allocate_option             = "AUTO_ONLY"
@@ -59,7 +59,7 @@ resource "google_compute_router_nat" "nat_gateway" {
 # https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
 resource "google_compute_firewall" "nginx_admission" {
   name        = "${local.cluster_name}-master-to-worker"
-  network     = local.vpc_name
+  network     = module.vpc.network_self_link
   description = "Creates a nginx firewall rule from master to workers"
 
   allow {

@@ -25,9 +25,9 @@ $ export GCP_PROJECT_NUMBER="<project-number>"
 $ gsutil mb gs://$GCP_PROJECT_ID-tf-state
 ```
 
-3. Enable Compute, Container and Cloud Build APIs and give Cloud Build's SA permission in case it's the first time you use it.
+3. Enable the necessary APIs and give Cloud Build's SA permission in case it's the first time you use it.
 ```
-$ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com container.googleapis.com
+$ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com
 $ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/editor'
 ```
 
