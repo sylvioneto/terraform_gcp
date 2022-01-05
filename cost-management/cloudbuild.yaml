@@ -19,5 +19,7 @@ steps:
   args: 
   - apply
   - -auto-approve
+
+options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
