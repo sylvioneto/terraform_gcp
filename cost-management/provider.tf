@@ -4,6 +4,6 @@ terraform {
 }
 
 provider "google" {
-  project = "gce-test-syl"
+  project = var.project_id
   region  = "us-central1"
 }

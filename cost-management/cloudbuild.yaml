@@ -8,7 +8,7 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=terraform_gcp/cost-management"
-  
+      
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
   args: 
@@ -18,4 +18,5 @@ steps:
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
+  - -var='project_id=$PROJECT_ID'
   - -auto-approve
