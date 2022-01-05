@@ -2,11 +2,11 @@
 
 ## Description
 Terraform examples for Google Cloud Platform - GCP  
-All modules are set to use free tier as much as possible in order to help to explore GCP without costs.  
+All modules are set to use free tier as much as possible in order to help you to explore GCP without costs.  
 Just in case, always check the free-tier eligibility: https://cloud.google.com/free/docs/gcp-free-tier
 
 ## Pre-req
-- terraform 0.13 or later
+- terraform 1.0 or later
 - google provider 3.12 or later
 
 ## Example
