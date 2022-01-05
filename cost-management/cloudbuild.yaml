@@ -6,7 +6,7 @@ steps:
   - -backend-config="bucket=$PROJECT_ID-tf-state"
   - -backend-config="path=terraform_gcp/cost-management"
   
-- id: 'tf init'
+- id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - plan

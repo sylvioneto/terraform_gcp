@@ -20,8 +20,12 @@ $ export GCP_PROJECT_ID="<project-id>"
 $ gsutil mb gs://$GCP_PROJECT_ID-tf-state
 ```
 
-3. Execute Terraform using Cloud Build.
+3. Enable Cloud Build API in case it is the first time you use it.
 ```
-$ gcloud build submit . \
-    
+$ gcloud services enable cloudbuild.googleapis.com
+```
+
+4. Execute Terraform using Cloud Build.
+```
+$ gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
 ```
