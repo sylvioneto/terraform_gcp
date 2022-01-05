@@ -33,7 +33,7 @@ module "vpc" {
 
 # NAT and Router
 resource "google_compute_router" "nat_router" {
-  name    = "${module.vpc.name}-nat-router"
+  name    = "${module.vpc.network_name}-nat-router"
   network = module.vpc.network_self_link
 
   bgp {
@@ -42,7 +42,7 @@ resource "google_compute_router" "nat_router" {
 }
 
 resource "google_compute_router_nat" "nat_gateway" {
-  name                               = "${module.vpc.name}-nat-gw"
+  name                               = "${module.vpc.network_name}-nat-gw"
   router                             = google_compute_router.nat_router.name
   region                             = google_compute_router.nat_router.region
   nat_ip_allocate_option             = "AUTO_ONLY"
