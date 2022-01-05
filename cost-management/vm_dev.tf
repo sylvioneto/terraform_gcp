@@ -54,7 +54,7 @@ resource "google_compute_instance" "finance_dev" {
   }
 
   labels = {
-    team        = "payments"
+    team        = "finance"
     cost-center = "002-02"
     env         = "dev"
   }
