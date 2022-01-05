@@ -5,7 +5,7 @@ resource "google_compute_network" "vpc" {
 }
 
 resource "google_compute_subnetwork" "subnet" {
-  name                     = "subnet-win"
+  name                     = "win-subnet"
   description              = "Subnet to host Windows Server VMs"
   ip_cidr_range            = "10.1.0.0/16"
   region                   = "us-central1"
