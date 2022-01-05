@@ -1,6 +1,6 @@
-resource "google_compute_instance" "dev1" {
-  name         = "vm-dev-001"
-  machine_type = "e2-standard-2"
+resource "google_compute_instance" "marketplace_dev" {
+  name         = "marketplace-dev"
+  machine_type = "e2-micro"
   zone         = "us-central1-a"
 
   boot_disk {
@@ -24,14 +24,14 @@ resource "google_compute_instance" "dev1" {
 
   labels = {
     team        = "marketplace"
-    cost-center = "001-09"
+    cost-center = "002-01"
     env         = "dev"
   }
 }
 
-resource "google_compute_instance" "dev2" {
-  name         = "vm-dev-002"
-  machine_type = "e2-standard-2"
+resource "google_compute_instance" "finance_dev" {
+  name         = "finance-dev"
+  machine_type = "e2-micro"
   zone         = "us-central1-a"
 
   boot_disk {
@@ -55,7 +55,7 @@ resource "google_compute_instance" "dev2" {
 
   labels = {
     team        = "payments"
-    cost-center = "001-08"
+    cost-center = "002-02"
     env         = "dev"
   }
 }
