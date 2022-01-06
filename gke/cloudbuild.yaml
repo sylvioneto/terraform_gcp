@@ -33,3 +33,5 @@ options:
 tags:
   - terraform
   - gke
+
+timeout: 1200s
