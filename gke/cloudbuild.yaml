@@ -20,13 +20,6 @@ steps:
   - apply
   - -auto-approve
 
-- id: create-cluster-role-binding
-  name: 'gcr.io/cloud-builders/kubectl'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    cat rbac.yaml | envsubst | kubectl apply -f -
 
 # - id: 'tf destroy'
 #   name: 'hashicorp/terraform:1.0.0'
