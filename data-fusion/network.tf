@@ -44,12 +44,12 @@ resource "google_compute_router_nat" "nat_gateway" {
 
 # Allow internal trrafic
 resource "google_compute_firewall" "allow-vm-to-vm" {
-  name        = "allow-vm-to-vm"
-  network     = module.vpc.network_self_link
+  name    = "allow-vm-to-vm"
+  network = module.vpc.network_self_link
 
   allow {
     protocol = "all"
-    ports = ["all"]
+    ports    = []
   }
 
   source_ranges = ["10.1.0.0/22"]
