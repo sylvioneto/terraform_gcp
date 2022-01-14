@@ -40,3 +40,22 @@ resource "google_compute_router_nat" "nat_gateway" {
     filter = "ERRORS_ONLY"
   }
 }
+
+
+# Allow internal trrafic
+resource "google_compute_firewall" "allow-vm-to-vm" {
+  name        = "allow-vm-to-vm"
+  network     = module.vpc.network_self_link
+  description = "Creates a nginx firewall rule from master to workers"
+
+  allow {
+    protocol = "tcp"
+  }
+
+  allow {
+    protocol = "icmp"
+  }
+
+  source_ranges = ["10.1.0.0/22"]
+  target_tags = ["10.1.0.0/22"]
+}
