@@ -46,7 +46,6 @@ resource "google_compute_router_nat" "nat_gateway" {
 resource "google_compute_firewall" "allow-vm-to-vm" {
   name        = "allow-vm-to-vm"
   network     = module.vpc.network_self_link
-  description = "Creates a nginx firewall rule from master to workers"
 
   allow {
     protocol = "tcp"
