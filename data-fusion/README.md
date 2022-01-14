@@ -27,7 +27,7 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 
 4. Execute Terraform using Cloud Build.
 ```
-$ gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
+gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
 ```
 
 ## Destroy
