@@ -49,10 +49,16 @@ resource "google_compute_firewall" "allow-vm-to-vm" {
 
   allow {
     protocol = "tcp"
+    ports = ["0-65535"]
+  }
+
+  allow {
+    protocol = "udp"
   }
 
   allow {
     protocol = "icmp"
+    ports = ["0-65535"]
   }
 
   source_ranges = ["10.1.0.0/22"]
