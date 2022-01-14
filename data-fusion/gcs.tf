@@ -7,7 +7,7 @@ resource "google_storage_bucket" "raw" {
 }
 
 resource "google_storage_bucket" "data_lake" {
-  name                        = "${var.project_id}-data-raw"
+  name                        = "${var.project_id}-data-lake"
   location                    = "us-east1"
   force_destroy               = true
   uniform_bucket_level_access = true
