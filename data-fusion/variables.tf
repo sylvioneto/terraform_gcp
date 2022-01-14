@@ -9,7 +9,7 @@ variable "region" {
 }
 
 locals {
-  resource_labels = {
+  labels = {
     terraform   = "true"
     cost-center = "training"
     env         = "dev"
