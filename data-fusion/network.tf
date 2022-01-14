@@ -57,5 +57,5 @@ resource "google_compute_firewall" "allow-vm-to-vm" {
   }
 
   source_ranges = ["10.1.0.0/22"]
-  target_tags = ["10.1.0.0/22"]
+  target_ranges = ["10.1.0.0/22"]
 }
