@@ -2,7 +2,7 @@
 
 ## Description
 
-This project demonstrates how to create a Data Fusion to execute No Code data pipelines.
+This project demonstrates how to create a Data Fusion environment to execute No Code data pipeline.
 
 ## Deploy
 
