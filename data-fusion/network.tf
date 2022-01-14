@@ -48,16 +48,7 @@ resource "google_compute_firewall" "allow-vm-to-vm" {
   network     = module.vpc.network_self_link
 
   allow {
-    protocol = "tcp"
-    ports = ["all"]
-  }
-
-  allow {
-    protocol = "udp"
-  }
-
-  allow {
-    protocol = "icmp"
+    protocol = "all"
     ports = ["all"]
   }
 
