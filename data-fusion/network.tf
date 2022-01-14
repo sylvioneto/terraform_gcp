@@ -49,7 +49,7 @@ resource "google_compute_firewall" "allow-vm-to-vm" {
 
   allow {
     protocol = "tcp"
-    ports = ["0-65535"]
+    ports = ["all"]
   }
 
   allow {
@@ -58,7 +58,7 @@ resource "google_compute_firewall" "allow-vm-to-vm" {
 
   allow {
     protocol = "icmp"
-    ports = ["0-65535"]
+    ports = ["all"]
   }
 
   source_ranges = ["10.1.0.0/22"]
