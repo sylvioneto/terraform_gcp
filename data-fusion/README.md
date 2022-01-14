@@ -17,15 +17,19 @@ export GCP_PROJECT_NUMBER="<project-number>"
 gsutil mb gs://$GCP_PROJECT_ID-tf-state
 ```
 
-3. Enable the necessary APIs and give Cloud Build's SA permissions in case it's the first time you use it.
+3. Enable the necessary APIs.
 ```
-gcloud services enable cloudbuild.googleapis.com compute.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com datafusion.googleapis.com
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/iam.securityAdmin'
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/editor'
+gcloud services enable cloudbuild.googleapis.com \
+    compute.googleapis.com \
+    container.googleapis.com \
+    cloudresourcemanager.googleapis.com \
+    datafusion.googleapis.com
 ```
 
-4. Enable the necessary APIs and give Default Compute permissions in case it's the first time you use it.
+4. Give permissions to the service accounts.
 ```
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/iam.securityAdmin'
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/editor'
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER-compute@developer.gserviceaccount.com" --role='roles/editor'
 ```
 
