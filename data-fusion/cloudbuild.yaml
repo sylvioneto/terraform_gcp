@@ -33,6 +33,6 @@ options:
     - PROJECT_NUMBER=$PROJECT_NUMBER
 tags:
   - terraform
-  - gke
+  - data-fusion
 
 timeout: 1200s
