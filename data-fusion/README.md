@@ -8,13 +8,13 @@ This project demonstrates how to create a Data Fusion to execute No Code data pi
 
 1. Set env vars for your project id and number
 ```
-$ export GCP_PROJECT_ID="<project-id>"
-$ export GCP_PROJECT_NUMBER="<project-number>"
+export GCP_PROJECT_ID="<project-id>"
+export GCP_PROJECT_NUMBER="<project-number>"
 ```
 
 2. Create a bucket to store your project's Terraform state. 
 ```
-$ gsutil mb gs://$GCP_PROJECT_ID-tf-state
+gsutil mb gs://$GCP_PROJECT_ID-tf-state
 ```
 
 3. Enable the necessary APIs and give Cloud Build's SA permissions in case it's the first time you use it.
