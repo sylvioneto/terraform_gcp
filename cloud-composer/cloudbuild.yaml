@@ -7,7 +7,7 @@ steps:
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=terraform_gcp/data-fusion"
+    -backend-config="prefix=terraform_gcp/cloud-composer"
       
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
