@@ -60,18 +60,21 @@ def run():
     output_dw = 'gs://{0}-data-warehouse/order/output'.format(PROJECT)
 
     # find all orders that contain invalid data and insert the valid ones on GCS
-    all_orders = (p | 'GetOrders' >> beam.io.ReadFromText(input))
+    all_orders = (p | 'GetOrders' >> beam.io.ReadFromText(
+        input, skip_header_lines=1))
     valid_orders = all_orders | 'RemoveInvalids' >> beam.FlatMap(
         lambda line: validate_order(line))
 
     # Data Lake output
     (all_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
-    (valid_orders | 'WriteToDataWarehouse' >> beam.io.WriteToText(output_dw))
 
     # Data Warehouse output
-    (valid_orders
+    dw_input = (
+        valid_orders
         | 'String To BigQuery Row' >> beam.Map(lambda s: csv_to_bqrow(s))
-        | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
+        | 'String To Dictionary' >> beam.Map(lambda line: dict(record=line)))
+    (dw_input | 'WriteToDataWarehouse' >> beam.io.WriteToText(output_dw))
+    (dw_input | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
             TABLE_SPEC,
             schema=TABLE_SCHEMA,
             write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE,
