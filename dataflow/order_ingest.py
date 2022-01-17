@@ -45,7 +45,7 @@ def run():
       '--temp_location=gs://{0}-data-raw/temp/'.format(PROJECT),
       '--runner=DataflowRunner',
       '--region=us-east1',
-      '--subnetwork=data-engine'
+      '--subnetwork=regions/us-east1/subnetworks/data-engineering'
    ]
 
    p = beam.Pipeline(argv=argv)
