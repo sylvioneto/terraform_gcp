@@ -48,6 +48,12 @@ gsutil cp order_ingest.csv gs://$GCP_PROJECT_ID-data-raw/order/
 Note: Change the project id in the order_ingest.py file before running it.
 
 ```
+pip3 install virtualenv
+python3 -m virtualenv env
+source env/bin/activate
+
+pip3 install apache-beam[gcp]
+
 python3 order_ingest.py
 ```
 
