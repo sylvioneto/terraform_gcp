@@ -23,7 +23,7 @@ gcloud services enable cloudbuild.googleapis.com \
     cloudresourcemanager.googleapis.com \
     compute.googleapis.com \
     container.googleapis.com \
-    composer.googleapis.com
+    dataflow.googleapis.com
 ```
 
 4. Give permissions to the service accounts.
