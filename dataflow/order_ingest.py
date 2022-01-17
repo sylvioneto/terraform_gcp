@@ -30,19 +30,16 @@ def validate_order(line):
         yield line
 
 
-def handle_customer_data(line):
+def csv_to_bqrow(line):
     order_data = line.split(",")
-
-    # add here your logic to handle customer data, for example
-    customer_name = order_data[3]
-    if customer_name:
-        yield {"order_id": order_data[0],
-               "status": order_data[1],
-               "amount": order_data[2],
-               "customer_name": order_data[3],
-               "customer_phone": order_data[4],
-               "customer_email": order_data[5],
-               }
+    d = {"order_id": order_data[0],
+         "status": order_data[1],
+         "amount": order_data[2],
+         "customer_name": order_data[3],
+         "customer_phone": order_data[4],
+         "customer_email": order_data[5],
+         }
+    return d
 
 
 def run():
@@ -63,24 +60,23 @@ def run():
     output_dw = 'gs://{0}-data-warehouse/order/output'.format(PROJECT)
 
     # find all orders that contain invalid data and insert the valid ones on GCS
-    valid_orders = (p
-                    | 'GetOrders' >> beam.io.ReadFromText(input)
-                    | 'RemoveInvalids' >> beam.FlatMap(lambda line: validate_order(line))
-                    )
+    all_orders = (p | 'GetOrders' >> beam.io.ReadFromText(input))
+    valid_orders = all_orders | 'RemoveInvalids' >> beam.FlatMap(
+        lambda line: validate_order(line))
 
     # Data Lake output
-    (valid_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
+    (all_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
+    (valid_orders | 'WriteToDataWarehouse' >> beam.io.WriteToText(output_dw))
 
     # Data Warehouse output
-    dw_data = valid_orders | 'HandleCustomerData' >> beam.FlatMap(lambda line: handle_customer_data(line))
-    (dw_data | 'WriteToDataWarehouseBucket' >> beam.io.WriteToText(output_dw))
-    (dw_data
+    (valid_orders
+        | 'String To BigQuery Row' >> beam.Map(lambda s: csv_to_bqrow(s))
         | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
             TABLE_SPEC,
             schema=TABLE_SCHEMA,
             write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE,
             create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED)
-    )
+     )
 
     p.run()
 
