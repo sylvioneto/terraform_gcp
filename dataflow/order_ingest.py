@@ -43,8 +43,7 @@ def run():
       '--save_main_session',
       '--staging_location=gs://{0}-data-raw/staging/'.format(PROJECT),
       '--temp_location=gs://{0}-data-raw/temp/'.format(PROJECT),
-      '--region=us-central1',
-      '--runner=DataflowRunner'
+      '--runner=DataflowRunner'      
    ]
 
    p = beam.Pipeline(argv=argv)

@@ -42,9 +42,10 @@ gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
 6. Deploy the pipeline
 ```
 python3 -m order_ingest.py \
-    --region us-east1 \
     --runner=DataflowRunner \
-    --project syl-dataflow-demo
+    --project syl-dataflow-demo \
+    --region us-east1 \
+    --subnetwork=data-engineering
 ```
 
 
