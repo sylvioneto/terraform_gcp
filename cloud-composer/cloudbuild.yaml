@@ -33,6 +33,6 @@ options:
     - PROJECT_NUMBER=$PROJECT_NUMBER
 tags:
   - terraform
-  - data-fusion
+  - cloud-composer
 
 timeout: 1200s
