@@ -30,6 +30,15 @@ def validate_order(line):
         yield line
 
 
+def handle_customer_data(line):
+    order_data = line.split(",")
+
+    # add here your logic to handle customer data, for example
+    customer_name = order_data[3]
+    if customer_name:
+        yield line
+
+
 def run():
     argv = [
         '--project={0}'.format(PROJECT),
@@ -53,12 +62,15 @@ def run():
                     | 'RemoveInvalids' >> beam.FlatMap(lambda line: validate_order(line))
                     )
 
-    # write outputs
-    dw_output = valid_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake)
-    dw_output = valid_orders | 'WriteToDataWarehouse' >> beam.io.WriteToText(output_dw)
-
+    # Data Lake output
+    (valid_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
+    
+    # Data Warehouse output
     (
-        dw_output | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
+        valid_orders
+        | 'HandleCustomerData' >> beam.FlatMap(lambda line: handle_customer_data(line))
+        | 'WriteToDataWarehouseBucket' >> beam.io.WriteToText(output_dw)
+        | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
             TABLE_SPEC,
             schema=TABLE_SCHEMA,
             write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE,
