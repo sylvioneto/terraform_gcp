@@ -1,5 +1,5 @@
-resource "google_composer_environment" "dev" {
-  name   = "composer-dev"
+resource "google_composer_environment" "airflow_dev" {
+  name   = "airflow-dev"
   region = var.region
   labels = local.labels
 
