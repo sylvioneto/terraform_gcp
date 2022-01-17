@@ -1,11 +1,11 @@
 variable "project_id" {
   description = "GCP Project ID"
-  default = null
+  default     = null
 }
 
 locals {
-  region     = "us-central1"
-  vpc_name   = "gke-vpc"
+  region   = "us-central1"
+  vpc_name = "gke-vpc"
 
   cluster_name = "gke-dev"
   cluster_ip_ranges = {
