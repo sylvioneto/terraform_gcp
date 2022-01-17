@@ -45,11 +45,16 @@ gsutil cp order_ingest.csv gs://$GCP_PROJECT_ID-data-raw/order/
 ```
 
 7. Deploy the pipeline
+Note: Change the project id in the order_ingest.py file before running it.
+
 ```
-python3 order_ingest.py \
-    --runner=DataflowRunner \
-    --project=syl-dataflow-demo \
-    --region=us-east1
+python3 order_ingest.py
+```
+
+8. Clear data to run it again.
+```
+gsutil rm -r gs://$GCP_PROJECT_ID-data-lake/order/
+gsutil rm -r gs://$GCP_PROJECT_ID-data-warehouse/order/
 ```
 
 
