@@ -7,8 +7,7 @@ resource "google_composer_environment" "dev" {
     node_count = 4
 
     node_config {
-      network    = google_compute_network.test.id
-      subnetwork = google_compute_subnetwork.test.id
+      network    = module.vpc.network_self_link
     }
   }
 }
