@@ -7,7 +7,7 @@ steps:
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=terraform_gcp/cloud-composer"
+    -backend-config="prefix=terraform_gcp/dataflow"
       
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
@@ -33,6 +33,6 @@ options:
     - PROJECT_NUMBER=$PROJECT_NUMBER
 tags:
   - terraform
-  - cloud-composer
+  - dataflow
 
 timeout: 1200s
