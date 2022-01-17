@@ -17,8 +17,6 @@ import apache_beam as beam
 
 
 PROJECT='syl-dataflow-demo'
-BUCKET_DATA_RAW='syl-dataflow-demo-data-raw'
-BUCKET_DATA_LAKE='syl-dataflow-demo-data-lake'
 
 
 def validate_order(line):
@@ -43,15 +41,15 @@ def run():
       '--project={0}'.format(PROJECT),
       '--job_name=order-ingest',
       '--save_main_session',
-      '--staging_location=gs://{0}/staging/'.format(BUCKET_DATA_RAW),
-      '--temp_location=gs://{0}/temp/'.format(BUCKET_DATA_RAW),
+      '--staging_location=gs://{0}-data-raw/staging/'.format(PROJECT),
+      '--temp_location=gs://{0}-data-raw/temp/'.format(PROJECT),
       '--region=us-central1',
       '--runner=DataflowRunner'
    ]
 
    p = beam.Pipeline(argv=argv)
-   input = 'gs://{0}/order/*.csv'.format(BUCKET_DATA_RAW)
-   output_prefix = 'gs://{0}/order/output'.format(BUCKET_DATA_LAKE)
+   input = 'gs://{0}-data-raw/order/*.csv'.format(PROJECT)
+   output_prefix = 'gs://{0}-data-lake/order/output'.format(PROJECT)
 
 
    # find all orders that contain invalid data and insert the valid ones on GCS

@@ -39,5 +39,14 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
 ```
 
+6. Deploy the pipeline
+```
+python3 -m order_ingest.py \
+    --region us-east1 \
+    --runner=DataflowRunner \
+    --project syl-dataflow-demo
+```
+
+
 ## Destroy
 Uncomment the `tf destroy` step in the cloudbuild.yaml file, and trigger the deployment again.
