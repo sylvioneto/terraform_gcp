@@ -34,7 +34,7 @@ resource "google_project_iam_member" "composer-worker" {
   member = "serviceAccount:${google_service_account.dev.email}"
 }
 
-resource "google_project_iam_member" "composer-worker" {
+resource "google_project_iam_member" "composer-editor" {
   role   = "roles/composer.editor"
   member = "serviceAccount:${google_service_account.dev.email}"
 }
