@@ -23,17 +23,8 @@ def validate_order(line):
   order_data = line.split(",")
 
   # order_id must not be null
-  if not order_data[0]:
+  if order_data[0]:
     yield line
-
-
-def validate_customer(line):
-  order_data = line.split(",")
-
-  # customer_name must not be null
-  if not order_data[3]:
-    yield line
-
 
 
 def run():
@@ -50,16 +41,20 @@ def run():
 
    p = beam.Pipeline(argv=argv)
    input = 'gs://{0}-data-raw/order/*.csv'.format(PROJECT)
-   output_prefix = 'gs://{0}-data-lake/order/output'.format(PROJECT)
+   output_datalake = 'gs://{0}-data-lake/order/output'.format(PROJECT)
+   output_dw = 'gs://{0}-data-warehouse/order/output'.format(PROJECT)
 
 
    # find all orders that contain invalid data and insert the valid ones on GCS
-   (p
+   valid_orders = ( p
       | 'GetOrders' >> beam.io.ReadFromText(input)
       | 'RemoveInvalids' >> beam.FlatMap(lambda line: validate_order(line) )
-      | 'ValidateCustomer' >> beam.FlatMap(lambda line: validate_customer(line) )
-      | 'WriteToDataLake' >> beam.io.WriteToText(output_prefix)
-   )
+    )
+    
+   # write outputs
+   (valid_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
+   dw_output = valid_orders | 'WriteToDataWarehouse' >> beam.io.WriteToText(output_dw)
+   (dw_output | 'WriteToBQ' >> beam.io.WriteToText(output_dw))
 
    p.run()
 
