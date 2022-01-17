@@ -5,13 +5,11 @@ resource "google_composer_environment" "airflow_dev" {
 
   config {
     node_config {
-      zone         = "us-central1-a"
+      zone         = "${var.region}-a"
       machine_type = "n1-standard-1"
 
       network    = module.vpc.network_self_link
       subnetwork = module.vpc.subnets_ids[0]
-
-      service_account = google_service_account.test.name
     }
 
     database_config {
