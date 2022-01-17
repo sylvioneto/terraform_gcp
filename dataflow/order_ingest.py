@@ -14,49 +14,59 @@ limitations under the License.
 """
 
 import apache_beam as beam
+from apache_beam.io.gcp.internal.clients import bigquery
 
 
-PROJECT='syl-dataflow-demo'
+PROJECT = 'syl-dataflow-demo'
+TABLE_SPEC = 'ecommerce.order'
+TABLE_SCHEMA = 'order_id:STRING, status:STRING, amount:NUMERIC, customer_name:STRING, customer_phone:STRING, customer_email:STRING'
 
 
 def validate_order(line):
-  order_data = line.split(",")
+    order_data = line.split(",")
 
-  # order_id must not be null
-  if order_data[0]:
-    yield line
+    # order_id must not be null
+    if order_data[0]:
+        yield line
 
 
 def run():
-   argv = [
-      '--project={0}'.format(PROJECT),
-      '--job_name=order-ingest',
-      '--save_main_session',
-      '--staging_location=gs://{0}-data-raw/staging/'.format(PROJECT),
-      '--temp_location=gs://{0}-data-raw/temp/'.format(PROJECT),
-      '--runner=DataflowRunner',
-      '--region=us-east1',
-      '--subnetwork=regions/us-east1/subnetworks/data-engineering'
-   ]
+    argv = [
+        '--project={0}'.format(PROJECT),
+        '--job_name=order-ingest',
+        '--save_main_session',
+        '--staging_location=gs://{0}-data-raw/staging/'.format(PROJECT),
+        '--temp_location=gs://{0}-data-raw/temp/'.format(PROJECT),
+        '--runner=DataflowRunner',
+        '--region=us-east1',
+        '--subnetwork=regions/us-east1/subnetworks/data-engineering'
+    ]
 
-   p = beam.Pipeline(argv=argv)
-   input = 'gs://{0}-data-raw/order/*.csv'.format(PROJECT)
-   output_datalake = 'gs://{0}-data-lake/order/output'.format(PROJECT)
-   output_dw = 'gs://{0}-data-warehouse/order/output'.format(PROJECT)
+    p = beam.Pipeline(argv=argv)
+    input = 'gs://{0}-data-raw/order/*.csv'.format(PROJECT)
+    output_datalake = 'gs://{0}-data-lake/order/output'.format(PROJECT)
+    output_dw = 'gs://{0}-data-warehouse/order/output'.format(PROJECT)
 
+    # find all orders that contain invalid data and insert the valid ones on GCS
+    valid_orders = (p
+                    | 'GetOrders' >> beam.io.ReadFromText(input)
+                    | 'RemoveInvalids' >> beam.FlatMap(lambda line: validate_order(line))
+                    )
 
-   # find all orders that contain invalid data and insert the valid ones on GCS
-   valid_orders = ( p
-      | 'GetOrders' >> beam.io.ReadFromText(input)
-      | 'RemoveInvalids' >> beam.FlatMap(lambda line: validate_order(line) )
+    # write outputs
+    dw_output = valid_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake)
+    dw_output = valid_orders | 'WriteToDataWarehouse' >> beam.io.WriteToText(output_dw)
+
+    (
+        dw_output | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
+            TABLE_SPEC,
+            schema=TABLE_SCHEMA,
+            write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE,
+            create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED)
     )
-    
-   # write outputs
-   (valid_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
-   dw_output = valid_orders | 'WriteToDataWarehouse' >> beam.io.WriteToText(output_dw)
-   (dw_output | 'WriteToBQ' >> beam.io.WriteToText(output_dw))
 
-   p.run()
+    p.run()
+
 
 if __name__ == '__main__':
-   run()
+    run()
