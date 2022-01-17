@@ -39,13 +39,17 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
 ```
 
-6. Deploy the pipeline
+6. Create the input file to the raw data bucket.
+```
+gsutil cp order_ingest.csv gs://$GCP_PROJECT_ID-data-raw/order/
+```
+
+7. Deploy the pipeline
 ```
 python3 order_ingest.py \
     --runner=DataflowRunner \
     --project=syl-dataflow-demo \
-    --region=us-east1 \
-    --subnetwork=data-engineering
+    --region=us-east1
 ```
 
 
