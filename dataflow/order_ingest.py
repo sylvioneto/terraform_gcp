@@ -72,10 +72,9 @@ def run():
     (valid_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
 
     # Data Warehouse output
-    (
-        valid_orders
-        | 'HandleCustomerData' >> beam.FlatMap(lambda line: handle_customer_data(line))
-        | 'WriteToDataWarehouseBucket' >> beam.io.WriteToText(output_dw)
+    dw_data = valid_orders | 'HandleCustomerData' >> beam.FlatMap(lambda line: handle_customer_data(line))
+    (dw_data | 'WriteToDataWarehouseBucket' >> beam.io.WriteToText(output_dw))
+    (dw_data
         | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
             TABLE_SPEC,
             schema=TABLE_SCHEMA,
