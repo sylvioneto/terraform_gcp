@@ -36,7 +36,13 @@ def handle_customer_data(line):
     # add here your logic to handle customer data, for example
     customer_name = order_data[3]
     if customer_name:
-        yield line
+        yield {"order_id": order_data[0],
+               "status": order_data[1],
+               "amount": order_data[2],
+               "customer_name": order_data[3],
+               "customer_phone": order_data[4],
+               "customer_email": order_data[5],
+               }
 
 
 def run():
@@ -64,7 +70,7 @@ def run():
 
     # Data Lake output
     (valid_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
-    
+
     # Data Warehouse output
     (
         valid_orders
