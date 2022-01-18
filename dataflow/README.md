@@ -60,20 +60,7 @@ pip3 install apache-beam[gcp]
 
 3. Run the job.
 
-    3.1 Local
-    ```
-    python3 ./job/order_ingest.py \
-        --project=$GCP_PROJECT_ID \
-        --region=us-east1 \
-        --runner=DirectRunner \
-        --job_name=order-ingest \
-        --temp_location=gs://$GCP_PROJECT_ID-data-raw/temp/ \
-        --gcs_raw=$GCP_PROJECT_ID-data-raw \
-        --gcs_lake=$GCP_PROJECT_ID-data-lake \
-        --gcs_dw=$GCP_PROJECT_ID-data-dw
-    ```
-
-    3.2 Dataflow
+    3.1 On Dataflow
     ```
     python3 ./job/order_ingest.py \
         --project=$GCP_PROJECT_ID \
@@ -86,6 +73,19 @@ pip3 install apache-beam[gcp]
         --gcs_raw=$GCP_PROJECT_ID-data-raw \
         --gcs_lake=$GCP_PROJECT_ID-data-lake \
         --gcs_dw=$GCP_PROJECT_ID-data-warehouse
+    ```
+
+    3.2 Local (for troubleshooting)
+    ```
+    python3 ./job/order_ingest.py \
+        --project=$GCP_PROJECT_ID \
+        --region=us-east1 \
+        --runner=DirectRunner \
+        --job_name=order-ingest \
+        --temp_location=gs://$GCP_PROJECT_ID-data-raw/temp/ \
+        --gcs_raw=$GCP_PROJECT_ID-data-raw \
+        --gcs_lake=$GCP_PROJECT_ID-data-lake \
+        --gcs_dw=$GCP_PROJECT_ID-data-dw
     ```
 
 4. Clear data.
