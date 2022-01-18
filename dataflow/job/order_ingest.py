@@ -27,18 +27,6 @@ def validate_order(line):
         yield line
 
 
-def csv_to_bqrow(line):
-    order_data = line.split(",")
-    d = {"order_id": order_data[0],
-         "status": order_data[1],
-         "amount": order_data[2],
-         "customer_name": order_data[3],
-         "customer_phone": order_data[4],
-         "customer_email": order_data[5],
-         }
-    return d
-
-
 def run():
     p = beam.Pipeline(options=CommandLineOptions())
     input = 'gs://{0}/order*.csv'.format(p.options.gcs_raw)
