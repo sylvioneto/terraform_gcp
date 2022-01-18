@@ -55,8 +55,8 @@ def run():
     ]
 
     p = beam.Pipeline(argv=argv)
-    input = 'gs://{0}-data-raw/order/*.csv'.format(PROJECT)
-    output_datalake = 'gs://{0}-data-lake/order/output'.format(PROJECT)
+    input = 'gs://{0}-data-raw/order*.csv'.format(PROJECT)
+    output_datalake = 'gs://{0}-data-lake/orderoutput'.format(PROJECT)
     output_dw = 'gs://{0}-data-warehouse/order/output'.format(PROJECT)
 
     # find all orders that contain invalid data and insert the valid ones on GCS

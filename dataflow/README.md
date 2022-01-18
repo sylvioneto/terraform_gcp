@@ -6,6 +6,7 @@ This project demonstrates how to create a Cloud Composer environment to execute 
 
 ## Deploy
 
+### Terraform
 1. Set env vars for your project id and number
 ```
 export GCP_PROJECT_ID="<project-id>"
@@ -36,21 +37,22 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 
 5. Execute Terraform using Cloud Build.
 ```
-gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
+gcloud builds submit ./terraform --config cloudbuild.yaml --project $GCP_PROJECT_ID
 ```
 
-6. Create the input file to the raw data bucket.
+### Dataflow job
+1. Copy the input file to the raw data bucket.
 ```
-gsutil cp order_ingest.csv gs://$GCP_PROJECT_ID-data-raw/order/
+gsutil cp ./data/order_ingest.csv gs://$GCP_PROJECT_ID-data-raw/
 ```
 
-7. Deploy the pipeline
+7. Prepare the environment
 Note: Change the project id in the order_ingest.py file before running it.
 
 ```
 pip3 install virtualenv
-python3 -m virtualenv env
-source env/bin/activate
+python3 -m virtualenv venv
+source venv/bin/activate
 
 pip3 install apache-beam[gcp]
 
@@ -59,8 +61,8 @@ python3 order_ingest.py
 
 8. Clear data to run it again.
 ```
-gsutil rm -r gs://$GCP_PROJECT_ID-data-lake/order/
-gsutil rm -r gs://$GCP_PROJECT_ID-data-warehouse/order/
+gsutil rm -r gs://$GCP_PROJECT_ID-data-lake/
+gsutil rm -r gs://$GCP_PROJECT_ID-data-warehouse/
 ```
 
 
