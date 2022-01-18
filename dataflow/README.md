@@ -46,17 +46,36 @@ gcloud builds submit ./terraform --config cloudbuild.yaml --project $GCP_PROJECT
 gsutil cp ./data/order_ingest.csv gs://$GCP_PROJECT_ID-data-raw/
 ```
 
-7. Prepare the environment
+2. Prepare the environment
 Note: Change the project id in the order_ingest.py file before running it.
 
 ```
 pip3 install virtualenv
 python3 -m virtualenv venv
 source venv/bin/activate
-
 pip3 install apache-beam[gcp]
+```
 
+3. Run the job
+
+Local
+```
 python3 order_ingest.py
+```
+
+Dataflow
+```
+python3 ./job/order_ingest.py \
+    --project=$GCP_PROJECT_ID \
+    --region=us-east1 \
+    --job_name=order-ingest \
+    --save_main_session \
+    --temp_location=gs://$GCP_PROJECT_ID-data-raw/temp/ \
+    --runner=DataflowRunner \
+    --subnetwork=regions/us-east1/subnetworks/data-engineering \
+    --gcs_raw=$GCP_PROJECT_ID-data-raw \
+    --gcs_lake=$GCP_PROJECT_ID-data-lake \
+    --gcs_dw=$GCP_PROJECT_ID-data-dw
 ```
 
 8. Clear data to run it again.
