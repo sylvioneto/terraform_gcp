@@ -7,7 +7,8 @@ This project demonstrates how to create a Cloud Composer environment to execute 
 ## Deploy
 
 ### Terraform
-1. Set env vars for your project id and number
+1. Clone this repo.
+2. Set env vars for your project id and number
 ```
 export GCP_PROJECT_ID="<project-id>"
 export GCP_PROJECT_NUMBER="<project-number>"
