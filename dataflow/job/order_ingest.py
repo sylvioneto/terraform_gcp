@@ -7,7 +7,6 @@ from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.io.gcp.internal.clients import bigquery
 
 
-#PROJECT = 'syl-dataflow-demo'
 TABLE_SPEC = 'ecommerce.order'
 TABLE_SCHEMA = 'order_id:STRING, status:STRING, amount:NUMERIC, customer_name:STRING, customer_phone:STRING, customer_email:STRING'
 
