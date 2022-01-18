@@ -41,10 +41,11 @@ def csv_to_bqrow(line):
 
 def run():
     p = beam.Pipeline(options=CommandLineOptions())
-    print(p.options)
     input = 'gs://{0}/order*.csv'.format(p.options.gcs_raw)
     output_datalake = 'gs://{0}/order/output'.format(p.options.gcs_lake)
     output_dw = 'gs://{0}/order/output'.format(p.options.gcs_dw)
+
+    print('GCS Input {0}, GCS Lake {1}, GCS DW {2}'.format(input,output_datalake,output_dw))
 
     # find all orders that contain invalid data and insert the valid ones on GCS
     all_orders = (p | 'GetOrders' >> beam.io.ReadFromText(input))
