@@ -9,8 +9,8 @@ This project demonstrates how to create a Data Fusion environment to execute No 
 1. Clone this repo into the Cloud Shell or your local machine.
 2. Set env vars for your project id and number
 ```
-export GCP_PROJECT_ID="<project-id>"
-export GCP_PROJECT_NUMBER="<project-number>"
+export GCP_PROJECT_ID=<project-id>
+export GCP_PROJECT_NUMBER=<project-number>
 ```
 
 3. Create a bucket to store your project's Terraform state. 
