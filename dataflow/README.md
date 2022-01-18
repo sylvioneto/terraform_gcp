@@ -83,7 +83,7 @@ pip3 install apache-beam[gcp]
         --subnetwork=regions/us-east1/subnetworks/data-engineering \
         --gcs_raw=$GCP_PROJECT_ID-data-raw \
         --gcs_lake=$GCP_PROJECT_ID-data-lake \
-        --gcs_dw=$GCP_PROJECT_ID-data-dw
+        --gcs_dw=$GCP_PROJECT_ID-data-warehouse
     ```
 
 4. Clear data.
