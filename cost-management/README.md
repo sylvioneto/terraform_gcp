@@ -11,28 +11,29 @@ Pre-req:
 
 ## Deploy
 
-1. Set env vars for your project id and number
+1. Clone this repo into the Cloud Shell or your local machine.
+2. Set env vars for your project id and number
 ```
 $ export GCP_PROJECT_ID="<project-id>"
 $ export GCP_PROJECT_NUMBER="<project-number>"
 ```
 
-2. Create a bucket to store your project's Terraform state. 
+3. Create a bucket to store your project's Terraform state. 
 ```
 $ gsutil mb gs://$GCP_PROJECT_ID-tf-state
 ```
 
-3. Enable Compute and Cloud Build API in case it is the first time you use it.
+4. Enable Compute and Cloud Build API in case it is the first time you use it.
 ```
 $ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com
 ```
 
-4. Give Cloud Build's service account necessary permissions
+5. Give Cloud Build's service account necessary permissions
 ```
 $ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/editor'
 ```
 
-5. Deploy Terraform using Cloud Build.
+6. Deploy Terraform using Cloud Build.
 ```
 $ gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
 ```
