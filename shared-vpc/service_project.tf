@@ -1,6 +1,6 @@
 module "dev" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 10.1"
+  version = "~> 12.0"
 
   name                 = "syl-dev"
   random_project_id    = true
@@ -16,7 +16,7 @@ module "dev" {
 
 module "qa" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 10.1"
+  version = "~> 12.0"
 
   name                 = "syl-qa"
   random_project_id    = true
@@ -32,7 +32,7 @@ module "qa" {
 
 module "prod" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 10.1"
+  version = "~> 12.0"
 
   name                 = "syl-prod"
   random_project_id    = true

@@ -1,6 +1,6 @@
 module "network_project" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 10.1"
+  version = "~> 12.0"
 
   name              = "syl-network"
   random_project_id = true
