@@ -1,6 +1,6 @@
 locals {
-  region          = "us-central1"
-  network_project_id = "syl-network-20220309"
+  region             = "us-central1"
+  network_project_id = "syl-network-${random_string.random}"
 }
 
 variable "org_id" {
