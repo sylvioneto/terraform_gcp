@@ -11,6 +11,10 @@ module "dev" {
   shared_vpc_subnets = [
     "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/dev",
   ]
+
+  depends_on = [
+    module.network_project
+  ]
 }
 
 
@@ -27,6 +31,10 @@ module "qa" {
   shared_vpc_subnets = [
     "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/qa",
   ]
+
+  depends_on = [
+    module.network_project
+  ]
 }
 
 
@@ -40,7 +48,11 @@ module "prod" {
   billing_account      = var.billing_account_id
   svpc_host_project_id = module.network_project.project_id
 
-    shared_vpc_subnets = [
+  shared_vpc_subnets = [
     "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/prod",
+  ]
+
+  depends_on = [
+    module.network_project
   ]
 }
