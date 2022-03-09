@@ -32,7 +32,7 @@ module "vpc" {
     },
     {
       subnet_name   = "prod"
-      subnet_ip     = "10.20.10.0/16"
+      subnet_ip     = "10.20.0.0/16"
       subnet_region = local.region
     }
   ]
