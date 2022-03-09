@@ -8,9 +8,9 @@ module "dev" {
   billing_account      = var.billing_account_id
   svpc_host_project_id = module.network_project.project_id
 
-  # shared_vpc_subnets = [
-  #   "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/dev",
-  # ]
+  shared_vpc_subnets = [
+    "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/dev",
+  ]
 }
 
 
@@ -24,9 +24,9 @@ module "qa" {
   billing_account      = var.billing_account_id
   svpc_host_project_id = module.network_project.project_id
 
-  # shared_vpc_subnets = [
-  #   "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/qa",
-  # ]
+  shared_vpc_subnets = [
+    "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/qa",
+  ]
 }
 
 
@@ -40,7 +40,7 @@ module "prod" {
   billing_account      = var.billing_account_id
   svpc_host_project_id = module.network_project.project_id
 
-    # shared_vpc_subnets = [
-  #   "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/prod",
-  # ]
+    shared_vpc_subnets = [
+    "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/prod",
+  ]
 }
