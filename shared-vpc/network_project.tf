@@ -3,6 +3,7 @@ module "network_project" {
   version = "~> 10.1"
 
   name              = "syl-network"
+  random_project_id    = true
   org_id            = var.org_id
   billing_account   = var.billing_account_id
 
