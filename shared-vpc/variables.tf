@@ -1,6 +1,6 @@
 locals {
   region          = "us-central1"
-  network_project = "syl-network"
+  network_project_id = "syl-network-20220309"
 }
 
 variable "org_id" {
