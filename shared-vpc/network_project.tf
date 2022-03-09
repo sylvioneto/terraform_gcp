@@ -2,7 +2,7 @@ module "network_project" {
   source  = "terraform-google-modules/project-factory/google"
   version = "~> 10.1"
 
-  name              = var.network_project_id
+  name              = "syl-network"
   random_project_id = true
   org_id            = var.org_id
   billing_account   = var.billing_account_id
