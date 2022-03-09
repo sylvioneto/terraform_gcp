@@ -9,3 +9,8 @@ variable "billing_account_id" {
 variable "region" {
   default = "us-central1"
 }
+
+variable "developers_group" {
+  description = "This group will have access to the shared subnets"
+  default = "gcp-developers@example.com"
+}
