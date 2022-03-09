@@ -46,19 +46,3 @@ resource "google_compute_subnetwork_iam_member" "dev_member" {
   role       = "roles/compute.networkUser"
   member     = "group:${var.developers_group}"
 }
-
-resource "google_compute_subnetwork_iam_member" "qa_member" {
-  project    = module.network_project.project_id
-  region     = var.region
-  subnetwork = "qa"
-  role       = "roles/compute.networkUser"
-  member     = "group:${var.developers_group}"
-}
-
-resource "google_compute_subnetwork_iam_member" "prod_member" {
-  project    = module.network_project.project_id
-  region     = var.region
-  subnetwork = "prod"
-  role       = "roles/compute.networkUser"
-  member     = "group:${var.developers_group}"
-}
