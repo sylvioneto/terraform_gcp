@@ -2,9 +2,8 @@ module "network_project" {
   source  = "terraform-google-modules/project-factory/google"
   version = "~> 10.1"
 
-  name              = local.network_project_id
+  name              = "syl-network"
   org_id            = var.org_id
-  usage_bucket_name = "${local.network_project_id}-usage-report-bucket"
   billing_account   = var.billing_account_id
 
   auto_create_network            = false
