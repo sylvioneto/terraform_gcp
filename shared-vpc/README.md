@@ -31,7 +31,9 @@ export BILLING_ACCOUNT_ID=<BILLING_ACCOUNT_ID>
 ```
 
 5.1 Option 1 - Shell
-
+```
+sh run_terraform.sh
+```
 
 5.2 Option 2 - Cloud Build
 ```
