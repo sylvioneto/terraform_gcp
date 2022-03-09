@@ -2,7 +2,7 @@ module "network_project" {
   source  = "terraform-google-modules/project-factory/google"
   version = "~> 10.1"
 
-  name              = local.network_project_id
+  name              = var.network_project_id
   random_project_id = false
   org_id            = var.org_id
   billing_account   = var.billing_account_id
@@ -23,17 +23,17 @@ module "vpc" {
     {
       subnet_name   = "dev"
       subnet_ip     = "10.0.0.0/16"
-      subnet_region = local.region
+      subnet_region = var.region
     },
     {
       subnet_name   = "qa"
       subnet_ip     = "10.10.0.0/16"
-      subnet_region = local.region
+      subnet_region = var.region
     },
     {
       subnet_name   = "prod"
       subnet_ip     = "10.20.0.0/16"
-      subnet_region = local.region
+      subnet_region = var.region
     }
   ]
 }
