@@ -4,9 +4,9 @@ locals {
 }
 
 variable "org_id" {
-  desdescription = "Organization ID"
+  description = "Organization ID"
 }
 
 variable "billing_account_id" {
-  desdescription = "Billing Account ID"
+  description = "Billing Account ID"
 }

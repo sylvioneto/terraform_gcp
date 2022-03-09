@@ -3,8 +3,8 @@ module "dev" {
   version = "~> 10.1"
 
   name                 = "syl-dev"
-  org_id               = local.org_id
-  billing_account      = local.billing_account
+  org_id               = var.org_id
+  billing_account      = var.billing_account
   svpc_host_project_id = module.network_project.project_id
 
   # shared_vpc_subnets = [
@@ -18,8 +18,8 @@ module "qa" {
   version = "~> 10.1"
 
   name                 = "syl-qa"
-  org_id               = local.org_id
-  billing_account      = local.billing_account
+  org_id               = var.org_id
+  billing_account      = var.billing_account
   svpc_host_project_id = module.network_project.project_id
 
   # shared_vpc_subnets = [
@@ -33,8 +33,8 @@ module "prod" {
   version = "~> 10.1"
 
   name                 = "syl-prod"
-  org_id               = local.org_id
-  billing_account      = local.billing_account
+  org_id               = var.org_id
+  billing_account      = var.billing_account
   svpc_host_project_id = module.network_project.project_id
 
     # shared_vpc_subnets = [
