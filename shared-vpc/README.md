@@ -22,24 +22,11 @@ gsutil mb gs://$GOOGLE_CLOUD_PROJECT-tf-state
 gcloud services enable cloudbuild.googleapis.com compute.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com cloudbilling.googleapis.com
 ```
 
-5. Navigate to `terraform_gcp/shared_vpc`, then execute Terraform using Cloud Build with the proper substitutions or shell.
-
-Set env vars
+5. Navigate to `terraform_gcp/shared_vpc`, then set the env vars and execute Terraform.
 ```
 export ORG_ID=<ORG_ID>
 export BILLING_ACCOUNT_ID=<BILLING_ACCOUNT_ID>
-```
-
-5.1 Option 1 - Shell
-```
 sh run_terraform.sh
-```
-
-5.2 Option 2 - Cloud Build
-```
-gcloud builds submit . --config cloudbuild.yaml \
---project $GOOGLE_CLOUD_PROJECT \
---substitutions _ORG_ID=$ORG_ID,_BILLING_ACCOUNT_ID=$BILLING_ACCOUNT_ID
 ```
 
 ## Destroy

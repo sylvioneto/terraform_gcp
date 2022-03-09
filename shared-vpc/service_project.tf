@@ -9,11 +9,7 @@ module "dev" {
   svpc_host_project_id = module.network_project.project_id
 
   shared_vpc_subnets = [
-    "projects/${local.network_project_id}/regions/${local.region}/subnetworks/dev",
-  ]
-
-  depends_on = [
-    module.network_project
+    "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/dev",
   ]
 }
 
@@ -29,11 +25,7 @@ module "qa" {
   svpc_host_project_id = module.network_project.project_id
 
   shared_vpc_subnets = [
-    "projects/${local.network_project_id}/regions/${local.region}/subnetworks/qa",
-  ]
-
-  depends_on = [
-    module.network_project
+    "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/qa",
   ]
 }
 
@@ -49,10 +41,6 @@ module "prod" {
   svpc_host_project_id = module.network_project.project_id
 
   shared_vpc_subnets = [
-    "projects/${local.network_project_id}/regions/${local.region}/subnetworks/prod",
-  ]
-
-  depends_on = [
-    module.network_project
+    "projects/${module.network_project.project_id}/regions/${local.region}/subnetworks/prod",
   ]
 }
