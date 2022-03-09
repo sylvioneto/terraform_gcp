@@ -24,8 +24,8 @@ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com containe
 
 5. Navigate to `terraform_gcp/shared_vpc`, then set the env vars and execute Terraform.
 ```
-export ORG_ID=<ORG_ID>
-export BILLING_ACCOUNT_ID=<BILLING_ACCOUNT_ID>
+export TF_VAR_org_id=<ORG_ID>
+export TF_VAR_billing_account_id=<BILLING_ACCOUNT_ID>
 sh run_terraform.sh
 ```
 
