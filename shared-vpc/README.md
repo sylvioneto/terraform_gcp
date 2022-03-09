@@ -2,7 +2,19 @@
 
 ## Description
 
-TO - DO
+This project demonstrate how to use Shared-VPC and Google Cloud terraform modules.
+
+Resources created:
+- Network project (Host project) with the subnets below:
+    - dev
+    - qa
+    - prod
+
+- Dev project (Service project)
+- QA project (Service project)
+- Prod project (Service project)
+
+
 
 ## Deploy
 
