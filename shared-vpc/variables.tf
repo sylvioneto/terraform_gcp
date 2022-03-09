@@ -7,5 +7,5 @@ variable "billing_account_id" {
 }
 
 variable "region" {
-  value = "us-central1"
+  default = "us-central1"
 }
