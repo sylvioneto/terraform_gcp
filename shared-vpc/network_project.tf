@@ -3,7 +3,7 @@ module "network_project" {
   version = "~> 10.1"
 
   name              = var.network_project_id
-  random_project_id = false
+  random_project_id = true
   org_id            = var.org_id
   billing_account   = var.billing_account_id
 
