@@ -45,4 +45,8 @@ resource "google_compute_subnetwork_iam_member" "dev_member" {
   subnetwork = "dev"
   role       = "roles/compute.networkUser"
   member     = "group:${var.developers_group}"
+
+  depends_on = [
+    module.vpc
+  ]
 }
