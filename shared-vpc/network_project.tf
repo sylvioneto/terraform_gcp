@@ -5,7 +5,7 @@ module "network_project" {
   name              = local.network_project_id
   org_id            = var.org_id
   usage_bucket_name = "${local.network_project_id}-usage-report-bucket"
-  billing_account   = var.billing_account
+  billing_account   = var.billing_account_id
 
   auto_create_network            = false
   enable_shared_vpc_host_project = true

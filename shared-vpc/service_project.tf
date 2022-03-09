@@ -4,7 +4,7 @@ module "dev" {
 
   name                 = "syl-dev"
   org_id               = var.org_id
-  billing_account      = var.billing_account
+  billing_account      = var.billing_account_id
   svpc_host_project_id = module.network_project.project_id
 
   # shared_vpc_subnets = [
@@ -19,7 +19,7 @@ module "qa" {
 
   name                 = "syl-qa"
   org_id               = var.org_id
-  billing_account      = var.billing_account
+  billing_account      = var.billing_account_id
   svpc_host_project_id = module.network_project.project_id
 
   # shared_vpc_subnets = [
@@ -34,7 +34,7 @@ module "prod" {
 
   name                 = "syl-prod"
   org_id               = var.org_id
-  billing_account      = var.billing_account
+  billing_account      = var.billing_account_id
   svpc_host_project_id = module.network_project.project_id
 
     # shared_vpc_subnets = [
