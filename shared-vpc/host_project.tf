@@ -26,7 +26,7 @@ module "vpc" {
       subnet_region = var.region
     },
     {
-      subnet_name   = "qa"
+      subnet_name   = "staging"
       subnet_ip     = "10.10.0.0/16"
       subnet_region = var.region
     },
