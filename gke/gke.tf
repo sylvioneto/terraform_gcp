@@ -21,17 +21,8 @@ module "gke" {
   # whitelist who can reach cluster's master nodes
   master_authorized_networks = [
     {
-      display_name = "office-br"
-      cidr_block   = "192.0.2.11/32"
-    },
-    {
-      display_name = "office-ca"
-      cidr_block   = "192.0.2.22/32"
-    },
-    {
-      # not recommended - testing only!
-      display_name = "internet"
-      cidr_block   = "0.0.0.0/0"
+      display_name = "IAP"
+      cidr_block   = "35.235.240.0/20"
     }
   ]
 
