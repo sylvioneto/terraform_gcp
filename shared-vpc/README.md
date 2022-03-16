@@ -24,7 +24,7 @@ Resources created:
 echo $GOOGLE_CLOUD_PROJECT
 ```
 
-3. Create a bucket to store your project's Terraform state. 
+3. Create a bucket to store your the Terraform state. 
 ```
 gsutil mb gs://$GOOGLE_CLOUD_PROJECT-tf-state
 ```
