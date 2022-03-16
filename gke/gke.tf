@@ -29,8 +29,8 @@ module "gke" {
   # whitelist who can reach cluster's master nodes
   master_authorized_networks = [
     {
-      display_name = "IAP"
-      cidr_block   = "35.235.240.0/20"
+      display_name = "internet"
+      cidr_block   = "0.0.0.0/0"
     }
   ]
 
