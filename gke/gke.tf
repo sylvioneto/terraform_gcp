@@ -7,12 +7,13 @@ module "gke" {
   region     = local.region
   name       = local.cluster_name
 
-  network             = module.vpc.network_name
-  subnetwork          = local.cluster_name
-  ip_range_pods       = "pods"
-  ip_range_services   = "services"
-  http_load_balancing = false
-  network_policy      = false
+  network                   = module.vpc.network_name
+  subnetwork                = local.cluster_name
+  ip_range_pods             = "pods"
+  ip_range_services         = "services"
+  http_load_balancing       = false
+  network_policy            = false
+  default_max_pods_per_node = 32
 
   // Private cluster setup
   enable_private_nodes   = true
