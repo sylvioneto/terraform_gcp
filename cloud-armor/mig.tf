@@ -19,14 +19,14 @@ module "instance_template" {
   sudo apt install apache2 -y
   EOF
 
-  access_config   = [{
-    nat_ip = null
+  access_config = [{
+    nat_ip       = null
     network_tier = "PREMIUM"
   }]
 
   tags = [
-      "allow-health-check",
-      "allow-http"
+    "allow-health-check",
+    "allow-http"
   ]
 }
 
