@@ -41,6 +41,6 @@ module "mig" {
   project_id        = var.project_id
   region            = var.region
   target_size       = 1
-  hostname          = "mig-apache"
+  hostname          = "apache"
   instance_template = module.instance_template.self_link
 }
