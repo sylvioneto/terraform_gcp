@@ -17,7 +17,7 @@ module "gce-lb-http" {
       enable_cdn              = false
       custom_request_headers  = null
       custom_response_headers = null
-      security_policy         = null
+      security_policy         = google_compute_security_policy.policy.name
 
       connection_draining_timeout_sec = null
       session_affinity                = null
