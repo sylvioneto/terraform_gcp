@@ -28,6 +28,10 @@ module "instance_template" {
     "allow-health-check",
     "allow-http"
   ]
+
+  depends_on = [
+    module.vpc
+  ]
 }
 
 module "mig" {
