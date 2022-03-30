@@ -1,36 +1,5 @@
-resource "google_compute_firewall" "allow_health_check" {
-  name    = "${module.vpc.network_name}-allow-health-check"
-  network = module.vpc.network_self_link
-
-  allow {
-    protocol = "tcp"
-  }
-
-  source_ranges = [
-    "130.211.0.0/22",
-    "35.191.0.0/16"
-  ]
-  target_tags = ["allow-health-check"]
-}
-
-resource "google_compute_firewall" "allow_http" {
-  name    = "${module.vpc.network_name}-allow-http-https"
-  network = module.vpc.network_self_link
-
-  allow {
-    protocol = "tcp"
-    ports     = ["80", "443"]
-  }
-
-  source_ranges = [
-    "0.0.0.0/0"
-  ]
-
-  target_tags = ["allow-http"]
-}
-
 resource "google_compute_firewall" "allow_ssh" {
-  name    = "${module.vpc.network_name}-allow-ssh"
+  name    = "${module.vpc.network_name}-allow-ssh-from-iap"
   network = module.vpc.network_self_link
 
   allow {

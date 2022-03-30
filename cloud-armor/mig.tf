@@ -25,8 +25,7 @@ module "instance_template" {
   }]
 
   tags = [
-    "allow-health-check",
-    "allow-http"
+    "allow-hc",
   ]
 
   depends_on = [
@@ -44,6 +43,13 @@ module "mig" {
   hostname          = local.application_name
   instance_template = module.instance_template.self_link
 
+  named_ports = [
+    { 
+      name = "http"
+      port = 80 
+    }
+  ]
+
   health_check = {
     type                = "http"
     initial_delay_sec   = 30
@@ -59,12 +65,3 @@ module "mig" {
     host                = ""
   }
 }
-
-resource "google_compute_backend_service" "apache_backend_srv" {
-  name          = "${local.application_name}-backend-svc"
-  health_checks = module.mig.health_check_self_links
-  backend {
-    group = module.mig.instance_group
-  }
-}
-
