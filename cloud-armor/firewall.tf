@@ -14,12 +14,12 @@ resource "google_compute_firewall" "allow_health_check" {
 }
 
 resource "google_compute_firewall" "allow_http" {
-  name    = "${module.vpc.network_name}-allow-http"
+  name    = "${module.vpc.network_name}-allow-http-https"
   network = module.vpc.network_self_link
 
   allow {
     protocol = "tcp"
-    ports     = ["80"]
+    ports     = ["80", "443"]
   }
 
   source_ranges = [
