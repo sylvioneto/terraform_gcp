@@ -1,5 +1,3 @@
-data "google_project" "project" {}
-
 module "instance_template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
   version = "~> 7.6.0"
@@ -49,19 +47,4 @@ module "mig" {
       port = 80 
     }
   ]
-
-  health_check = {
-    type                = "http"
-    initial_delay_sec   = 30
-    check_interval_sec  = 30
-    healthy_threshold   = 1
-    timeout_sec         = 10
-    unhealthy_threshold = 5
-    response            = ""
-    proxy_header        = "NONE"
-    port                = 80
-    request             = ""
-    request_path        = "/"
-    host                = ""
-  }
 }

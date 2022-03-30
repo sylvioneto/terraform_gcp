@@ -1,3 +1,5 @@
+data "google_project" "project" {}
+
 locals {
   resource_labels = {
     terraform = "true"
