@@ -5,7 +5,7 @@ module "instance_template" {
   version = "~> 7.6.0"
 
   project_id           = var.project_id
-  name_prefix          = "apache"
+  name_prefix          = local.application_name
   region               = var.region
   network              = module.vpc.network_name
   subnetwork           = "webapp-${var.region}"
@@ -41,6 +41,30 @@ module "mig" {
   project_id        = var.project_id
   region            = var.region
   target_size       = 1
-  hostname          = "apache"
+  hostname          = local.application_name
   instance_template = module.instance_template.self_link
+
+  health_check = {
+    type                = "http"
+    initial_delay_sec   = 30
+    check_interval_sec  = 30
+    healthy_threshold   = 1
+    timeout_sec         = 10
+    unhealthy_threshold = 5
+    response            = ""
+    proxy_header        = "NONE"
+    port                = 80
+    request             = ""
+    request_path        = "/"
+    host                = ""
+  }
 }
+
+resource "google_compute_backend_service" "apache_backend_srv" {
+  name          = "${local.application_name}-backend-svc"
+  health_checks = module.mig.health_check_self_links
+  backend {
+    group = module.mig.instance_group
+  }
+}
+
