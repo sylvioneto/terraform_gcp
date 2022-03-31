@@ -14,7 +14,7 @@ module "instance_template" {
 
   startup_script = <<EOF
   sudo apt update
-  sudo apt install apache2 wget-y
+  sudo apt install apache2 -y
   sudo curl https://raw.githubusercontent.com/sylvioneto/terraform_gcp/master/cloud-armor/index.html --output /var/www/html/index.html
   EOF
 
