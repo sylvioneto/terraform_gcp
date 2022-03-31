@@ -39,5 +39,12 @@ cd ./terraform_gcp/cloud-armor
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
+## Testing
+You can use tools such as dirsearch to test your setup.
+
 ## Destroy
-TO-DO
+1. Execute Terraform using Cloud Build
+```
+cd ./terraform_gcp/cloud-armor
+gcloud builds submit . --config cloudbuild_destroy.yaml
+```
