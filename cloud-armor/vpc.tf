@@ -1,6 +1,6 @@
 module "vpc" {
   source       = "terraform-google-modules/network/google"
-  version      = "~> 3.0"
+  version      = "~> 5.0"
   project_id   = var.project_id
   network_name = "cloud-armor-vpc"
   routing_mode = "GLOBAL"
@@ -21,7 +21,7 @@ resource "google_compute_firewall" "allow_ssh" {
 
   allow {
     protocol = "tcp"
-    ports     = ["22"]
+    ports    = ["22"]
   }
 
   source_ranges = [

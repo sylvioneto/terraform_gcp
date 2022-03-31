@@ -2,12 +2,12 @@
 
 ## Description
 
-This example demonstrates how to use Clour Armor to protect your web applications.
+This example demonstrates how to use Clour Armor to protect a HTTP server.
 
 Resources created:
 - VPC
-- MIG
-- CLOUD ARMOR
+- Managed Instance Group with Apache VM
+- Cloud Armor with WAF rules and Rate limit
 
 ## Deploy
 

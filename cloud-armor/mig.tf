@@ -1,6 +1,6 @@
 module "instance_template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
-  version = "~> 7.6.0"
+  version = "~> 7.6"
 
   project_id           = var.project_id
   name_prefix          = local.application_name
@@ -42,9 +42,9 @@ module "mig" {
   instance_template = module.instance_template.self_link
 
   named_ports = [
-    { 
+    {
       name = "http"
-      port = 80 
+      port = 80
     }
   ]
 }

@@ -1,6 +1,6 @@
 module "gce-lb-http" {
   source  = "GoogleCloudPlatform/lb-http/google"
-  version = "~> 4.4"
+  version = "~> 6.2"
 
   project           = var.project_id
   name              = "${local.application_name}-http-lb"
