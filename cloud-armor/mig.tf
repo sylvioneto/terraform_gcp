@@ -38,7 +38,7 @@ module "mig" {
 
   project_id        = var.project_id
   region            = var.region
-  target_size       = 1
+  target_size       = 2
   hostname          = local.application_name
   instance_template = module.instance_template.self_link
 
