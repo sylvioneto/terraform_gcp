@@ -8,16 +8,11 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=terraform_gcp/cloudarmor"
-      
-- id: 'tf plan'
-  name: 'hashicorp/terraform:1.0.0'
-  args: 
-  - plan
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
-  - apply
+  - destroy
   - -auto-approve
 
 options:
