@@ -18,7 +18,7 @@ resource "google_compute_security_policy" "policy" {
   rule {
     action      = "rate_based_ban"
     priority    = "500"
-    description = "Rate based ban - 100req in 30s"
+    description = "Rate based ban - 120req in 60s"
 
     match {
       versioned_expr = "SRC_IPS_V1"
@@ -29,8 +29,8 @@ resource "google_compute_security_policy" "policy" {
 
     rate_limit_options {
       rate_limit_threshold {
-        count        = 100
-        interval_sec = 30
+        count        = 120
+        interval_sec = 60
       }
       ban_duration_sec = 600
       conform_action   = "allow"
