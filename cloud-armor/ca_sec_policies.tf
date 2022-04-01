@@ -9,7 +9,7 @@ resource "google_compute_security_policy" "policy" {
     description = "Deny requests out of geo coverage"
     match {
       expr {
-        expression = "origin.region_code != 'BR'"
+        expression = "origin.region_code != 'BR' && origin.region_code != 'US'"
       }
     }
   }
@@ -139,7 +139,7 @@ resource "google_compute_security_policy" "policy" {
   # Rate based ban
   rule {
     action      = "rate_based_ban"
-    priority    = "1100"
+    priority    = "1110"
     description = "Rate based ban - 300req in 60s"
 
     match {
