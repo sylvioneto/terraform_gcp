@@ -139,7 +139,7 @@ resource "google_compute_security_policy" "policy" {
   # Rate based ban
   rule {
     action      = "rate_based_ban"
-    priority    = "1110"
+    priority    = "2000"
     description = "Rate based ban - 300req in 60s"
 
     match {
@@ -164,7 +164,7 @@ resource "google_compute_security_policy" "policy" {
   # Wordpress
   rule {
     action      = "deny(403)"
-    priority    = "1120"
+    priority    = "3000"
     description = "Block access to Wordpress admin"
     match {
       expr {
