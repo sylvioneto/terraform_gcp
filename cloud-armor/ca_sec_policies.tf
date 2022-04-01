@@ -139,7 +139,7 @@ resource "google_compute_security_policy" "policy" {
   # Rate based ban
   rule {
     action      = "rate_based_ban"
-    priority    = "10000"
+    priority    = "100000"
     description = "Rate based ban - 1000 reqs in 120s"
 
     match {
