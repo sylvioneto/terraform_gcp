@@ -14,31 +14,6 @@ resource "google_compute_security_policy" "policy" {
     }
   }
 
-  # Rate based ban
-  rule {
-    action      = "rate_based_ban"
-    priority    = "500"
-    description = "Rate based ban - 300req in 60s"
-
-    match {
-      versioned_expr = "SRC_IPS_V1"
-      config {
-        src_ip_ranges = ["*"]
-      }
-    }
-
-    rate_limit_options {
-      rate_limit_threshold {
-        count        = 300
-        interval_sec = 60
-      }
-      ban_duration_sec = 600
-      conform_action   = "allow"
-      exceed_action    = "deny(429)"
-      enforce_on_key   = "XFF-IP"
-    }
-  }
-
   # WAF preconfigured rules
   rule {
     action      = "deny(403)"
@@ -161,11 +136,36 @@ resource "google_compute_security_policy" "policy" {
     }
   }
 
+  # Rate based ban
+  rule {
+    action      = "rate_based_ban"
+    priority    = "1100"
+    description = "Rate based ban - 300req in 60s"
+
+    match {
+      versioned_expr = "SRC_IPS_V1"
+      config {
+        src_ip_ranges = ["*"]
+      }
+    }
+
+    rate_limit_options {
+      rate_limit_threshold {
+        count        = 300
+        interval_sec = 60
+      }
+      ban_duration_sec = 600
+      conform_action   = "allow"
+      exceed_action    = "deny(429)"
+      enforce_on_key   = "XFF-IP"
+    }
+  }
+
   # Wordpress
   rule {
     action      = "deny(403)"
-    priority    = "1110"
-    description = "Block access to wordpress admin"
+    priority    = "1120"
+    description = "Block access to Wordpress admin"
     match {
       expr {
         expression = "request.path.matches('/wp-admin/')"
