@@ -18,7 +18,7 @@ resource "google_compute_security_policy" "policy" {
   rule {
     action      = "rate_based_ban"
     priority    = "500"
-    description = "Rate based ban - 120req in 60s"
+    description = "Rate based ban - 300req in 60s"
 
     match {
       versioned_expr = "SRC_IPS_V1"
@@ -29,7 +29,7 @@ resource "google_compute_security_policy" "policy" {
 
     rate_limit_options {
       rate_limit_threshold {
-        count        = 120
+        count        = 300
         interval_sec = 60
       }
       ban_duration_sec = 600
@@ -157,6 +157,18 @@ resource "google_compute_security_policy" "policy" {
     match {
       expr {
         expression = "evaluatePreconfiguredExpr('cve-canary')"
+      }
+    }
+  }
+
+  # Wordpress
+  rule {
+    action      = "deny(403)"
+    priority    = "1110"
+    description = "Block access to wordpress admin"
+    match {
+      expr {
+        expression = "request.path.matches('/wp-admin/')"
       }
     }
   }
