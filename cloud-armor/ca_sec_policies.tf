@@ -173,7 +173,7 @@ resource "google_compute_security_policy" "policy" {
     }
   }
 
-  # allow
+  # default rule
   rule {
     action      = "allow"
     priority    = "2147483647"
