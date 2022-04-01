@@ -136,6 +136,18 @@ resource "google_compute_security_policy" "policy" {
     }
   }
 
+  # Wordpress
+  rule {
+    action      = "deny(403)"
+    priority    = "3000"
+    description = "Block access to Wordpress admin"
+    match {
+      expr {
+        expression = "request.path.matches('/wp-admin/')"
+      }
+    }
+  }
+
   # Rate based ban
   rule {
     action      = "rate_based_ban"
@@ -158,18 +170,6 @@ resource "google_compute_security_policy" "policy" {
       conform_action   = "allow"
       exceed_action    = "deny(429)"
       enforce_on_key   = "XFF-IP"
-    }
-  }
-
-  # Wordpress
-  rule {
-    action      = "deny(403)"
-    priority    = "3000"
-    description = "Block access to Wordpress admin"
-    match {
-      expr {
-        expression = "request.path.matches('/wp-admin/')"
-      }
     }
   }
 
