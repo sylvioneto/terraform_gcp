@@ -24,7 +24,7 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "GCP region"
-  default     = "us-central1"
+  default     = "southamerica-east1"
 }
 
 variable "webapp_cidr" {

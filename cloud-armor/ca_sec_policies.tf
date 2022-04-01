@@ -2,6 +2,43 @@ resource "google_compute_security_policy" "policy" {
   provider = google-beta
   name     = "${local.application_name}-sec-policy"
 
+  # Geo location
+  rule {
+    action      = "deny(403)"
+    priority    = "250"
+    description = "Deny requests out of geo coverage"
+    match {
+      expr {
+        expression = "origin.region_code != 'BR'"
+      }
+    }
+  }
+
+  # Rate based ban
+  rule {
+    action      = "rate_based_ban"
+    priority    = "500"
+    description = "Rate based ban - 100req in 30s"
+
+    match {
+      versioned_expr = "SRC_IPS_V1"
+      config {
+        src_ip_ranges = ["*"]
+      }
+    }
+
+    rate_limit_options {
+      rate_limit_threshold {
+        count        = 100
+        interval_sec = 30
+      }
+      ban_duration_sec = 600
+      conform_action   = "allow"
+      exceed_action    = "deny(429)"
+      enforce_on_key   = "XFF-IP"
+    }
+  }
+
   # WAF preconfigured rules
   rule {
     action      = "deny(403)"
@@ -116,36 +153,11 @@ resource "google_compute_security_policy" "policy" {
   rule {
     action      = "deny(403)"
     priority    = "1100"
-    description = "Deny 	Newly discovered vulnerabilities"
+    description = "Deny Newly discovered vulnerabilities"
     match {
       expr {
         expression = "evaluatePreconfiguredExpr('cve-canary')"
       }
-    }
-  }
-
-  # Rate limit
-  rule {
-    action      = "rate_based_ban"
-    priority    = "1110"
-    description = "Rate limit ban - 60req/60s"
-
-    match {
-      versioned_expr = "SRC_IPS_V1"
-      config {
-        src_ip_ranges = ["*"]
-      }
-    }
-
-    rate_limit_options {
-      rate_limit_threshold {
-        count        = 60
-        interval_sec = 60
-      }
-      ban_duration_sec = 600
-      conform_action   = "allow"
-      exceed_action    = "deny(429)"
-      enforce_on_key   = "IP"
     }
   }
 
