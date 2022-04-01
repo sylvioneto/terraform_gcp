@@ -40,7 +40,7 @@ gcloud builds submit . --config cloudbuild.yaml
 ```
 
 ## Testing
-You can use tools such as dirsearch to test your setup.
+You can use tools such as [dirsearch](https://github.com/maurosoria/dirsearch) to test your setup.
 
 ## Destroy
 1. Execute Terraform using Cloud Build
