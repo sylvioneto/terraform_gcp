@@ -6,7 +6,7 @@ resource "google_compute_security_policy" "policy" {
   rule {
     action      = "deny(403)"
     priority    = "250"
-    description = "Deny requests out of geo coverage"
+    description = "Deny requests out of the geo coverage"
     match {
       expr {
         expression = "origin.region_code != 'BR' && origin.region_code != 'US'"
