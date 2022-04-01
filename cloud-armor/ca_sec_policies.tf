@@ -143,7 +143,7 @@ resource "google_compute_security_policy" "policy" {
     description = "Block access to Wordpress admin"
     match {
       expr {
-        expression = "request.path.matches('/wp-admin/')"
+        expression = "request.path.matches('/wp-admin')"
       }
     }
   }
