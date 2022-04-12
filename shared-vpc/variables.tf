@@ -12,5 +12,5 @@ variable "region" {
 
 variable "developers_group" {
   description = "This group will have access to the shared subnets"
-  default = "gcp-developers@example.com"
+  default     = "gcp-developers@example.com"
 }

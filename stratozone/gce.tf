@@ -64,7 +64,7 @@ resource "google_compute_instance" "stratozone_collector" {
   machine_type = "e2-standard-4"
   zone         = "us-central1-a"
   labels       = local.labels
-  tags         = ["stratozone"]
+  tags         = ["stratozone", "allow-ssh-ext"]
 
   boot_disk {
     initialize_params {

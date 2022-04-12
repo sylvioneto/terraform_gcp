@@ -15,9 +15,9 @@ module "dev" {
 
 # give developers access to Dev project
 resource "google_project_iam_member" "dev_member" {
-  project    = module.dev.project_id
-  role       = "roles/owner"
-  member     = "group:${var.developers_group}"
+  project = module.dev.project_id
+  role    = "roles/owner"
+  member  = "group:${var.developers_group}"
 }
 
 

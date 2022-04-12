@@ -30,7 +30,7 @@ resource "google_compute_firewall" "stratozone" {
 }
 
 resource "google_compute_firewall" "allow_iap" {
-  name     = "allow-ingress-from-iap"
+  name     = "allow-ssh-rdp-from-iap"
   network  = google_compute_network.vpc_network.name
   priority = 1100
 
@@ -40,4 +40,18 @@ resource "google_compute_firewall" "allow_iap" {
   }
 
   source_ranges = ["35.235.240.0/20"]
+}
+
+resource "google_compute_firewall" "allow_ssh" {
+  name     = "allow-ssh-from-internet"
+  network  = google_compute_network.vpc_network.name
+  priority = 1101
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["allow-ssh-ext"]
 }
