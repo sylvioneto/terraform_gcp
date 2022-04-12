@@ -11,27 +11,29 @@ Resources created:
 
 ### Deploy
 
-1. Clone this repo into the Cloud Shell or your local machine.
-2. Set env vars for your project id and number
+1. Create or select an existing project
+2. Open Cloud Shell and clone this repo into the Cloud Shell VM
 ```
-export GCP_PROJECT_ID=<project-id>
-export GCP_PROJECT_NUMBER=<project-number>
+git clone https://github.com/sylvioneto/terraform_gcp.git
 ```
-
-3. Create a bucket to store your project's Terraform state. 
+3. Ensure the var is set, otherwise set it with `gcloud config set project` command
 ```
-$ gsutil mb gs://$GCP_PROJECT_ID-tf-state
+echo $GOOGLE_CLOUD_PROJECT
 ```
 
-4. Enable the necessary APIs and give Cloud Build's SA permission in case it's the first time you use it.
+4. Create a bucket to store your project's Terraform state
 ```
-$ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com
-$ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/editor'
+gsutil mb gs://$GOOGLE_CLOUD_PROJECT-tf-state
 ```
 
-5. Execute Terraform using Cloud Build.
+5. Enable necessary APIs
 ```
-$ gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
+gcloud services enable cloudbuild.googleapis.com compute.googleapis.com
+```
+
+6. Execute Terraform using Cloud Build.
+```
+gcloud builds submit . --config cloudbuild.yaml
 ```
 
 ### Destroy

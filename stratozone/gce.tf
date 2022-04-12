@@ -61,7 +61,7 @@ resource "google_compute_instance" "db_server_linux" {
 
 resource "google_compute_instance" "stratozone_collector" {
   name         = "stratozone-collector"
-  machine_type = "e2-medium"
+  machine_type = "e2-standard-4"
   zone         = "us-central1-a"
   labels       = local.labels
   tags         = ["stratozone"]

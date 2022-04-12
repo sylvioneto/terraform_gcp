@@ -1,11 +1,9 @@
 terraform {
   backend "gcs" {
-    bucket = "<YOUR-TF-STATE-BUCKET>"
-    prefix = "stratozone"
   }
 }
 
 provider "google" {
-  project = "<YOUR-PROJECT-ID>"
+  project = var.project_id
   region  = "us-central1"
 }
