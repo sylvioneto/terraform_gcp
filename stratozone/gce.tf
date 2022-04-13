@@ -10,7 +10,7 @@ resource "google_compute_instance" "app_server_win" {
   machine_type = "e2-medium"
   zone         = "us-central1-a"
   labels       = local.labels
-  tags         = ["allow-ssh-ext"]
+  tags         = ["allow-rdp-ext"]
 
   boot_disk {
     initialize_params {
@@ -65,7 +65,7 @@ resource "google_compute_instance" "stratozone_collector" {
   machine_type = "e2-standard-4"
   zone         = "us-central1-a"
   labels       = local.labels
-  tags         = ["stratozone", "allow-ssh-ext"]
+  tags         = ["stratozone", "allow-rdp-ext"]
 
   boot_disk {
     initialize_params {

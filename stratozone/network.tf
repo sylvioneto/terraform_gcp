@@ -43,15 +43,15 @@ resource "google_compute_firewall" "allow_iap" {
 }
 
 resource "google_compute_firewall" "allow_ssh" {
-  name     = "allow-ssh-external"
+  name     = "allow-rdp-external"
   network  = google_compute_network.vpc_network.name
   priority = 1101
 
   allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = ["3389"]
   }
 
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["allow-ssh-ext"]
+  target_tags   = ["allow-rdp-ext"]
 }
