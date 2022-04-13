@@ -30,7 +30,7 @@ resource "google_compute_firewall" "stratozone" {
 }
 
 resource "google_compute_firewall" "allow_iap" {
-  name     = "allow-ssh-rdp-from-iap"
+  name     = "allow-ssh-rdp-iap"
   network  = google_compute_network.vpc_network.name
   priority = 1100
 
@@ -43,7 +43,7 @@ resource "google_compute_firewall" "allow_iap" {
 }
 
 resource "google_compute_firewall" "allow_ssh" {
-  name     = "allow-ssh-from-internet"
+  name     = "allow-ssh-external"
   network  = google_compute_network.vpc_network.name
   priority = 1101
 
