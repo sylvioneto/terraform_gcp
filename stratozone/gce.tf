@@ -10,6 +10,7 @@ resource "google_compute_instance" "app_server_win" {
   machine_type = "e2-medium"
   zone         = "us-central1-a"
   labels       = local.labels
+  tags         = ["allow-ssh-ext"]
 
   boot_disk {
     initialize_params {
