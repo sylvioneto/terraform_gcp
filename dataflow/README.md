@@ -57,7 +57,7 @@ source venv/bin/activate
 pip3 install apache-beam[gcp]
 ```
 
-3. (optional) Grant `roles/dataflow.worker` and `roles/storage.admin` should be granted to controller service account `<project-number>-compute@developer.gserviceaccount.com` in case it's the first time you use Dataflow.
+3. (optional) Grant `roles/dataflow.worker`, `roles/storage.admin`, `roles/bigquery.admin` to `<project-number>-compute@developer.gserviceaccount.com` in case it's the first time you use Dataflow.
 
 4. Run the job.
 
