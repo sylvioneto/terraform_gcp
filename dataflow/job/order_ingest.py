@@ -7,7 +7,7 @@ from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.io.gcp.internal.clients import bigquery
 
 
-TABLE_SPEC = 'ecommerce.order'
+TABLE_NAME = 'ecommerce.order'
 TABLE_SCHEMA = 'order_id:STRING, status:STRING, amount:NUMERIC, customer_name:STRING, customer_phone:STRING, customer_email:STRING'
 
 class CommandLineOptions(PipelineOptions):
@@ -21,10 +21,19 @@ class CommandLineOptions(PipelineOptions):
 
 def validate_order(line):
     order_data = line.split(",")
-
-    # order_id must not be null
     if order_data[0]:
         yield line
+
+class FormatDoFn(beam.DoFn):
+  def process(self, element):
+    return [{
+        'order_id': element[0],
+        'status': element[1],
+        'amount': element[2],
+        'customer_name': element[3],
+        'customer_phone': element[4],
+        'customer_email': element[5]
+    }]
 
 
 def run():
@@ -35,27 +44,30 @@ def run():
 
     print('GCS Input {0}, GCS Lake {1}, GCS DW {2}'.format(input,output_datalake,output_dw))
 
-    # find all orders that contain invalid data and insert the valid ones on GCS
+    # Get order files from the raw data bucket
     all_orders = (p | 'GetOrders' >> beam.io.ReadFromText(input))
 
-    # Data Lake output
+    # Output to the DL bucket
     (all_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
 
-    # Data Warehouse output
-    # GCS
+    # Remove invalids
     valid_orders = all_orders | 'RemoveInvalids' >> beam.FlatMap(lambda line: validate_order(line))
+
+    # Output to the DW bucket
     (valid_orders | 'WriteToDataWarehouse' >> beam.io.WriteToText(output_dw))
 
-    # BQ
-    # TO-DO
-    # (valid_orders
-    #     | 'String To BigQuery Row' >> beam.Map(lambda s: csv_to_bqrow(s))
-    #     | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
-    #         TABLE_SPEC,
-    #         schema=TABLE_SCHEMA,
-    #         write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE,
-    #         create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED)
-    #  )
+    # Transform to BQ format
+    transformed = (
+        valid_orders
+        | 'Format' >> beam.ParDo(FormatDoFn()))
+
+    # Write to BigQuery
+    # pylint: disable=expression-not-assigned
+    transformed | 'Write' >> beam.io.WriteToBigQuery(
+        table=TABLE_NAME,
+        schema=TABLE_SCHEMA,
+        create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
+        write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND)
 
     p.run()
 
