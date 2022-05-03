@@ -57,7 +57,9 @@ source venv/bin/activate
 pip3 install apache-beam[gcp]
 ```
 
-3. Run the job.
+3. (optional) Grant `roles/dataflow.worker` and `roles/storage.admin` should be granted to controller service account `<project-number>-compute@developer.gserviceaccount.com` in case it's the first time you use Dataflow.
+
+4. Run the job.
 
     3.1 On Dataflow
     Run:
@@ -88,8 +90,6 @@ pip3 install apache-beam[gcp]
         --gcs_lake=$GOOGLE_CLOUD_PROJECT-data-lake \
         --gcs_dw=$GOOGLE_CLOUD_PROJECT-data-warehouse
     ```
-    
-4. (optional) Grant Storage Admin and Bigquery Admin to `service-<project-number>@dataflow-service-producer-prod.iam.gserviceaccount.com`service account in case it is the first time you use Dataflow.
 
 
 ## Destroy
