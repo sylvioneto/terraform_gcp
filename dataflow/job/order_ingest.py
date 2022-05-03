@@ -21,22 +21,21 @@ class CommandLineOptions(PipelineOptions):
         parser.add_argument('--gcs_dw')
 
 
-def validate_order(line):
+def validate_order_data(line):
     order_data = line.split(",")
     if order_data[0]:
         yield line
 
 
-class FormatDoFn(beam.DoFn):
-    def process(self, element):
-        return [{
-            'order_id': element[0],
-            'status': element[1],
-            'amount': element[2],
-            'customer_name': element[3],
-            'customer_phone': element[4],
-            'customer_email': element[5]
-        }]
+def transform_line(line):
+    wrk_element = line.split(",")      
+    order_data = { 'order_id': wrk_element[0],
+        'status': wrk_element[1],
+        'amount': wrk_element[2],
+        'customer_name': wrk_element[3],
+        'customer_phone': wrk_element[4],
+        'customer_email': wrk_element[5]}
+    return order_data
 
 
 def run():
@@ -49,34 +48,25 @@ def run():
         input, output_datalake, output_dw))
 
     # Get order files from the raw data bucket
-    all_orders = (p | 'GetOrders' >> beam.io.ReadFromText(input))
+    all_orders = (p | 'GetOrders' >> beam.io.ReadFromText(input, skip_header_lines=1))
 
     # Output to the DL bucket
     (all_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
 
     # Remove invalids
-    valid_orders = (all_orders 
-        | 'RemoveInvalids' >> beam.FlatMap(lambda line: validate_order(line))
-    )
+    valid_orders = (all_orders | 'RemoveInvalids' >> beam.FlatMap(lambda line: validate_order_data(line)))
 
     # Output to the DW bucket
-    dw_output = (
-        valid_orders | 'WriteToDataWarehouseBucket' >> beam.io.WriteToText(output_dw)
-    )
+    (valid_orders | 'WriteToDWBucket' >> beam.io.WriteToText(output_dw))
 
-    # Transform to BQ format
-    transformed = (
-        valid_orders
-        | 'Format' >> beam.ParDo(FormatDoFn())
-    )
-
-    # Write to BigQuery
-    # pylint: disable=expression-not-assigned
-    transformed | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
+    #String To BigQuery Row
+    (valid_orders 
+        | 'StringToBigQueryRow' >> beam.Map(lambda l: transform_line(l))
+        | 'WriteToDWBigQuery' >> beam.io.WriteToBigQuery(
         TABLE_NAME,
         schema=TABLE_SCHEMA,
         create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
-        write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND)
+        write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND))
 
     p.run()
 
