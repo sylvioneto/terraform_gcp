@@ -55,16 +55,21 @@ def run():
     (all_orders | 'WriteToDataLake' >> beam.io.WriteToText(output_datalake))
 
     # Remove invalids
-    valid_orders = all_orders | 'RemoveInvalids' >> beam.FlatMap(
-        lambda line: validate_order(line))
+    valid_orders = (all_orders 
+        | 'RemoveInvalids' >> beam.FlatMap(lambda line: validate_order(line))
+    )
 
     # Output to the DW bucket
-    (valid_orders | 'WriteToDataWarehouseBucket' >> beam.io.WriteToText(output_dw))
+    dw_output = (
+        valid_orders | 'WriteToDataWarehouseBucket' >> beam.io.WriteToText(output_dw)
+    )
 
     # Transform to BQ format
     transformed = (
         valid_orders
-        | 'Format' >> beam.ParDo(FormatDoFn()))
+        | Wait.on(dw_output)
+        | 'Format' >> beam.ParDo(FormatDoFn())
+    )
 
     # Write to BigQuery
     # pylint: disable=expression-not-assigned
