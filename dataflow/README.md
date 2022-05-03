@@ -7,19 +7,23 @@ This project demonstrates how to create a Cloud Composer environment to execute 
 ## Deploy
 
 ### Terraform
-1. Clone this repo into the Cloud Shell or your local machine.
-2. Set env vars for your project id and number
+
+1. Create or select an existing project
+2. Open Cloud Shell and clone this repo into the Cloud Shell VM
 ```
-export GCP_PROJECT_ID=<project-id>
-export GCP_PROJECT_NUMBER=<project-number>
+git clone https://github.com/sylvioneto/terraform_gcp.git
+```
+3. Ensure the var is set, otherwise set it with `gcloud config set project` command
+```
+echo $GOOGLE_CLOUD_PROJECT
 ```
 
-3. Create a bucket to store your project's Terraform state. 
+4. Create a bucket to store your project's Terraform state
 ```
-gsutil mb gs://$GCP_PROJECT_ID-tf-state
+gsutil mb gs://$GOOGLE_CLOUD_PROJECT-tf-state
 ```
 
-4. Enable the necessary APIs.
+5. Enable the necessary APIs.
 ```
 gcloud services enable cloudbuild.googleapis.com \
     cloudresourcemanager.googleapis.com \
@@ -30,22 +34,19 @@ gcloud services enable cloudbuild.googleapis.com \
     dlp.googleapis.com
 ```
 
-5. Give permissions to the service accounts.
-```
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/iam.securityAdmin'
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/editor'
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER-compute@developer.gserviceaccount.com" --role='roles/editor'
-```
 
-6. Execute Terraform using Cloud Build.
+6. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor` and `Project IAM Admin` role to the Cloud Build's service account `<PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`.
+
+7. Execute Terraform using Cloud Build
 ```
-gcloud builds submit ./terraform --config cloudbuild.yaml --project $GCP_PROJECT_ID
+cd ./terraform_gcp/dataflow
+gcloud builds submit ./terraform --config cloudbuild.yaml --project $GOOGLE_CLOUD_PROJECT
 ```
 
 ### Dataflow job
 1. Copy the input file to the raw data bucket.
 ```
-gsutil cp ./data/order_ingest.csv gs://$GCP_PROJECT_ID-data-raw/
+gsutil cp ./data/order_ingest.csv gs://$GOOGLE_CLOUD_PROJECT-data-raw/
 ```
 
 2. Prepare the environment.
@@ -63,36 +64,35 @@ pip3 install apache-beam[gcp]
     3.1 On Dataflow
     ```
     python3 ./job/order_ingest.py \
-        --project=$GCP_PROJECT_ID \
+        --project=$$GOOGLE_CLOUD_PROJECT \
         --region=us-east1 \
         --runner=DataflowRunner \
         --job_name=order-ingest \
         --save_main_session \
-        --temp_location=gs://$GCP_PROJECT_ID-data-raw/temp/ \
+        --temp_location=gs://$GOOGLE_CLOUD_PROJECT-data-raw/temp/ \
         --subnetwork=regions/us-east1/subnetworks/data-engineering \
-        --gcs_raw=$GCP_PROJECT_ID-data-raw \
-        --gcs_lake=$GCP_PROJECT_ID-data-lake \
-        --gcs_dw=$GCP_PROJECT_ID-data-warehouse
+        --gcs_raw=$GOOGLE_CLOUD_PROJECT-data-raw \
+        --gcs_lake=$GOOGLE_CLOUD_PROJECT-data-lake \
+        --gcs_dw=$GOOGLE_CLOUD_PROJECT-data-warehouse
     ```
 
     3.2 Local (for troubleshooting)
     ```
     python3 ./job/order_ingest.py \
-        --project=$GCP_PROJECT_ID \
+        --project=$$GOOGLE_CLOUD_PROJECT \
         --region=us-east1 \
         --runner=DirectRunner \
         --job_name=order-ingest \
-        --temp_location=gs://$GCP_PROJECT_ID-data-raw/temp/ \
+        --temp_location=gs://$$GOOGLE_CLOUD_PROJECT-data-raw/temp/ \
         --gcs_raw=$GCP_PROJECT_ID-data-raw \
         --gcs_lake=$GCP_PROJECT_ID-data-lake \
         --gcs_dw=$GCP_PROJECT_ID-data-dw
     ```
 
-4. Clear data.
-```
-gsutil rm -r gs://$GCP_PROJECT_ID-data-lake/*
-gsutil rm -r gs://$GCP_PROJECT_ID-data-warehouse/*
-```
 
 ## Destroy
-Uncomment the `tf destroy` step in the cloudbuild.yaml file, and trigger the deployment again.
+1. Execute Terraform using Cloud Build
+```
+cd ./terraform_gcp/dataflow
+gcloud builds submit ./terraform --config cloudbuild_destroy.yaml
+```

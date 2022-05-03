@@ -26,7 +26,9 @@ module "gke" {
   enable_private_nodes   = true
   master_ipv4_cidr_block = local.cluster_ip_ranges.master
 
-  # whitelist who can reach cluster's master nodes
+  // whitelist who can reach cluster's master nodes
+  // NOTE: internet is not recommended! It is used for testing only.
+  
   master_authorized_networks = [
     {
       display_name = "internet"

@@ -43,4 +43,8 @@ gcloud builds submit . --config cloudbuild.yaml --project $GOOGLE_CLOUD_PROJECT
 ```
 
 ## Destroy
-Uncomment the `tf destroy` step in the cloudbuild.yaml file, and trigger the deployment again.
+1. Execute Terraform using Cloud Build
+```
+cd ./terraform_gcp/gke
+gcloud builds submit . --config cloudbuild_destroy.yaml
+```
