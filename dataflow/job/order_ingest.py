@@ -54,7 +54,7 @@ def run():
     valid_orders = all_orders | 'RemoveInvalids' >> beam.FlatMap(lambda line: validate_order(line))
 
     # Output to the DW bucket
-    (valid_orders | 'WriteToDataWarehouse' >> beam.io.WriteToText(output_dw))
+    (valid_orders | 'WriteToDataWarehouseBucket' >> beam.io.WriteToText(output_dw))
 
     # Transform to BQ format
     transformed = (
@@ -63,7 +63,7 @@ def run():
 
     # Write to BigQuery
     # pylint: disable=expression-not-assigned
-    transformed | 'Write' >> beam.io.WriteToBigQuery(
+    transformed | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
         table=TABLE_NAME,
         schema=TABLE_SCHEMA,
         create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
