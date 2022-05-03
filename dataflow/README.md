@@ -1,8 +1,8 @@
-# Cloud Composer
+# Data Pipeline
 
 ## Description
 
-This project demonstrates how to create a Cloud Composer environment to execute data pipelines.
+This project demonstrates how to create a data pipeline with Dataflow and GCS.
 
 ## Deploy
 
@@ -50,8 +50,6 @@ gsutil cp ./data/order_ingest.csv gs://$GOOGLE_CLOUD_PROJECT-data-raw/
 ```
 
 2. Prepare the environment.
-Note: Change the project id in the order_ingest.py file before running it.
-
 ```
 pip3 install virtualenv
 python3 -m virtualenv venv
@@ -62,24 +60,26 @@ pip3 install apache-beam[gcp]
 3. Run the job.
 
     3.1 On Dataflow
+    Run:
     ```
     python3 ./job/order_ingest.py \
-        --project=$$GOOGLE_CLOUD_PROJECT \
+        --project=$GOOGLE_CLOUD_PROJECT \
         --region=us-east1 \
         --runner=DataflowRunner \
         --job_name=order-ingest \
         --save_main_session \
-        --temp_location=gs://$GOOGLE_CLOUD_PROJECT-data-raw/temp/ \
+        --temp_location=gs://$GOOGLE_CLOUD_PROJECT-dataflow-temp/ \
         --subnetwork=regions/us-east1/subnetworks/data-engineering \
         --gcs_raw=$GOOGLE_CLOUD_PROJECT-data-raw \
         --gcs_lake=$GOOGLE_CLOUD_PROJECT-data-lake \
         --gcs_dw=$GOOGLE_CLOUD_PROJECT-data-warehouse
     ```
+    Check the job on https://console.cloud.google.com/dataflow/jobs
 
     3.2 Local (for troubleshooting)
     ```
     python3 ./job/order_ingest.py \
-        --project=$$GOOGLE_CLOUD_PROJECT \
+        --project=$GOOGLE_CLOUD_PROJECT \
         --region=us-east1 \
         --runner=DirectRunner \
         --job_name=order-ingest \
@@ -88,6 +88,7 @@ pip3 install apache-beam[gcp]
         --gcs_lake=$GCP_PROJECT_ID-data-lake \
         --gcs_dw=$GCP_PROJECT_ID-data-dw
     ```
+4. (optional) Grant Storage Admin and Bigquery Admin to `service-<project-number>@dataflow-service-producer-prod.iam.gserviceaccount.com`service account in case it is the first time you use Dataflow.
 
 
 ## Destroy
