@@ -67,7 +67,6 @@ def run():
     # Transform to BQ format
     transformed = (
         valid_orders
-        | Wait.on(dw_output)
         | 'Format' >> beam.ParDo(FormatDoFn())
     )
 
