@@ -59,7 +59,7 @@ def run():
     # Output to the DW bucket
     (valid_orders | 'WriteToDWBucket' >> beam.io.WriteToText(output_dw))
 
-    #String To BigQuery Row
+    #Output to DW BigQuery
     (valid_orders 
         | 'StringToBigQueryRow' >> beam.Map(lambda l: transform_line(l))
         | 'WriteToDWBigQuery' >> beam.io.WriteToBigQuery(
