@@ -4,6 +4,10 @@
 
 This project demonstrates how to create a data pipeline with Dataflow and GCS.
 
+This pipeline gets data from a raw bucket, process and save it into the Data Lake and Data Warehouse.
+
+![image](printscreen.png)
+
 ## Deploy
 
 ### Terraform
