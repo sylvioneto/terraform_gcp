@@ -83,11 +83,12 @@ pip3 install apache-beam[gcp]
         --region=us-east1 \
         --runner=DirectRunner \
         --job_name=order-ingest \
-        --temp_location=gs://$$GOOGLE_CLOUD_PROJECT-data-raw/temp/ \
-        --gcs_raw=$GCP_PROJECT_ID-data-raw \
-        --gcs_lake=$GCP_PROJECT_ID-data-lake \
-        --gcs_dw=$GCP_PROJECT_ID-data-dw
+        --temp_location=gs://$GOOGLE_CLOUD_PROJECT-dataflow-temp/ \
+        --gcs_raw=$GOOGLE_CLOUD_PROJECT-data-raw \
+        --gcs_lake=$GOOGLE_CLOUD_PROJECT-data-lake \
+        --gcs_dw=$GOOGLE_CLOUD_PROJECT-data-warehouse
     ```
+    
 4. (optional) Grant Storage Admin and Bigquery Admin to `service-<project-number>@dataflow-service-producer-prod.iam.gserviceaccount.com`service account in case it is the first time you use Dataflow.
 
 

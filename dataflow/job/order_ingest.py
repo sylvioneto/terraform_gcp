@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import logging
 
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
@@ -68,7 +69,7 @@ def run():
     # Write to BigQuery
     # pylint: disable=expression-not-assigned
     transformed | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
-        table=TABLE_NAME,
+        TABLE_NAME,
         schema=TABLE_SCHEMA,
         create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
         write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND)
