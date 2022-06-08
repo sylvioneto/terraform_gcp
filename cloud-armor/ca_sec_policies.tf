@@ -2,18 +2,6 @@ resource "google_compute_security_policy" "policy" {
   provider = google-beta
   name     = "${local.application_name}-sec-policy"
 
-  # Geo location
-  rule {
-    action      = "deny(403)"
-    priority    = "250"
-    description = "Deny requests out of the geo coverage"
-    match {
-      expr {
-        expression = "origin.region_code != 'BR' && origin.region_code != 'US'"
-      }
-    }
-  }
-
   # WAF preconfigured rules
   rule {
     action      = "deny(403)"
