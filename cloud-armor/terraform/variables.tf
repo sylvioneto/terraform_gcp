@@ -8,6 +8,11 @@ locals {
     app       = "cloud-armor"
   }
 
+  service_account = {
+    email  = google_service_account.service_account.email
+    scopes = ["https://www.googleapis.com/auth/cloud-platform"]
+  }
+
   application_name = "juice-shop"
 }
 
