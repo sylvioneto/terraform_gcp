@@ -4,13 +4,13 @@ resource "google_service_account" "service_account" {
 }
 
 resource "google_service_account_iam_member" "log_writer" {
-  service_account_id = google_service_account.sa.name
+  service_account_id = google_service_account.service_account.name
   role               = "roles/logging.logWriter"
   member             = "serviceAccount:${google_service_account.service_account.email}"
 }
 
 resource "google_service_account_iam_member" "monitoring_writer" {
-  service_account_id = google_service_account.sa.name
+  service_account_id = google_service_account.service_account.name
   role               = "roles/monitoring.metricWriter"
   member             = "serviceAccount:${google_service_account.service_account.email}"
 }
