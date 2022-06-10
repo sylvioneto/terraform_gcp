@@ -15,8 +15,7 @@ module "instance_template" {
   preemptible          = true
 
   startup_script = <<EOF
-  docker pull bkimminich/juice-shop:v14.0.1
-  docker run --rm -p 3000:3000 bkimminich/juice-shop:v14.0.1
+  docker run --rm -p 80:3000 bkimminich/juice-shop:v14.0.1
   EOF
 
   access_config = [{
@@ -47,7 +46,7 @@ module "mig" {
   named_ports = [
     {
       name = "http"
-      port = 3000
+      port = 80
     }
   ]
 }

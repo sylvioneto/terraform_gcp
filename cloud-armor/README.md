@@ -7,10 +7,7 @@ This example demonstrates how to use Clour Armor to protect a web server.
 Resources created:
 - VPC
 - Managed Instance Group with Apache VM
-- Cloud Armor with
-  - WAF rules
-  - Rate limit
-  - Geo restrictions (US and Brazil only)
+- Cloud Armor with WAF rules and Rate limit
 
 ![image](cloud-armor-policy.png)
 
