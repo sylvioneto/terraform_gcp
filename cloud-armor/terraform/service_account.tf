@@ -1,5 +1,5 @@
 resource "google_service_account" "service_account" {
-  account_id   = var.application_name
+  account_id   = local.application_name
   display_name = "Service Account for instances of ${local.application_name}"
 }
 
