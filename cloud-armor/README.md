@@ -5,11 +5,11 @@
 This example demonstrates how to use Clour Armor to protect a web server.
 
 Resources created:
-- VPC
-- Managed Instance Group with Apache VM
+- VPC with firewall rules
+- Managed Instance Group
 - Cloud Armor with WAF rules and Rate limit
 
-![image](cloud-armor-policy.png)
+It deployes the [Juice Shop](https://owasp-juice.shop) web app, an unsecure application, so you can test GCP's security features.
 
 ## Deploy
 
