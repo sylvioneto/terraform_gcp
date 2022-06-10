@@ -1,6 +1,6 @@
 resource "google_compute_security_policy" "policy" {
   provider = google-beta
-  name     = "${local.application_name}-sec-policy"
+  name     = "${local.application_name}-policy"
 
   # WAF preconfigured rules
   rule {

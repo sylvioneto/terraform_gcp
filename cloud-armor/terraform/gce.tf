@@ -9,13 +9,14 @@ module "instance_template" {
   subnetwork           = "webapp-${var.region}"
   service_account      = local.service_account
   labels               = local.resource_labels
-  source_image         = "debian-10-buster-v20220317"
-  source_image_project = "debian-cloud"
+  source_image         = "cos-stable-97-16919-29-40"
+  source_image_project = "cos-cloud"
+  machine_type         = "e2-standard-2"
+  preemptible          = true
 
   startup_script = <<EOF
-  sudo apt update
-  sudo apt install apache2 -y
-  sudo curl https://raw.githubusercontent.com/sylvioneto/terraform_gcp/master/cloud-armor/index.html --output /var/www/html/index.html
+  docker pull bkimminich/juice-shop:v14.0.1
+  docker run --rm -p 3000:3000 bkimminich/juice-shop:v14.0.1
   EOF
 
   access_config = [{
@@ -25,6 +26,7 @@ module "instance_template" {
 
   tags = [
     "allow-hc",
+    "allow-ssh"
   ]
 
   depends_on = [
@@ -45,7 +47,7 @@ module "mig" {
   named_ports = [
     {
       name = "http"
-      port = 80
+      port = 3000
     }
   ]
 }

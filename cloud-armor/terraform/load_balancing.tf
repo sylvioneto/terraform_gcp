@@ -11,7 +11,7 @@ module "gce-lb-http" {
     default = {
       description             = null
       protocol                = "HTTP"
-      port                    = 80
+      port                    = 3000
       port_name               = "http"
       timeout_sec             = 10
       enable_cdn              = false

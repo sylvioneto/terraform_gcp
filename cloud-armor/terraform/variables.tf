@@ -13,7 +13,7 @@ locals {
     scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
 
-  application_name = "apache"
+  application_name = "juice-shop"
 }
 
 variable "project_id" {
