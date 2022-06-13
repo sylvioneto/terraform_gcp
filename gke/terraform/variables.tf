@@ -16,9 +16,10 @@ locals {
   }
 
   resource_labels = {
-    terraform   = "true"
-    cost-center = "training"
-    env         = "dev"
-    owner       = "data-engineering"
+    terraform = "true"
+    app       = "gke"
+    purpose   = "demo"
+    env       = "sandbox"
+    repo      = "terraform_gcp"
   }
 }

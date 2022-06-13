@@ -3,9 +3,10 @@ data "google_project" "project" {}
 locals {
   resource_labels = {
     terraform = "true"
-    purpose   = "demo"
-    repo      = "terraform_gcp"
     app       = "cloud-armor"
+    purpose   = "demo"
+    env       = "sandbox"
+    repo      = "terraform_gcp"
   }
 
   service_account = {

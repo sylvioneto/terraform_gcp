@@ -28,7 +28,7 @@ module "gke" {
 
   // whitelist who can reach cluster's master nodes
   // NOTE: internet is not recommended! It is used for testing only.
-  
+
   master_authorized_networks = [
     {
       display_name = "internet"
