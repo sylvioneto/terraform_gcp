@@ -12,7 +12,7 @@ module "gke" {
   version    = "~> 17.0.0"
   project_id = var.project_id
   region     = local.region
-  name       = local.cluster_name
+  name       = "${local.cluster_name}-${local.region}"
 
   network                   = module.vpc.network_name
   subnetwork                = local.cluster_name

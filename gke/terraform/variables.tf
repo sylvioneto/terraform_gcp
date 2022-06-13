@@ -7,7 +7,7 @@ locals {
   region   = "us-central1"
   vpc_name = "gke-vpc"
 
-  cluster_name = "gke-dev"
+  cluster_name = "gke-sandbox"
   cluster_ip_ranges = {
     pods     = "10.1.0.0/22"
     services = "10.1.4.0/24"
