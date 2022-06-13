@@ -11,7 +11,7 @@ module "instance_template" {
   labels               = local.resource_labels
   source_image         = "cos-stable-97-16919-29-40"
   source_image_project = "cos-cloud"
-  machine_type         = "e2-standard-2"
+  machine_type         = "e2-small"
   preemptible          = true
 
   startup_script = <<EOF
