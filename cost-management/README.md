@@ -11,32 +11,37 @@ Pre-req:
 
 ## Deploy
 
-1. Clone this repo into the Cloud Shell or your local machine.
-2. Set env vars for your project id and number
+1. Create a new project and select it
+2. Open Cloud Shell and clone this repo into the Cloud Shell VM
 ```
-$ export GCP_PROJECT_ID="<project-id>"
-$ export GCP_PROJECT_NUMBER="<project-number>"
+git clone https://github.com/sylvioneto/terraform_gcp.git
 ```
-
-3. Create a bucket to store your project's Terraform state. 
+3. Ensure the var is set, otherwise set it with `gcloud config set project` command
 ```
-$ gsutil mb gs://$GCP_PROJECT_ID-tf-state
+echo $GOOGLE_CLOUD_PROJECT
 ```
 
-4. Enable Compute and Cloud Build API in case it is the first time you use it.
+4. Create a bucket to store your project's Terraform state
 ```
-$ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com
-```
-
-5. Give Cloud Build's service account necessary permissions
-```
-$ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role='roles/editor'
+gsutil mb gs://$GOOGLE_CLOUD_PROJECT-tf-state
 ```
 
-6. Deploy Terraform using Cloud Build.
+5. Enable the necessary APIs
 ```
-$ gcloud builds submit . --config cloudbuild.yaml --project $GCP_PROJECT_ID
+gcloud services enable cloudbuild.googleapis.com compute.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com
+```
+
+6. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor` and `Security Admin` role to the Cloud Build's service account `<PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`.
+
+7. Execute Terraform using Cloud Build
+```
+cd ./terraform_gcp/cost-management
+gcloud builds submit ./terraform --config cloudbuild.yaml
 ```
 
 ## Destroy
-Uncomment the `tf destroy` step in the cloudbuild.yaml file, and trigger the deployment again.
+1. Execute Terraform using Cloud Build
+```
+cd ./terraform_gcp/cost-management
+gcloud builds submit ./terraform --config cloudbuild_destroy.yaml
+```

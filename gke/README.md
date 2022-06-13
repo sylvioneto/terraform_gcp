@@ -14,7 +14,7 @@ Resources created:
 
 ## Deploy
 
-1. Create or select a project to create your GKE cluster
+1. Create a new project and select it
 2. Open Cloud Shell and clone this repo into the Cloud Shell VM
 ```
 git clone https://github.com/sylvioneto/terraform_gcp.git
