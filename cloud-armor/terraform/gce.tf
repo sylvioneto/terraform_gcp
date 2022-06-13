@@ -18,11 +18,6 @@ module "instance_template" {
   docker run --rm -p 80:3000 bkimminich/juice-shop:v14.0.1
   EOF
 
-  access_config = [{
-    nat_ip       = null
-    network_tier = "PREMIUM"
-  }]
-
   tags = [
     "allow-hc",
     "allow-ssh"
