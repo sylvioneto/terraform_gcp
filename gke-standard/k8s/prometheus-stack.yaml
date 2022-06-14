@@ -1,0 +1,10 @@
+commonLabels: 
+  purpose: demo
+  env: sandbox
+  repo: terraform-gcp
+
+alertmanager:
+  enabled: true
+
+grafana:
+  enabled: true

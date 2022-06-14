@@ -46,5 +46,5 @@ gcloud builds submit ./terraform --config cloudbuild.yaml --project $GOOGLE_CLOU
 1. Execute Terraform using Cloud Build
 ```
 cd ./terraform_gcp/gke
-gcloud builds submit ./terraform --config cloudbuild_destroy.yaml
+gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
