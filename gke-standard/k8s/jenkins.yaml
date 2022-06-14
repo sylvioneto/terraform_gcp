@@ -10,12 +10,15 @@ controller:
         jenkins:
           systemMessage: Welcome to Jenkins running on GKE!
   ingress:
-    apiVersion: "networking.k8s.io/v1"
+      enabled: true
+      paths: []
+      apiVersion: "extensions/v1beta1"
+      hostName: jenkins.example.com
+  
+  ingress:
     enabled: true
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      kubernetes.io/tls-acme: "true"
-    # hostName: jenkins.example.com
+    ingressClassName: nginx
+    hostName: jenkins.example.com
 
 persistence:
   enabled: true

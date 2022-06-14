@@ -75,7 +75,7 @@ steps:
   name: 'gcr.io/$PROJECT_ID/helm:latest'
   args: ['upgrade', '--install', 'jenkins',
   'jenkinsci/jenkins', 
-  '--version', '3.10.2', 
+  '--version', '4.1.8', 
   '--namespace', 'devops',
    '-f', 'jenkins.yaml'
   ]

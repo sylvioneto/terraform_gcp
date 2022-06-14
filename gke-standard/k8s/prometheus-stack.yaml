@@ -3,8 +3,22 @@ commonLabels:
   env: sandbox
   repo: terraform-gcp
 
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hostName: prometheus.example.com
+
 alertmanager:
   enabled: true
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hostName: grafana.example.com
 
 grafana:
   enabled: true
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hostName: grafana.example.com
