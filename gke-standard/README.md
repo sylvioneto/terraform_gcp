@@ -31,7 +31,7 @@ gsutil mb gs://$GOOGLE_CLOUD_PROJECT-tf-state
 
 5. Enable the necessary APIs
 ```
-gcloud services enable cloudbuild.googleapis.com compute.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com
+gcloud services enable cloudbuild.googleapis.com compute.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com containersecurity.googleapis.com
 ```
 
 6. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor` and `Security Admin` role to the Cloud Build's service account `<PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`.
