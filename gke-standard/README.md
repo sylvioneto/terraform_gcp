@@ -39,7 +39,7 @@ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com containe
 7. Execute Terraform using Cloud Build
 ```
 cd ./terraform_gcp/gke
-gcloud builds submit ./terraform --config cloudbuild.yaml --project $GOOGLE_CLOUD_PROJECT
+gcloud builds submit . --config cloudbuild.yaml
 ```
 
 ## Destroy
