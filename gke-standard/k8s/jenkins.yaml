@@ -13,12 +13,12 @@ controller:
       enabled: true
       paths: []
       apiVersion: "extensions/v1beta1"
-      hostName: jenkins.example.com
+      hostName: jenkins.your-domain.com
   
   ingress:
     enabled: true
     ingressClassName: nginx
-    hostName: jenkins.example.com
+    hostName: jenkins.your-domain.com
 
 persistence:
   enabled: true

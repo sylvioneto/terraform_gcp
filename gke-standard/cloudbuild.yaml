@@ -8,7 +8,7 @@ steps:
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=terraform_gcp/gke"
+    -backend-config="prefix=terraform_gcp/gke-standard"
   dir: terraform
       
 - id: 'tf plan'
@@ -93,6 +93,6 @@ options:
 tags:
   - terraform
   - helm
-  - gke
+  - gke-standard
 
 timeout: 1200s
