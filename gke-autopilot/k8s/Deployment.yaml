@@ -9,5 +9,5 @@ spec:
   - name: hello-app
     image: us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
     ports:
-      - containerPort: 80
+      - containerPort: 8080
         name: http
