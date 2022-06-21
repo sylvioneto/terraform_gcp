@@ -36,11 +36,29 @@ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com containe
 
 6. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor` and `Security Admin` role to the Cloud Build's service account `<PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`.
 
-7. Execute Terraform using Cloud Build
+7. Find and replace `your-domain.com` by your own domain.
+
+8. Execute Terraform using Cloud Build
 ```
 cd ./terraform_gcp/gke
 gcloud builds submit . --config cloudbuild.yaml
 ```
+
+9. At this point your cluster and workloads ar up and running, please check it on [GKE](https://console.cloud.google.com/kubernetes/list/overview).
+
+9. (Optional) Add the ingress-nginx IP to your DNS records in order to access the applications.  
+In case you use Cloud DNS, you can run the command below replcing the IP, domain name, and DNS Zone.
+```
+ZONE_NAME=your-zone-name
+NGINX_IP=ingress nginx external IP
+DOMAIN=your-domaim.com.
+```
+```
+gcloud dns record-sets create jenkins.$DOMAIN      --rrdatas=$NGINX_IP --type=A --ttl=300 --zone=$ZONE_NAME
+gcloud dns record-sets create prometheus.$DOMAIN   --rrdatas=$NGINX_IP --type=A --ttl=300 --zone=$ZONE_NAME
+gcloud dns record-sets create grafana.$DOMAIN      --rrdatas=$NGINX_IP --type=A --ttl=300 --zone=$ZONE_NAME
+gcloud dns record-sets create alertmanager.$DOMAIN --rrdatas=$NGINX_IP --type=A --ttl=300 --zone=$ZONE_NAME
+````
 
 ## Destroy
 1. Execute Terraform using Cloud Build
