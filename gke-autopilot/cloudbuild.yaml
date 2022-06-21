@@ -1,0 +1,60 @@
+steps:
+# Terraform
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform init \
+    -backend-config="bucket=$PROJECT_ID-tf-state" \
+    -backend-config="prefix=terraform_gcp/gke-autopilot"
+  dir: terraform
+      
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.0.0'
+  args: 
+  - plan
+  dir: terraform
+
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  args: 
+  - apply
+  - -auto-approve
+  dir: terraform
+
+# Kubernetes
+- id: git-clone
+  name: 'gcr.io/cloud-builders/git'
+  args: ['clone', 'https://github.com/GoogleCloudPlatform/cloud-builders-community']
+
+- id: build-helm
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/helm', '-q', 'helm']
+  dir: cloud-builders-community
+  
+- id: test-helm
+  name: 'gcr.io/$PROJECT_ID/helm:latest'
+  args: ['version', '--client']
+  env:
+    - SKIP_CLUSTER_CONFIG=true
+
+- id: create-k8s objects
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', '.']
+  dir: k8s
+
+
+options:
+  env:
+    - TF_VAR_project_id=$PROJECT_ID
+    - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=gke-autopilot-sandbox'
+
+tags:
+  - terraform
+  - helm
+  - gke-autopilot
+
+timeout: 1200s

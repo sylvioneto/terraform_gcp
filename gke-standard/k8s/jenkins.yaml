@@ -10,13 +10,8 @@ controller:
         jenkins:
           systemMessage: Welcome to Jenkins running on GKE!
   ingress:
-      enabled: true
-      paths: []
-      apiVersion: "extensions/v1beta1"
-      hostName: jenkins.your-domain.com
-  
-  ingress:
     enabled: true
+    paths: []
     ingressClassName: nginx
     hostName: jenkins.your-domain.com
 
