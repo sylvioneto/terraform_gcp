@@ -49,8 +49,8 @@ gcloud builds submit . --config cloudbuild.yaml
 9. (Optional) Add the ingress-nginx IP to your DNS records in order to access the applications.  
 In case you use Cloud DNS, you can run the command below replcing the IP, domain name, and DNS Zone.
 ```
-ZONE_NAME=your-zone-name
-NGINX_IP=ingress nginx external IP
+ZONE_NAME=your-public-zone-name
+NGINX_IP=1.2.3.4
 DOMAIN=your-domaim.com.
 ```
 ```
