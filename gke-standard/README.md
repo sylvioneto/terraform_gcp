@@ -51,7 +51,7 @@ In case you use Cloud DNS, you can run the command below replcing the IP, domain
 ```
 ZONE_NAME=your-public-zone-name
 NGINX_IP=1.2.3.4
-DOMAIN=your-domaim.com.
+DOMAIN=your-domain.com.
 ```
 ```
 gcloud dns record-sets create jenkins.$DOMAIN      --rrdatas=$NGINX_IP --type=A --ttl=300 --zone=$ZONE_NAME
