@@ -9,7 +9,7 @@ provider "kubernetes" {
 
 module "gke" {
   source     = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
-  version    = "~> 17.0.0"
+  version    = "21.1.0"
   project_id = var.project_id
   region     = local.region
   name       = local.cluster_name
