@@ -76,7 +76,7 @@ steps:
   args: ['upgrade', '--install', 'jenkins',
   'jenkinsci/jenkins', 
   '--version', '4.1.8', 
-  '--namespace', 'devops',
+  '--namespace', 'jenkins',
    '-f', 'jenkins.yaml'
   ]
   env:
