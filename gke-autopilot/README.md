@@ -57,10 +57,11 @@ DOMAIN=your-domain.com.
 ```
 And run the command below on Cloud Shell terminal.
 ```
-gcloud dns record-sets create jenkins.$DOMAIN      --rrdatas=$NGINX_IP --type=A --ttl=300 --zone=$ZONE_NAME
-gcloud dns record-sets create prometheus.$DOMAIN   --rrdatas=$NGINX_IP --type=A --ttl=300 --zone=$ZONE_NAME
-gcloud dns record-sets create grafana.$DOMAIN      --rrdatas=$NGINX_IP --type=A --ttl=300 --zone=$ZONE_NAME
-gcloud dns record-sets create alertmanager.$DOMAIN --rrdatas=$NGINX_IP --type=A --ttl=300 --zone=$ZONE_NAME
+gcloud dns record-sets create helloapp.$DOMAIN  \
+--rrdatas=$NGINX_IP \
+--type=A \
+--ttl=300 \
+--zone=$ZONE_NAME
 ```
 
 ## Destroy
