@@ -70,3 +70,17 @@ resource "google_compute_firewall" "nginx_admission" {
   source_ranges = [local.cluster_ip_ranges.master]
   target_tags   = [local.cluster_name]
 }
+
+
+resource "google_compute_firewall" "allow_iap" {
+  name        = "${local.cluster_name}-allow-iap"
+  network     = module.vpc.network_self_link
+  description = "Allow IAP to VMs"
+
+  allow {
+    protocol = "tcp"
+  }
+
+  source_ranges = ["35.235.240.0/20"]
+  target_tags   = [local.cluster_name]
+}
