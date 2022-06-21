@@ -4,4 +4,4 @@ metadata:
   name: managed-cert
 spec:
   domains:
-    - test.sylvio.demo.altostrat.com
+    - test.your-domain.com
