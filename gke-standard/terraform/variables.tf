@@ -5,7 +5,7 @@ variable "project_id" {
 
 locals {
   region   = "us-central1"
-  vpc_name = "gke-vpc"
+  vpc_name = "vpc-gke-std"
 
   cluster_name = "gke-std-sandbox"
   cluster_ip_ranges = {
