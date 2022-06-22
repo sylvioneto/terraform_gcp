@@ -2,10 +2,7 @@
 
 ## Description
 
-This project demonstrates how to create a Private GKE cluster using [Google CFT](https://github.com/GoogleCloudPlatform/cloud-foundation-toolkit/blob/master/docs/terraform.md) modules.
-
-In this example, all nodes have private ips and the cluster's masters are private.
-
+This project demonstrates how to create a GKE Autopilot cluster.
 Resources created:
 - VPC
 - Subnet
@@ -31,7 +28,7 @@ gsutil mb gs://$GOOGLE_CLOUD_PROJECT-tf-state
 gcloud services enable cloudbuild.googleapis.com compute.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com containersecurity.googleapis.com
 ```
 
-5. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor` and `Security Admin` role to the Cloud Build's service account `<PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`.
+5. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor`.
 
 6. Clone this repo into the Cloud Shell VM
 ```
@@ -48,21 +45,7 @@ gcloud builds submit . --config cloudbuild.yaml
 
 9. At this point your cluster and workloads ar up and running, please check it on [GKE](https://console.cloud.google.com/kubernetes/list/overview).
 
-10. (Optional) Add the ingress-nginx IP to your DNS records in order to access the applications.  
-In case you use Cloud DNS, you can set the env vars below according to your settings:
-```
-ZONE_NAME=your-public-zone-name
-NGINX_IP=1.2.3.4
-DOMAIN=your-domain.com.
-```
-And run the command below on Cloud Shell terminal.
-```
-gcloud dns record-sets create helloapp.$DOMAIN  \
---rrdatas=$NGINX_IP \
---type=A \
---ttl=300 \
---zone=$ZONE_NAME
-```
+10. (Optional) In other to have the tls certificate, add the Ingresses IPs to your DNS records, so that GKE will provision the certificate. ([reference](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs))
 
 ## Destroy
 1. Execute Terraform using Cloud Build
