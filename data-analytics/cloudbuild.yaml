@@ -27,4 +27,4 @@ tags:
   - terraform
   - data-analytics
 
-timeout: 1200s
+timeout: 3600s
