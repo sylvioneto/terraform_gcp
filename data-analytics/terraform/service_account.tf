@@ -23,6 +23,6 @@ resource "google_project_iam_member" "bq_editor" {
 
 resource "google_project_iam_member" "bq_job_user" {
   project = var.project_id
-  role    = "roles/bigquery.jobRun"
+  role    = "roles/bigquery.jobUser"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
