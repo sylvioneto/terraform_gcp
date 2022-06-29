@@ -15,14 +15,14 @@ resource "google_project_iam_member" "monitoring_writer" {
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
-resource "google_project_iam_member" "bq_editor" {
+resource "google_project_iam_member" "bq_admin" {
   project = var.project_id
-  role    = "roles/bigquery.dataEditor"
+  role    = "roles/bigquery.admin"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
-resource "google_project_iam_member" "bq_job_user" {
+resource "google_project_iam_member" "dataproc_admin" {
   project = var.project_id
-  role    = "roles/bigquery.jobUser"
+  role    = "roles/dataproc.admin"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
