@@ -30,7 +30,7 @@ resource "google_project_organization_policy" "vm_Can_Ip_Forward" {
   constraint = "compute.vmCanIpForward"
 
   boolean_policy {
-    allow_all = true
+    enforced = false
   }
 }
 
@@ -39,7 +39,7 @@ resource "google_project_organization_policy" "external_ip" {
   constraint = "compute.vmExternalIpAccess"
 
   boolean_policy {
-    allow_all = true
+    enforced = false
   }
 }
 
@@ -48,6 +48,6 @@ resource "google_project_organization_policy" "vpc_peering" {
   constraint = "compute.restrictVpcPeering"
 
   boolean_policy {
-    allow_all = true
+    enforced = false
   }
 }
