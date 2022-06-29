@@ -26,3 +26,9 @@ resource "google_project_iam_member" "dataproc_admin" {
   role    = "roles/dataproc.admin"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
+
+resource "google_project_iam_member" "storage_admin" {
+  project = var.project_id
+  role    = "roles/storage.admin"
+  member  = "serviceAccount:${google_service_account.service_account.email}"
+}
