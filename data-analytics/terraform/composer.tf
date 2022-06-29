@@ -9,6 +9,7 @@ module "composer" {
   subnetwork              = local.composer_env_name
   enable_private_endpoint = true
   labels                  = local.resource_labels
+  image_version = "composer-2-airflow-2"
 
   depends_on = [
     module.vpc
