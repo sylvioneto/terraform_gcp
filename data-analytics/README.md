@@ -35,7 +35,7 @@ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com cloudres
 
 7. Execute Terraform using Cloud Build
 ```
-cd ./terraform_gcp/cloud-armor
+cd ./terraform_gcp/composer
 gcloud builds submit ./terraform --config cloudbuild.yaml
 ```
 
@@ -45,6 +45,6 @@ You can use tools such as [dirsearch](https://github.com/maurosoria/dirsearch) t
 ## Destroy
 1. Execute Terraform using Cloud Build
 ```
-cd ./terraform_gcp/cloud-armor
+cd ./terraform_gcp/composer
 gcloud builds submit ./terraform --config cloudbuild_destroy.yaml
 ```
