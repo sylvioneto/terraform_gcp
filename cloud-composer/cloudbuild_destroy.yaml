@@ -7,17 +7,12 @@ steps:
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=terraform_gcp/data-analytics"
-      
-- id: 'tf plan'
-  name: 'hashicorp/terraform:1.0.0'
-  args: 
-  - plan
+    -backend-config="prefix=terraform_gcp/cloud-composer"
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
-  - apply
+  - destroy
   - -auto-approve
 
 options:
@@ -25,6 +20,6 @@ options:
     - TF_VAR_project_id=$PROJECT_ID
 tags:
   - terraform
-  - data-analytics
+  - cloud-armor
 
-timeout: 3600s
+timeout: 1200s

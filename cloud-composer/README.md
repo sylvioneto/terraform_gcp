@@ -32,7 +32,7 @@ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com cloudres
 6. Clone this repo
 ```
 git clone https://github.com/sylvioneto/terraform_gcp.git
-cd ./terraform_gcp/composer
+cd ./terraform_gcp/cloud-composer
 ```
 
 7. Execute Terraform using Cloud Build

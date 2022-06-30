@@ -4,7 +4,7 @@ locals {
   composer_env_name = "composer-af2"
   resource_labels = {
     terraform = "true"
-    app       = "data-analytics"
+    app       = "cloud-composer"
     purpose   = "demo"
     env       = "sandbox"
     repo      = "terraform_gcp"
