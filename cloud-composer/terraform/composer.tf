@@ -10,7 +10,7 @@ module "composer" {
 
   network                          = module.vpc.network_name
   subnetwork                       = local.composer_env_name
-  master_ipv4_cidr                 = "10.0.7.0/28"
+  master_ipv4_cidr                 = local.ip_ranges.master
   service_ip_allocation_range_name = "services"
   pod_ip_allocation_range_name     = "pods"
   enable_private_endpoint          = true
