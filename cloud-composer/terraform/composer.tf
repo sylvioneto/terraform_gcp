@@ -4,13 +4,14 @@ module "composer" {
 
   project_id               = var.project_id
   composer_env_name        = local.composer_env_name
+  composer_service_account = google_service_account.service_account.email
   region                   = var.region
+  image_version            = "composer-2-airflow-2"
+
   network                  = module.vpc.network_name
   subnetwork               = local.composer_env_name
   enable_private_endpoint  = true
   labels                   = local.resource_labels
-  image_version            = "composer-2-airflow-2"
-  composer_service_account = google_service_account.service_account.email
 
   depends_on = [
     module.vpc

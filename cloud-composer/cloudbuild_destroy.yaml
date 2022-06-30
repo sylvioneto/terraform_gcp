@@ -18,8 +18,10 @@ steps:
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
+
 tags:
   - terraform
-  - cloud-armor
+  - cloud-composer
+  - destroy
 
-timeout: 1200s
+timeout: 3600s

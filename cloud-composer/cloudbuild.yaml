@@ -26,5 +26,6 @@ options:
 tags:
   - terraform
   - cloud-composer
+  - plan-apply
 
 timeout: 3600s
