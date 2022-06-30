@@ -1,16 +1,29 @@
-module "sql-db" {
-  source     = "GoogleCloudPlatform/sql-db/google//modules/mssql"
-  version    = "11.0.0"
-  project_id = var.project_id
+resource "random_id" "db_name_suffix" {
+  byte_length = 2
+}
 
-  # instance settings
-  name   = "mssql-instance-01"
-  region = var.region
-  zone   = "${var.region}-b"
+resource "random_password" "db_initial_password" {
+  length = 12
+}
 
-  # db settings
-  db_name   = "my-database"
-  user_name = "user1"
+resource "google_sql_database_instance" "instance" {
+  provider = google-beta
 
-  deletion_protection = false # not recommended for PROD
+  name                = "private-mssql-${random_id.db_name_suffix.hex}"
+  region              = var.region
+  database_version    = "SQLSERVER_2019_STANDARD"
+  root_password       = random_password.db_initial_password.result # printed in the output
+  deletion_protection = false                                      # not recommended for PROD
+
+  settings {
+    tier        = "db-custom-2-3840"
+    user_labels = local.resource_labels
+
+    ip_configuration {
+      ipv4_enabled    = false
+      private_network = module.vpc.network_self_link
+    }
+  }
+
+  depends_on = [module.vpc]
 }
