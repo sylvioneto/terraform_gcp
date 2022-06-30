@@ -1,5 +1,3 @@
-data "google_project" "project" {}
-
 locals {
   composer_env_name = "composer-af2"
   resource_labels = {

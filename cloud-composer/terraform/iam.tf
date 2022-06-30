@@ -3,7 +3,15 @@ resource "google_service_account" "service_account" {
   display_name = "Service Account for instances of ${local.composer_env_name}"
 }
 
-# required permissions for env provisioning
+# Required permissions for env provisioning
+# Ref: https://cloud.google.com/composer/docs/troubleshooting-environment-creation
+
+resource "google_project_iam_member" "composer_v2_extension" {
+  project = var.project_id
+  role    = "roles/composer.ServiceAgentV2Ext"
+  member  = "serviceAccount:service-${data.google_project.project.project_number}@cloudcomposer-accounts.iam.gserviceaccount.com"
+}
+
 resource "google_project_iam_member" "composer_worker" {
   project = var.project_id
   role    = "roles/composer.worker"
