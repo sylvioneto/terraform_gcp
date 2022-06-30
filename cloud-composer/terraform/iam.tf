@@ -9,7 +9,7 @@ resource "google_service_account" "service_account" {
 resource "google_project_iam_member" "composer_v2_extension" {
   project = var.project_id
   role    = "roles/composer.ServiceAgentV2Ext"
-  member  = "serviceAccount:service-${data.google_project.project.project_number}@cloudcomposer-accounts.iam.gserviceaccount.com"
+  member  = "serviceAccount:service-${data.google_project.project.number}@cloudcomposer-accounts.iam.gserviceaccount.com"
 }
 
 resource "google_project_iam_member" "composer_worker" {
@@ -24,20 +24,7 @@ resource "google_project_iam_member" "composer_sa_user" {
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
-resource "google_project_iam_member" "log_writer" {
-  project = var.project_id
-  role    = "roles/logging.logWriter"
-  member  = "serviceAccount:${google_service_account.service_account.email}"
-}
-
-resource "google_project_iam_member" "monitoring_writer" {
-  project = var.project_id
-  role    = "roles/monitoring.metricWriter"
-  member  = "serviceAccount:${google_service_account.service_account.email}"
-}
-
-# required for managing data
-
+# Required for managing data
 resource "google_project_iam_member" "bq_admin" {
   project = var.project_id
   role    = "roles/bigquery.admin"
