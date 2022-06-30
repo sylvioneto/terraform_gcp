@@ -16,6 +16,10 @@ module "composer" {
   enable_private_endpoint          = true
   labels                           = local.resource_labels
 
+  pypi_packages = {
+    "apache-airflow-providers-microsoft-mssql": ">=3.0.0"
+  }
+
   depends_on = [
     module.vpc
   ]
