@@ -33,6 +33,6 @@ with models.DAG(
         mssql_conn_id='airflow_mssql',
         sql=r"""SELECT * FROM Country;""",
         bucket='mssql-data',
-        filename='data/country/export.csv',
+        filename='data/country/export',
         export_format='csv',
     )
