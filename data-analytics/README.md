@@ -12,30 +12,31 @@ Resources created:
 ## Deploy
 
 1. Create a new project and select it
-2. Open Cloud Shell and clone this repo into the Cloud Shell VM
-```
-git clone https://github.com/sylvioneto/terraform_gcp.git
-```
-3. Ensure the var is set, otherwise set it with `gcloud config set project` command
+2. Open Cloud Shell and ensure the env var below is set, otherwise set it with `gcloud config set project` command
 ```
 echo $GOOGLE_CLOUD_PROJECT
 ```
 
-4. Create a bucket to store your project's Terraform state
+3. Create a bucket to store your project's Terraform state
 ```
 gsutil mb gs://$GOOGLE_CLOUD_PROJECT-tf-state
 ```
 
-5. Enable the necessary APIs
+4. Enable the necessary APIs
 ```
 gcloud services enable cloudbuild.googleapis.com compute.googleapis.com cloudresourcemanager.googleapis.com logging.googleapis.com monitoring.googleapis.com iam.googleapis.com 
 ```
 
-6. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor` and `Security Admin` role to the Cloud Build's service account `<PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`.
+5. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor`, `Network Admin` and `Security Admin` role to the Cloud Build's service account `<PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`.
+
+6. Clone this repo
+```
+git clone https://github.com/sylvioneto/terraform_gcp.git
+cd ./terraform_gcp/composer
+```
 
 7. Execute Terraform using Cloud Build
 ```
-cd ./terraform_gcp/composer
 gcloud builds submit ./terraform --config cloudbuild.yaml
 ```
 
