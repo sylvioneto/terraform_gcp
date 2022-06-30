@@ -1,6 +1,7 @@
 module "sql-db" {
-  source  = "GoogleCloudPlatform/sql-db/google//modules/mssql"
-  version = "11.0.0"
+  source     = "GoogleCloudPlatform/sql-db/google//modules/mssql"
+  version    = "11.0.0"
+  project_id = var.project_id
 
   # instance settings
   name   = "mssql-instance-01"
