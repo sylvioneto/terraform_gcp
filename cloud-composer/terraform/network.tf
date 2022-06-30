@@ -8,11 +8,24 @@ module "vpc" {
   subnets = [
     {
       subnet_name           = local.composer_env_name
-      subnet_ip             = "10.0.0.0/24"
+      subnet_ip             = "10.0.6.0/24"
       subnet_region         = var.region
       subnet_private_access = true
     },
   ]
+
+  secondary_ranges = {
+    "${local.composer_env_name}" = [
+      {
+        range_name    = "pods"
+        ip_cidr_range = "10.0.0.0/22"
+      },
+      {
+        range_name    = "services"
+        ip_cidr_range = "10.0.4.0/24"
+      },
+    ]
+  }
 }
 
 resource "google_compute_firewall" "allow_ssh" {
@@ -47,3 +60,4 @@ resource "google_service_networking_connection" "private_service_connection" {
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
 }
+

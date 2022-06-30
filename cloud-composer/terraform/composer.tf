@@ -8,10 +8,13 @@ module "composer" {
   region                   = var.region
   image_version            = "composer-2-airflow-2"
 
-  network                  = module.vpc.network_name
-  subnetwork               = local.composer_env_name
-  enable_private_endpoint  = true
-  labels                   = local.resource_labels
+  network                          = module.vpc.network_name
+  subnetwork                       = local.composer_env_name
+  master_ipv4_cidr                 = "10.0.7.0/28"
+  service_ip_allocation_range_name = "services"
+  pod_ip_allocation_range_name     = "pods"
+  enable_private_endpoint          = true
+  labels                           = local.resource_labels
 
   depends_on = [
     module.vpc
