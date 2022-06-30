@@ -8,7 +8,7 @@ module "sql-db" {
 
   # db settings
   db_name   = "my-database"
-  user_name = "composer"
+  user_name = "user1"
 
   deletion_protection = false # not recommended for PROD
 }
