@@ -6,6 +6,7 @@ module "sql-db" {
   # instance settings
   name   = "mssql-instance-01"
   region = var.region
+  zone   = "${var.region}-b"
 
   # db settings
   db_name   = "my-database"
