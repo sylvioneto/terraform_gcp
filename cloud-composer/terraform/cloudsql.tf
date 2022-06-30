@@ -12,7 +12,7 @@ resource "google_sql_database_instance" "instance" {
   name                = "private-mssql-${random_id.db_name_suffix.hex}"
   region              = var.region
   database_version    = "SQLSERVER_2019_STANDARD"
-  root_password       = random_password.db_initial_password.result # printed in the output
+  root_password       = random_password.db_initial_password.result # reset it after creation
   deletion_protection = false                                      # not recommended for PROD
 
   settings {
