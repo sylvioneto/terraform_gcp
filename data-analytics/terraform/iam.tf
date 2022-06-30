@@ -10,7 +10,7 @@ resource "google_project_iam_member" "composer_worker" {
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
-resource "google_project_iam_member" "composer_worker" {
+resource "google_project_iam_member" "composer_sa_user" {
   project = var.project_id
   role    = "roles/iam.serviceAccountUser"
   member  = "serviceAccount:${google_service_account.service_account.email}"
