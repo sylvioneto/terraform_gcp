@@ -18,6 +18,7 @@ module "composer" {
 
   pypi_packages = {
     "apache-airflow-providers-microsoft-mssql": ">=3.0.0"
+    "apache-airflow-providers-google": "==8.1.0"
   }
 
   depends_on = [
