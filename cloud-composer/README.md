@@ -48,8 +48,8 @@ cd ./terraform_gcp/cloud-composer
 gcloud builds submit ./terraform --config cloudbuild.yaml
 ```
 
-## Testing
-You can use tools such as [dirsearch](https://github.com/maurosoria/dirsearch) to test your setup.
+8. Upload the dags to the Composer DAG folder.
+
 
 ## Destroy
 1. Execute Terraform using Cloud Build
