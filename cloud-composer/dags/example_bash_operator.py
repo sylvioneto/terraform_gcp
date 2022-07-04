@@ -24,7 +24,7 @@ import pendulum
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.empty import EmptyOperator
+from airflow.operators.dummy import DummyOperator
 
 with DAG(
     dag_id='example_bash_operator',
@@ -35,7 +35,7 @@ with DAG(
     tags=['example', 'example2'],
     params={"example_key": "example_value"},
 ) as dag:
-    run_this_last = EmptyOperator(
+    run_this_last = DummyOperator(
         task_id='run_this_last',
     )
 
