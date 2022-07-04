@@ -16,7 +16,7 @@ resource "google_sql_database_instance" "instance" {
   deletion_protection = false                                      # not recommended for PROD
 
   settings {
-    tier        = "db-n1-standard-1"
+    tier        = "db-custom-1-3840"
     user_labels = local.resource_labels
 
     ip_configuration {
