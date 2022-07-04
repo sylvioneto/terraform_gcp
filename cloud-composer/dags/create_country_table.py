@@ -58,6 +58,18 @@ with DAG(
         params={"column": "CONVERT(VARCHAR, continent)", "value": "Asia"},
     )
 
+    drop_table_mssql_task = MsSqlOperator(
+        task_id='drop_table_mssql_task',
+        mssql_conn_id='airflow_mssql',
+        sql=r"""
+        DROP TABLE Country;
+        """,
+        dag=dag,
+    )
+
+
     create_table_mssql_task >> populate_country_table
-    populate_country_table >> get_all_countries
-    populate_country_table >> get_countries_from_continent
+    
+    populate_country_table >> get_all_countries >> drop_table_mssql_task
+    populate_country_table >> get_countries_from_continent >> drop_table_mssql_task
+
