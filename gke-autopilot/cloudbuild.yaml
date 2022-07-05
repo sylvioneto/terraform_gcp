@@ -54,7 +54,6 @@ options:
 
 tags:
   - terraform
-  - helm
   - gke-autopilot
 
 timeout: 1200s
