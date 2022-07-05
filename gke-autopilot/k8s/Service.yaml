@@ -7,7 +7,7 @@ spec:
     app.kubernetes.io/name: hello-app
   type: NodePort
   ports:
-  - name: name-of-service-port
+  - name: http
     protocol: TCP
     port: 80
     targetPort: http

@@ -49,7 +49,7 @@ gcloud builds submit . --config cloudbuild.yaml
 
 9. At this point your cluster and workloads ar up and running, please check it on [GKE](https://console.cloud.google.com/kubernetes/list/overview).
 
-10. (Optional) In other to have the tls certificate, add the Ingresses IPs to your DNS records, so that GKE will provision the certificate. ([reference](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs))
+10. (Optional) In other to issue the managed certificate, add the Ingresses IPs to your DNS records, so that GKE will provision the certificate. ([reference](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs)).
 
 ## Destroy
 1. Execute Terraform using Cloud Build
