@@ -40,9 +40,19 @@ steps:
   env:
     - SKIP_CLUSTER_CONFIG=true
 
-- id: create-k8s objects
+- id: k8s create namespace
   name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', '.']
+  args: ['apply', '-f', 'namespaces.yaml']
+  dir: k8s
+
+- id: k8s deploy hello-app-example
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'hello-app-example.yaml', '-n', 'hello-app-example']
+  dir: k8s
+
+- id: k8s deploy hpa-example
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'hpa-example.yaml', '-n', 'hpa-example']
   dir: k8s
 
 
