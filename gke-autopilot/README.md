@@ -25,7 +25,11 @@ gsutil mb gs://$GOOGLE_CLOUD_PROJECT-tf-state
 
 4. Enable the necessary APIs
 ```
-gcloud services enable cloudbuild.googleapis.com compute.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com containersecurity.googleapis.com
+gcloud services enable cloudbuild.googleapis.com \
+compute.googleapis.com \
+container.googleapis.com \
+cloudresourcemanager.googleapis.com \
+containersecurity.googleapis.com
 ```
 
 5. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor`.
@@ -33,7 +37,7 @@ gcloud services enable cloudbuild.googleapis.com compute.googleapis.com containe
 6. Clone this repo into the Cloud Shell VM
 ```
 git clone https://github.com/sylvioneto/terraform_gcp.git
-cd ./terraform_gcp/gke
+cd ./terraform_gcp/gke-autopilot
 ```
 
 7. Find and replace `your-domain.com` by your own domain.
