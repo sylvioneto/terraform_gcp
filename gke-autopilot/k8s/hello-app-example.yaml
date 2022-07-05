@@ -16,7 +16,7 @@ spec:
       - name: hello-app
         image: us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         resources:
           limits:
             cpu: 500m
@@ -34,7 +34,7 @@ spec:
   - name: http
     protocol: TCP
     port: 80
-    targetPort: http
+    targetPort: 8080
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
