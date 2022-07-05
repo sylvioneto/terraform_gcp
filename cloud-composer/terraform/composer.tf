@@ -7,6 +7,7 @@ module "composer" {
   composer_service_account = google_service_account.service_account.email
   region                   = var.region
   image_version            = "composer-2.0.18-airflow-2.2.5"
+  environment_size         = "ENVIRONMENT_SIZE_SMALL"
 
   network                          = module.vpc.network_name
   subnetwork                       = local.composer_env_name
@@ -17,8 +18,8 @@ module "composer" {
   labels                           = local.resource_labels
 
   pypi_packages = {
-    "apache-airflow-providers-microsoft-mssql": ">=3.0.0"
-    "apache-airflow-providers-google": "==8.1.0"
+    "apache-airflow-providers-microsoft-mssql" : ">=3.0.0"
+    "apache-airflow-providers-google" : "==8.1.0"
   }
 
   depends_on = [
