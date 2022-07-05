@@ -34,7 +34,7 @@ with models.DAG(
 ) as dag:
     upload = MSSQLToGCSOperator(
         task_id='mssql_to_gcs',
-        mssql_conn_id='airflow_mssql',
+        mssql_conn_id='airflow_mssql_adventure',
         sql=r"""SELECT country_id, country, continent FROM Country;""",
         bucket=BUCKET,
         filename=FILENAME,

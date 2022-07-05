@@ -12,6 +12,12 @@ module "vpc" {
       subnet_region         = var.region
       subnet_private_access = true
     },
+    {
+      subnet_name           = "gce-databases"
+      subnet_ip             = local.ip_ranges.gce_databases
+      subnet_region         = var.region
+      subnet_private_access = true
+    },
   ]
 
   secondary_ranges = {
@@ -28,13 +34,13 @@ module "vpc" {
   }
 }
 
-resource "google_compute_firewall" "allow_ssh" {
-  name    = "${module.vpc.network_name}-allow-ssh-from-iap"
+resource "google_compute_firewall" "allow_rdp_ssh" {
+  name    = "${module.vpc.network_name}-allow-rdp-ssh-from-iap"
   network = module.vpc.network_self_link
 
   allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = ["22", "3389"]
   }
 
   source_ranges = [
@@ -42,7 +48,8 @@ resource "google_compute_firewall" "allow_ssh" {
   ]
 
   target_tags = [
-    "allow-ssh"
+    "allow-ssh", 
+    "allow-rdp"
   ]
 }
 

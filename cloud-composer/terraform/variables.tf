@@ -18,6 +18,8 @@ locals {
     services = "10.0.4.0/24"
     nodes    = "10.0.6.0/24"
     master   = "10.0.7.0/28"
+
+    gce_databases = "10.0.8.0/24"
   }
 }
 
