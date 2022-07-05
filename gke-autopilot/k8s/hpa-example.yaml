@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: php-apache
+  name: hpa-example
 spec:
   selector:
     matchLabels:
-      run: php-apache
+      app.kubernetes.io/name: hpa-example
   replicas: 1
   template:
     metadata:
       labels:
-        run: php-apache
+        app.kubernetes.io/name: hpa-example
     spec:
       containers:
-      - name: php-apache
+      - name: hpa-example
         image: k8s.gcr.io/hpa-example
         ports:
         - containerPort: 80
@@ -27,27 +27,27 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: php-apache
+  name: hpa-example
   labels:
-    run: php-apache
+    app.kubernetes.io/name: hpa-example
 spec:
+  selector:
+    app.kubernetes.io/name: hpa-example
   ports:
   - port: 80
-  selector:
-    run: php-apache
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: php-apache
+  name: hpa-example
   annotations:
-    # kubernetes.io/ingress.global-static-ip-name: php-apache-ip
+    # kubernetes.io/ingress.global-static-ip-name: hpa-example-ip
     networking.gke.io/managed-certificates: managed-cert
     kubernetes.io/ingress.class: "gce"
 spec:
   defaultBackend:
     service:
-      name: php-apache
+      name: hpa-example
       port:
         number: 80
 ---
@@ -62,12 +62,12 @@ spec:
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: php-apache
+  name: hpa-example
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: php-apache
+    name: hpa-example
   minReplicas: 1
   maxReplicas: 10
   targetCPUUtilizationPercentage: 50
