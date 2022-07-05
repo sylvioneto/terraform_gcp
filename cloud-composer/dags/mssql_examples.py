@@ -6,7 +6,7 @@ from airflow.providers.microsoft.mssql.hooks.mssql import MsSqlHook
 from airflow.providers.microsoft.mssql.operators.mssql import MsSqlOperator
 
 ENV_ID = os.environ.get("SYSTEM_TESTS_ENV_ID")
-DAG_ID = "mssql_create_table"
+DAG_ID = "mssql_examples"
 
 
 with DAG(
