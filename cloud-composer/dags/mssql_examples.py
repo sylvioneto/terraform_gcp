@@ -21,7 +21,7 @@ with DAG(
 
     create_table_mssql_task = MsSqlOperator(
         task_id='create_country_table',
-        mssql_conn_id='airflow_mssql',
+        mssql_conn_id='airflow_mssql_test',
         sql=r"""
         CREATE TABLE Country (
             country_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -34,7 +34,7 @@ with DAG(
 
     populate_country_table = MsSqlOperator(
         task_id='populate_country_table',
-        mssql_conn_id='airflow_mssql',
+        mssql_conn_id='airflow_mssql_test',
         sql=r"""
                 INSERT INTO Country (name, continent)
                 VALUES ('Brazil', 'America');
@@ -47,20 +47,20 @@ with DAG(
 
     get_all_countries = MsSqlOperator(
         task_id="get_all_countries",
-        mssql_conn_id='airflow_mssql',
+        mssql_conn_id='airflow_mssql_test',
         sql=r"""SELECT * FROM Country;""",
     )
 
     get_countries_from_continent = MsSqlOperator(
         task_id="get_countries_from_continent",
-        mssql_conn_id='airflow_mssql',
+        mssql_conn_id='airflow_mssql_test',
         sql=r"""SELECT * FROM Country where {{ params.column }}='{{ params.value }}';""",
         params={"column": "CONVERT(VARCHAR, continent)", "value": "Asia"},
     )
 
     drop_table_mssql_task = MsSqlOperator(
         task_id='drop_table_mssql_task',
-        mssql_conn_id='airflow_mssql',
+        mssql_conn_id='airflow_mssql_test',
         sql=r"""
         DROP TABLE Country;
         """,

@@ -27,3 +27,13 @@ resource "google_sql_database_instance" "instance" {
 
   depends_on = [module.vpc]
 }
+
+resource "google_sql_database" "adventureworks" {
+  name     = "adventureworks"
+  instance = google_sql_database_instance.instance.id
+}
+
+resource "google_sql_database" "test" {
+  name     = "test"
+  instance = google_sql_database_instance.instance.id
+}
