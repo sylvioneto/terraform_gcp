@@ -25,22 +25,7 @@ steps:
   dir: terraform
 
 # Kubernetes
-- id: git-clone
-  name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'https://github.com/GoogleCloudPlatform/cloud-builders-community']
-
-- id: build-helm
-  name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--tag=gcr.io/$PROJECT_ID/helm', '-q', 'helm']
-  dir: cloud-builders-community
-  
-- id: test-helm
-  name: 'gcr.io/$PROJECT_ID/helm:latest'
-  args: ['version', '--client']
-  env:
-    - SKIP_CLUSTER_CONFIG=true
-
-- id: k8s create namespace
+- id: k8s create namespaces
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'namespaces.yaml']
   dir: k8s
