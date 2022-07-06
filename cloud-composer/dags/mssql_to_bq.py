@@ -23,7 +23,7 @@ from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQue
 
 
 BUCKET='mssql-data'
-FILENAME='data/country/export.csv'
+FILENAME='data/mssql/customer.csv'
 
 with models.DAG(
     'mssql_to_bq',
@@ -32,27 +32,28 @@ with models.DAG(
     catchup=False,
     tags=['example'],
 ) as dag:
-    upload = MSSQLToGCSOperator(
+    t1 = MSSQLToGCSOperator(
         task_id='mssql_to_gcs',
         mssql_conn_id='airflow_mssql',
-        sql=r"""SELECT country_id, country, continent FROM Country;""",
+        sql=r"""SELECT CustomerID, StoreID, AccountNumber, ModifiedDate FROM Customer;""",
         bucket=BUCKET,
         filename=FILENAME,
         export_format='csv',
     )
 
-    load_csv = GCSToBigQueryOperator(
+    t2 = GCSToBigQueryOperator(
         task_id='gcs_to_bigquery',
         bucket=BUCKET,
         source_objects=[FILENAME],
         destination_project_dataset_table=f"raw.country",
         schema_fields=[
-            {'name': 'country_id', 'type': 'INTEGER', 'mode': 'NULLABLE'},
-            {'name': 'country', 'type': 'STRING', 'mode': 'NULLABLE'},
-            {'name': 'continent', 'type': 'STRING', 'mode': 'NULLABLE'},
+            {'name': 'CustomerID', 'type': 'INTEGER', 'mode': 'NULLABLE'},
+            {'name': 'StoreID', 'type': 'INTEGER', 'mode': 'NULLABLE'},
+            {'name': 'AccountNumber', 'type': 'STRING', 'mode': 'NULLABLE'},
+            {'name': 'ModifiedDate', 'type': 'DATETIME', 'mode': 'NULLABLE'},
         ],
         skip_leading_rows=1,
         write_disposition='WRITE_TRUNCATE',
     )
 
-    upload >> load_csv
+    t1 >> t2
