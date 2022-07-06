@@ -27,15 +27,3 @@ resource "google_sql_database_instance" "instance" {
 
   depends_on = [module.vpc]
 }
-
-# Use this database to import the sample database AdventureWorks2019
-# https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver15&tabs=ssms
-resource "google_sql_database" "adventureworks" {
-  name     = "adventureworks"
-  instance = google_sql_database_instance.instance.id
-}
-
-resource "google_sql_database" "test" {
-  name     = "test"
-  instance = google_sql_database_instance.instance.id
-}
