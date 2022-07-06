@@ -35,7 +35,7 @@ with models.DAG(
     t1 = MSSQLToGCSOperator(
         task_id='mssql_to_gcs',
         mssql_conn_id='airflow_mssql',
-        sql=r"""SELECT CustomerID, StoreID, AccountNumber, ModifiedDate FROM Customer;""",
+        sql=r"""SELECT CustomerID, StoreID, AccountNumber, ModifiedDate FROM Sales.Customer;""",
         bucket=BUCKET,
         filename=FILENAME,
         export_format='csv',
@@ -45,7 +45,7 @@ with models.DAG(
         task_id='gcs_to_bigquery',
         bucket=BUCKET,
         source_objects=[FILENAME],
-        destination_project_dataset_table=f"raw.country",
+        destination_project_dataset_table=f"adventureworks.customer",
         schema_fields=[
             {'name': 'CustomerID', 'type': 'INTEGER', 'mode': 'NULLABLE'},
             {'name': 'StoreID', 'type': 'INTEGER', 'mode': 'NULLABLE'},
