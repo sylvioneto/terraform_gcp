@@ -5,10 +5,15 @@ Terraform examples for Google Cloud Platform - GCP
 All modules are set to use free tier as much as possible in order to help you to explore GCP without costs.  
 Just in case, always check the free-tier eligibility: https://cloud.google.com/free/docs/gcp-free-tier
 
-## Example
-- [cost-management](./cost-management): Deploy VMs with labels and monitor their costs with BigQuery and Data Studio
+## Examples
+
 - [cloud-armor](./cloud-armor): Protect a HTTP server with Cloud Armor standard applying WAF and rate limit
-- [gke](./gke): Creates a private GKE cluster plus VPC, Subnet, and NAT
-- [stratozone](./stratozone): Creates an environment to play with Stratozone
+- [cloud-composer](./cloud-composer): Use Cloud Composer to extract data from a SQL Server instance and load to BigQuery
+- [cost-management](./cost-management): Deploy VMs with labels, then monitor their costs with BigQuery and Data Studio
+- [dataflow](./dataflow): Use Dataflow to get raw data, process it, and store into Data Lake or Data Warehouse
+- [gke-autopilot](./gke-autopilot): Creates a private GKE Autopilot with google managed certificates for your endpoints
+- [gke-standard](./gke-standard): Creates a private GKE with nginx, Jenkins and Prometheus
+- [shared-vpc](./shared-vpc): Use Shared VPC to centralize network management for you organization
 - [sole-tenant](./sole-tenant): Use sole-tenant VMs to bring you [Microsoft Licenses](https://cloud.google.com/compute/docs/instances/windows/ms-licensing#byol) to GCP
+- [stratozone](./stratozone): Creates an environment to play with Stratozone Assessments
 
