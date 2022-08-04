@@ -14,6 +14,6 @@ Just in case, always check the free-tier eligibility: https://cloud.google.com/f
 - [gke-autopilot](./gke-autopilot): Creates a private GKE Autopilot with google managed certificates for your endpoints
 - [gke-standard](./gke-standard): Creates a private GKE with nginx, Jenkins and Prometheus
 - [shared-vpc](./shared-vpc): Use Shared VPC to centralize network management for you organization
-- [sole-tenant](./sole-tenant): Use sole-tenant VMs to bring you [Microsoft Licenses](https://cloud.google.com/compute/docs/instances/windows/ms-licensing#byol) to GCP
+- [sole-tenant](./sole-tenant): Use sole-tenant to host your Windows VMs with BYOL license mode. [Microsoft Licenses on GCP](https://cloud.google.com/compute/docs/instances/windows/ms-licensing#byol)
 - [stratozone](./stratozone): Creates an environment to play with Stratozone Assessments
 
