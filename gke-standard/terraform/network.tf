@@ -35,6 +35,7 @@ module "vpc" {
 resource "google_compute_router" "nat_router" {
   name    = "${module.vpc.network_name}-nat-router"
   network = module.vpc.network_self_link
+  region  = var.region
 
   bgp {
     asn = 64514
