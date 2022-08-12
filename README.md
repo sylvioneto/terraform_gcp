@@ -7,7 +7,7 @@ Just in case, always check the free-tier eligibility: https://cloud.google.com/f
 
 ## Examples
 
-- [cloud-armor](./cloud-armor): Protect a HTTP server with Cloud Armor standard applying WAF and rate limit
+- [cloud-armor](./cloud-armor): Protect a HTTP server with Cloud Armor standard by applying WAF rules and rate limit
 - [cloud-composer](./cloud-composer): Use Cloud Composer to extract data from a SQL Server instance and load to BigQuery
 - [cloud-foundation](./cloud-foundation): Use this example to build a foundation for your GCP project with network, NAT, and security, before deploying your workloads.
 - [cost-management](./cost-management): Deploy VMs with labels, then monitor their costs with BigQuery and Data Studio
