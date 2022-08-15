@@ -36,7 +36,8 @@ containersecurity.googleapis.com \
 datamigration.googleapis.com \
 servicenetworking.googleapis.com \
 artifactregistry.googleapis.com \
-sqladmin.googleapis.com
+sqladmin.googleapis.com \
+vpcaccess.googleapis.com
 ```
 
 5. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor`, `Compute Networking Admin`, and `Security Admin` role to the Cloud Build's service account `<PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`.

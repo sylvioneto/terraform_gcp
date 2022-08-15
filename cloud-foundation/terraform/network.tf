@@ -107,3 +107,9 @@ resource "google_service_networking_connection" "private_service_connection" {
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
 }
+
+resource "google_vpc_access_connector" "connector" {
+  name          = "${module.vpc.network_name}-connector"
+  ip_cidr_range = var.vpc_connector_cidr
+  network       = module.vpc.network_self_link
+}

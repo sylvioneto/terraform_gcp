@@ -45,3 +45,8 @@ variable "service_networking" {
   type = string
   description = "Service Networking range, prefix 16"
 }
+
+variable "vpc_connector_cidr" {
+  type = string
+  description = "VPC Connector"
+}
