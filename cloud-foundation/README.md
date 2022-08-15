@@ -2,13 +2,13 @@
 
 ## Description
 
-This project demonstrates how to create a cloud foundation to quick-start your projects with most common resources on GCP.
+This project demonstrates how to create a foundation for your GCP project so that you can start building your systems following the best practices.
 
 Resources created:
 - VPC
-- Subnet
-- NAT
 - Firewall rules
+- Subnets
+- NAT
 - Docker repository
 
 
@@ -51,6 +51,8 @@ cd ./terraform_gcp/cloud-foundation
 ```
 gcloud builds submit ./terraform --config cloudbuild.yaml
 ```
+
+8. (Optional) Customize [terraform.tfvars](./terraform/terraform.tfvars) according to your needs.
 
 ## Destroy
 1. Execute Terraform using Cloud Build

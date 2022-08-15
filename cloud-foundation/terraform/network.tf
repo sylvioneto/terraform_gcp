@@ -7,8 +7,14 @@ module "vpc" {
 
   subnets = [
     {
-      subnet_name           = "subnet-${var.region}"
-      subnet_ip             = var.subnet_cidr
+      subnet_name           = "front-end-${var.region}"
+      subnet_ip             = var.front_end_cidr
+      subnet_region         = var.region
+      subnet_private_access = true
+    },
+    {
+      subnet_name           = "back-end-${var.region}"
+      subnet_ip             = var.back_end_cidr
       subnet_region         = var.region
       subnet_private_access = true
     },
@@ -51,6 +57,24 @@ resource "google_compute_firewall" "allow_rdp" {
   ]
 }
 
+resource "google_compute_firewall" "allow_front_to_back" {
+  name    = "${module.vpc.network_name}-allow-front-to-back"
+  network = module.vpc.network_self_link
+
+  allow {
+    protocol = "tcp"
+    ports    = ["8080", "80", "433"]
+  }
+
+  source_tags = [
+    "front-end"
+  ]
+
+  target_tags = [
+    "back-end"
+  ]
+}
+
 resource "google_compute_firewall" "allow_hc" {
   name    = "${module.vpc.network_name}-allow-health-checks"
   network = module.vpc.network_self_link
@@ -58,7 +82,7 @@ resource "google_compute_firewall" "allow_hc" {
   allow {
     protocol = "tcp"
   }
-  
+
   source_ranges = [
     "130.211.0.0/22",
     "35.191.0.0/16"

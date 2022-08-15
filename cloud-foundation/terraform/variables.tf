@@ -31,9 +31,14 @@ variable "network_name" {
   description = "VPC name"
 }
 
-variable "subnet_cidr" {
+variable "front_end_cidr" {
   type = string
-  description = "Default subnet CIDR"
+  description = "Front-end subnet CIDR"
+}
+
+variable "back_end_cidr" {
+  type = string
+  description = "Back-end subnet CIDR"
 }
 
 variable "service_networking" {
