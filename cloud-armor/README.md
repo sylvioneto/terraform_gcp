@@ -2,14 +2,17 @@
 
 ## Description
 
-This example demonstrates how to use Clour Armor to protect a web server.
+This example demonstrates how to protect application running on GCE with Clour Armor.
+
+![diagram.png](diagram.png)
+
+It deployes the [Juice Shop](https://owasp-juice.shop) web app, an unsecure application, onto a GCE, then creates a Load Balacing, and finally adds Cloud Armor security policies. 
 
 Resources created:
 - VPC with firewall rules
 - Managed Instance Group
 - Cloud Armor with WAF rules and Rate limit
 
-It deployes the [Juice Shop](https://owasp-juice.shop) web app, an unsecure application, so you can test GCP's security features.
 
 ## Deploy
 
