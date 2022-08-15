@@ -12,3 +12,5 @@ tests
 *.tfplan
 *.tfstate
 *.backup
+
+*.DS_store
