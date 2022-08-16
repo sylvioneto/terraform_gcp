@@ -18,9 +18,10 @@ module "composer" {
   enable_private_endpoint          = true
 
   env_variables = {
-    GCS_DATA_LAKE_BUCKET    = google_storage_bucket.data_lake.name
-    GCS_SQL_BACKUP_BUCKET   = google_storage_bucket.sql_backup.name
-    DVDRENTAL_INSTANCE_NAME = google_sql_database_instance.instance.name
+    GCS_DATA_LAKE_BUCKET      = google_storage_bucket.data_lake.name
+    GCS_SQL_BACKUP_BUCKET     = google_storage_bucket.sql_backup.name
+    DVDRENTAL_INSTANCE_NAME   = google_sql_database_instance.instance.name
+    AIRFLOW_CONN_DVDRENTAL_DB = local.airflow_conn_dvdrental
   }
 
   # Pre-installed packages https://cloud.google.com/composer/docs/concepts/versioning/composer-versions

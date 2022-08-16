@@ -3,14 +3,14 @@
 ## Description
 
 This example demonstrates how to use Cloud Composer to:
-- Extract data from Postgres and load to BigQuery
+- Extract data from Postgres and to Cloud Storage
 - Load data from Cloud Storage to BigQuery
 - Transform data on BigQuery
 
 Resources created:
 - VPC with firewall rules
-- Cloud SQL for Postgres
 - Cloud Composer
+- Cloud SQL for Postgres
 - Cloud Storage Buckets
 
 Check more operators available in [Airflow Google Operators doc](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/index.html).

@@ -1,12 +1,13 @@
 resource "random_id" "db_name_suffix" {
-  byte_length = 4
+  byte_length = 2
 }
 
 resource "google_sql_database_instance" "instance" {
   name                = "private-postgres-${random_id.db_name_suffix.hex}"
   region              = var.region
   database_version    = "POSTGRES_14"
-  deletion_protection = false # not recommended for PROD
+  deletion_protection = false             # not recommended for PROD
+  root_password       = var.root_password # not recommended for PROD
 
   settings {
     tier        = "db-g1-small"
@@ -16,6 +17,12 @@ resource "google_sql_database_instance" "instance" {
       ipv4_enabled    = false
       private_network = module.vpc.network_self_link
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      root_password
+    ]
   }
 
   depends_on = [module.vpc]

@@ -15,7 +15,7 @@ from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToG
 
 GCS_DATA_LAKE_BUCKET=os.environ.get("GCS_DATA_LAKE_BUCKET")
 SQL_QUERY = "select * from {};"
-CONN_ID="postgres_dvdrental"
+CONN_ID="DVDRENTAL_DB"
 FILE_PREFIX="dvdrental/{{ ds }}/"
 
 
