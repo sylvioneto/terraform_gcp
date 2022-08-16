@@ -2,7 +2,10 @@
 
 """
 Example DAG using PostgresToGoogleCloudStorageOperator.
-This dag exports some tables from a Postgres instance to Google Cloud Storage
+This dag exports tables from a Postgres instance to Google Cloud Storage
+
+Requirement: create a postgres_dvdrental connection on Airflow.
+It must to connect to the Postgres database created by terraform.
 """
 import os
 from datetime import datetime
@@ -10,11 +13,11 @@ from datetime import datetime
 from airflow import models
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
 
-#GCS_BUCKET = os.environ.get("GCP_GCS_BUCKET_NAME", "INVALID BUCKET NAME")
-GCS_BUCKET="syl-data-analytics-sql-backup"
+PROJECT_ID = os.environ.get("PROJECT_ID")
+GCS_BUCKET="{}-data-lake".format(PROJECT_ID)
 SQL_QUERY = "select * from {};"
 CONN_ID="postgres_dvdrental"
-FILE_NAME="{{ ds }}/{0}.json"
+FILE_NAME="dvdrental/{{ ds }}/{0}.json"
 
 with models.DAG(
     dag_id='example_postgres_to_gcs',

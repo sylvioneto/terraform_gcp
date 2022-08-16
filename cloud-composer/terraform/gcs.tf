@@ -6,3 +6,12 @@ resource "google_storage_bucket" "sql_backup" {
     prevent_destroy = false
   }
 }
+
+resource "google_storage_bucket" "data_lake" {
+  name                        = "${var.project_id}-data-lake"
+  location                    = var.region
+  uniform_bucket_level_access = true
+  lifecycle {
+    prevent_destroy = false
+  }
+}
