@@ -53,7 +53,7 @@ steps:
     export DATABASE_INSTANCE=$(gcloud sql instances list --format='value(name)' --filter='labels.app:cloud-composer')
     export SERVICE_ACCOUNT=$(gcloud sql instances describe private-postgres-1cdaf4a0 --format='value(serviceAccountEmailAddress)')
     gsutil iam ch serviceAccount:$$SERVICE_ACCOUNT:objectAdmin gs://$PROJECT_ID-sql-backup
-    gcloud sql import sql $$DATABASE_INSTANCE gs://$PROJECT_ID-sql-backup/postgres_dvdrental.sql --database=dvdrental --quiet
+    gcloud sql import sql $$DATABASE_INSTANCE gs://$PROJECT_ID-sql-backup/postgres_dvdrental.sql --database=dvdrental --quiet --async
 
 options:
   env:
