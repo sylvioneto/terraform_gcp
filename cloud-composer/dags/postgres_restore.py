@@ -16,6 +16,7 @@ INSTANCE_NAME=os.environ.get("DVDRENTAL_INSTANCE_NAME")
 with models.DAG(
     dag_id='postgres_restore',
     start_date=datetime(2022, 1, 1),
+    schedule_interval="@once",
     catchup=False,
     tags=['example'],
 ) as dag:
