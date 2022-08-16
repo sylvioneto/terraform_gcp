@@ -10,7 +10,7 @@ resource "google_sql_database_instance" "instance" {
 
   settings {
     tier        = "db-g1-small"
-    user_labels = local.resource_labels
+    user_labels = var.resource_labels
 
     ip_configuration {
       ipv4_enabled    = false

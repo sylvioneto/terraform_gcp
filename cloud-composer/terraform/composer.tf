@@ -4,15 +4,15 @@ module "composer" {
 
   project_id               = var.project_id
   region                   = var.region
-  composer_env_name        = local.composer_env_name
+  composer_env_name        = var.composer_env_name
   composer_service_account = google_service_account.service_account.email
   image_version            = "composer-2.0.1-airflow-2.1.4"
   environment_size         = "ENVIRONMENT_SIZE_SMALL"
-  labels                   = local.resource_labels
+  labels                   = var.resource_labels
 
   network                          = module.vpc.network_name
-  subnetwork                       = local.composer_env_name
-  master_ipv4_cidr                 = local.composer_ip_ranges.master
+  subnetwork                       = var.composer_env_name
+  master_ipv4_cidr                 = var.composer_ip_ranges.master
   service_ip_allocation_range_name = "services"
   pod_ip_allocation_range_name     = "pods"
   enable_private_endpoint          = true

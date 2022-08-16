@@ -7,22 +7,22 @@ module "vpc" {
 
   subnets = [
     {
-      subnet_name           = local.composer_env_name
-      subnet_ip             = local.composer_ip_ranges.nodes
+      subnet_name           = var.composer_env_name
+      subnet_ip             = var.composer_ip_ranges.nodes
       subnet_region         = var.region
       subnet_private_access = true
     },
   ]
 
   secondary_ranges = {
-    "${local.composer_env_name}" = [
+    "${var.composer_env_name}" = [
       {
         range_name    = "pods"
-        ip_cidr_range = local.composer_ip_ranges.pods
+        ip_cidr_range = var.composer_ip_ranges.pods
       },
       {
         range_name    = "services"
-        ip_cidr_range = local.composer_ip_ranges.services
+        ip_cidr_range = var.composer_ip_ranges.services
       },
     ]
   }
