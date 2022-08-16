@@ -1,5 +1,5 @@
 resource "random_id" "db_name_suffix" {
-  byte_length = 2
+  byte_length = 4
 }
 
 resource "google_sql_database_instance" "instance" {
