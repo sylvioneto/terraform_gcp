@@ -14,9 +14,9 @@ from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToG
 from airflow.providers.google.cloud.operators.cloud_sql import CloudSQLExportInstanceOperator
 
 
-GCS_DATA_LAKE_BUCKET=os.environ.get("GCS_DATA_LAKE_BUCKET")
-SQL_QUERY = "select * from {};"
 CONN_ID="DVDRENTAL_DB"
+SQL_QUERY = "select * from {};"
+GCS_DATA_LAKE_BUCKET=os.environ.get("GCS_DATA_LAKE_BUCKET")
 FILE_PREFIX="dvdrental/{{ ds }}/"
 
 
