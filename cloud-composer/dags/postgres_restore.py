@@ -10,7 +10,7 @@ from airflow import models
 from airflow.providers.google.cloud.operators.cloud_sql import CloudSQLImportInstanceOperator
 
 GCS_SQL_BACKUP_BUCKET=os.environ.get("GCS_SQL_BACKUP_BUCKET")
-FILE_NAME=GCS_SQL_BACKUP_BUCKET+"postgres_dvdrental.sql"
+FILE_NAME=GCS_SQL_BACKUP_BUCKET+"/postgres_dvdrental.sql"
 INSTANCE_NAME=os.environ.get("DVDRENTAL_INSTANCE_NAME")
 
 with models.DAG(
