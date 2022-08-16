@@ -10,7 +10,7 @@ from airflow import models
 from airflow.providers.google.cloud.operators.cloud_sql import CloudSQLImportInstanceOperator
 
 GCS_SQL_BACKUP_BUCKET=os.environ.get("GCS_SQL_BACKUP_BUCKET")
-FILE_NAME=GCS_SQL_BACKUP_BUCKET+"/postgres_dvdrental.sql"
+FILE_NAME="gs://{}/postgres_dvdrental.sql".format(GCS_SQL_BACKUP_BUCKET)
 INSTANCE_NAME=os.environ.get("DVDRENTAL_INSTANCE_NAME")
 
 with models.DAG(
@@ -20,8 +20,10 @@ with models.DAG(
     tags=['example'],
 ) as dag:
 
-    import_body = {"importContext": {"fileType": "sql", "uri": FILE_NAME}}
+    import_body = {"importContext": {"fileType": "sql", "uri": FILE_NAME, "database":"dvdrental"}}
 
     sql_import_task = CloudSQLImportInstanceOperator(
-        body=import_body, instance=INSTANCE_NAME, task_id='sql_import_task'
+        body=import_body, 
+        instance=INSTANCE_NAME,
+        task_id='sql_import_task'
     )

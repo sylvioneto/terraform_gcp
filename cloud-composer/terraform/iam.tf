@@ -43,8 +43,8 @@ resource "google_project_iam_member" "storage_admin" {
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
-resource "google_project_iam_member" "sql_client" {
+resource "google_project_iam_member" "sql_admin" {
   project = var.project_id
-  role    = "roles/cloudsql.client"
+  role    = "roles/cloudsql.admin"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
