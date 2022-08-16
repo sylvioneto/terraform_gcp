@@ -17,6 +17,11 @@ module "composer" {
   pod_ip_allocation_range_name     = "pods"
   enable_private_endpoint          = true
 
+  env_variables = {
+    GCS_DATA_LAKE_BUCKET    = google_storage_bucket.sql_backup.name
+    GCS_SQL_BACKUP_BUCKET   = google_storage_bucket.data_lake.name
+    DVDRENTAL_INSTANCE_NAME = google_sql_database_instance.instance.name
+  }
 
   # Pre-installed packages https://cloud.google.com/composer/docs/concepts/versioning/composer-versions
   pypi_packages = {

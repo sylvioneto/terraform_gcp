@@ -14,8 +14,7 @@ from airflow import models
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
 
 
-PROJECT_ID = os.environ.get("GCP_PROJECT")
-GCS_BUCKET="{}-data-lake".format(PROJECT_ID)
+GCS_DATA_LAKE_BUCKET=os.environ.get("GCS_DATA_LAKE_BUCKET")
 SQL_QUERY = "select * from {};"
 CONN_ID="postgres_dvdrental"
 FILE_PREFIX="dvdrental/{{ ds }}/"
@@ -33,7 +32,7 @@ with models.DAG(
         postgres_conn_id=CONN_ID,
         task_id="get_customer_data",
         sql=SQL_QUERY.format("customer"),
-        bucket=GCS_BUCKET,
+        bucket=GCS_DATA_LAKE_BUCKET,
         filename=FILE_PREFIX+"customer.json",
         gzip=False,
         use_server_side_cursor=True,
@@ -43,7 +42,7 @@ with models.DAG(
         postgres_conn_id=CONN_ID,
         task_id="get_rental_data",
         sql=SQL_QUERY.format("rental"),
-        bucket=GCS_BUCKET,
+        bucket=GCS_DATA_LAKE_BUCKET,
         filename=FILE_PREFIX+"rental.json",
         gzip=False,
         use_server_side_cursor=True,
