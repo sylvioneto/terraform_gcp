@@ -3,9 +3,10 @@
 ## Description
 
 This example demonstrates how to use Cloud Composer to:
-- Extract data from Postgres and to Cloud Storage
+- Restore a Postgres backup
+- Extract data from Postgres to Cloud Storage
 - Load data from Cloud Storage to BigQuery
-- Transform data on BigQuery
+- Transform data on BigQuery (to-do)
 
 Resources created:
 - VPC with firewall rules
