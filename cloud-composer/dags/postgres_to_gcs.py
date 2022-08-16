@@ -18,7 +18,7 @@ PROJECT_ID = os.environ.get("GCP_PROJECT")
 GCS_BUCKET="{}-data-lake".format(PROJECT_ID)
 SQL_QUERY = "select * from {};"
 CONN_ID="postgres_dvdrental"
-FILE_NAME="dvdrental/{{ ds }}/"
+FILE_PREFIX="dvdrental/{{ ds }}/"
 
 
 with models.DAG(
@@ -34,7 +34,7 @@ with models.DAG(
         task_id="get_customer_data",
         sql=SQL_QUERY.format("customer"),
         bucket=GCS_BUCKET,
-        filename=FILE_NAME+"customer.json",
+        filename=FILE_PREFIX+"customer.json",
         gzip=False,
         use_server_side_cursor=True,
     )
@@ -44,7 +44,7 @@ with models.DAG(
         task_id="get_rental_data",
         sql=SQL_QUERY.format("rental"),
         bucket=GCS_BUCKET,
-        filename=FILE_NAME+"rental.json",
+        filename=FILE_PREFIX+"rental.json",
         gzip=False,
         use_server_side_cursor=True,
     )
