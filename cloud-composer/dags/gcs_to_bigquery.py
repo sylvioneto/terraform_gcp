@@ -11,7 +11,6 @@ from datetime import datetime
 
 from airflow import models
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
-from airflow.providers.google.cloud.operators.cloud_sql import CloudSQLExportInstanceOperator
 
 
 GCS_DATA_LAKE_BUCKET=os.environ.get("GCS_DATA_LAKE_BUCKET")
@@ -28,7 +27,7 @@ with models.DAG(
     tags=['example'],
 ) as dag:
 
-    task_customer = PostgresToGCSOperator(
+    upload_customer_table = PostgresToGCSOperator(
         postgres_conn_id=CONN_ID,
         task_id="get_customer_data",
         sql=SQL_QUERY.format("customer"),
@@ -38,7 +37,7 @@ with models.DAG(
         use_server_side_cursor=True,
     )
 
-    task_rental = PostgresToGCSOperator(
+    upload_rental_table = PostgresToGCSOperator(
         postgres_conn_id=CONN_ID,
         task_id="get_rental_data",
         sql=SQL_QUERY.format("rental"),
@@ -48,14 +47,3 @@ with models.DAG(
         use_server_side_cursor=True,
     )
 
-    task_film = PostgresToGCSOperator(
-        postgres_conn_id=CONN_ID,
-        task_id="get_film_data",
-        sql=SQL_QUERY.format("film"),
-        bucket=GCS_DATA_LAKE_BUCKET,
-        filename=FILE_PREFIX+"film.json",
-        gzip=False,
-        use_server_side_cursor=True,
-    )
-
-task_customer >> task_rental >> task_film
