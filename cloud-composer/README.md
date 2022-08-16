@@ -55,6 +55,8 @@ cd ./terraform_gcp/cloud-composer
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
+8. Go to [Cloud Composer](https://console.cloud.google.com/composer) and check out the dags
+
 
 ## Destroy
 1. Execute Terraform using Cloud Build
