@@ -1,5 +1,5 @@
 locals {
-  airflow_conn_dvdrental = "gcpcloudsql://postgres:${var.root_password}@${google_sql_database_instance.instance.private_ip_address}:5432/dvdrental"
+  airflow_conn_dvdrental = "gcpcloudsql://airflow:${var.airflow_password}@${google_sql_database_instance.instance.private_ip_address}:5432/dvdrental"
 }
 
 variable "project_id" {
@@ -19,10 +19,10 @@ variable "composer_env_name" {
   default     = "composer-af2"
 }
 
-variable "root_password" {
+variable "airflow_password" {
   type        = string
   description = "Postgres root password"
-  default     = "supersecret!"
+  default     = "supersecret"
 }
 
 variable "composer_ip_ranges" {

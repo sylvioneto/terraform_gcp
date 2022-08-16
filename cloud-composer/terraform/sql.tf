@@ -6,8 +6,7 @@ resource "google_sql_database_instance" "instance" {
   name                = "private-postgres-${random_id.db_name_suffix.hex}"
   region              = var.region
   database_version    = "POSTGRES_14"
-  deletion_protection = false             # not recommended for PROD
-  root_password       = var.root_password # not recommended for PROD
+  deletion_protection = false # not recommended for PROD
 
   settings {
     tier        = "db-g1-small"
@@ -19,16 +18,16 @@ resource "google_sql_database_instance" "instance" {
     }
   }
 
-  lifecycle {
-    ignore_changes = [
-      root_password
-    ]
-  }
-
   depends_on = [module.vpc]
 }
 
 resource "google_sql_database" "dvdrental" {
   instance = google_sql_database_instance.instance.id
   name     = "dvdrental"
+}
+
+resource "google_sql_user" "airflow" {
+  instance = google_sql_database_instance.instance.id
+  name     = "airflow"
+  password = var.airflow_password
 }
