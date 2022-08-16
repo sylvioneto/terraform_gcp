@@ -13,15 +13,18 @@ from datetime import datetime
 from airflow import models
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
 
-PROJECT_ID = os.environ.get("PROJECT_ID")
+
+PROJECT_ID = os.environ.get("GCP_PROJECT")
 GCS_BUCKET="{}-data-lake".format(PROJECT_ID)
 SQL_QUERY = "select * from {};"
 CONN_ID="postgres_dvdrental"
-FILE_NAME="dvdrental/{{ ds }}/{0}.json"
+FILE_NAME="dvdrental/{{ ds }}/"
+
 
 with models.DAG(
     dag_id='postgres_to_gcs',
     start_date=datetime(2021, 1, 1),
+    schedule_interval="0 1 * * *",
     catchup=False,
     tags=['example'],
 ) as dag:
@@ -31,7 +34,7 @@ with models.DAG(
         task_id="get_customer_data",
         sql=SQL_QUERY.format("customer"),
         bucket=GCS_BUCKET,
-        filename=FILE_NAME.format("customer"),
+        filename=FILE_NAME+"customer.json",
         gzip=False,
         use_server_side_cursor=True,
     )
@@ -41,7 +44,7 @@ with models.DAG(
         task_id="get_rental_data",
         sql=SQL_QUERY.format("rental"),
         bucket=GCS_BUCKET,
-        filename=FILE_NAME.format("rental"),
+        filename=FILE_NAME+"rental.json",
         gzip=False,
         use_server_side_cursor=True,
     )
