@@ -5,13 +5,14 @@ This DAG restores the sql backup used by the other dags.
 """
 import os
 from datetime import datetime
-
 from airflow import models
 from airflow.providers.google.cloud.operators.cloud_sql import CloudSQLImportInstanceOperator
+
 
 GCS_SQL_BACKUP_BUCKET=os.environ.get("GCS_SQL_BACKUP_BUCKET")
 FILE_NAME="gs://{}/postgres_dvdrental.sql".format(GCS_SQL_BACKUP_BUCKET)
 INSTANCE_NAME=os.environ.get("DVDRENTAL_INSTANCE_NAME")
+
 
 with models.DAG(
     dag_id='postgres_restore',

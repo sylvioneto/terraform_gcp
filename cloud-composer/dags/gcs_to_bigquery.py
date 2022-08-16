@@ -38,15 +38,4 @@ with models.DAG(
         write_disposition='WRITE_TRUNCATE',
     )
 
-    load_rental_data = GCSToBigQueryOperator(
-        task_id='load_rental_data',
-        bucket=GCS_DATA_LAKE_BUCKET,
-        source_objects=[FILE_PREFIX+"rental.json"],
-        source_format="NEWLINE_DELIMITED_JSON",
-        destination_project_dataset_table="{}.{}".format(DATASET_NAME, "rental"),
-        autodetect=True,
-        write_disposition='WRITE_TRUNCATE',
-    )
-
 create_dataset >> load_customer_data
-create_dataset >> load_rental_data
