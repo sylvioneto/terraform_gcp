@@ -20,7 +20,7 @@ CONN_ID="postgres_dvdrental"
 FILE_NAME="dvdrental/{{ ds }}/{0}.json"
 
 with models.DAG(
-    dag_id='example_postgres_to_gcs',
+    dag_id='postgres_to_gcs',
     start_date=datetime(2021, 1, 1),
     catchup=False,
     tags=['example'],
