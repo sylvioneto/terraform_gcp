@@ -4,8 +4,7 @@
 Example DAG using PostgresToGoogleCloudStorageOperator.
 This dag exports tables from a Postgres instance to Google Cloud Storage
 
-Requirement: create a postgres_dvdrental connection on Airflow.
-It must to connect to the Postgres database created by terraform.
+Requirement: make sure the dag postgres_restore completed successfully at least once.
 """
 import os
 from datetime import datetime
