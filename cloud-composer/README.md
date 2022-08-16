@@ -2,12 +2,19 @@
 
 ## Description
 
-This example demonstrates how to use Cloud Composer to integrate SQL Server and BigQuery.
+This example demonstrates how to use Cloud Composer to:
+- Extract data from Postgres and load to BigQuery
+- Load data from Cloud Storage to BigQuery
+- Transform data on BigQuery
 
 Resources created:
 - VPC with firewall rules
-- Cloud SQL for MSSQL
+- Cloud SQL for Postgres
 - Cloud Composer
+- Cloud Storage Buckets
+
+Check more operators available in [Airflow Google Operators doc](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/index.html).
+
 
 ## Deploy
 
@@ -32,7 +39,7 @@ gcloud services enable compute.googleapis.com \
     storage.googleapis.com \
     cloudfunctions.googleapis.com \
     pubsub.googleapis.com \
-    dataflow.googleapis.com
+    sqladmin.googleapis.com 
 ```
 
 5. Go to [IAM](https://console.cloud.google.com/iam-admin/iam) and add `Editor`, `Network Admin` and `Security Admin` role to the Cloud Build's service account `<PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`.
@@ -45,15 +52,13 @@ cd ./terraform_gcp/cloud-composer
 
 7. Execute Terraform using Cloud Build
 ```
-gcloud builds submit ./terraform --config cloudbuild.yaml
+gcloud builds submit . --config cloudbuild.yaml
 ```
-
-8. Upload the dags to the Composer DAG folder.
 
 
 ## Destroy
 1. Execute Terraform using Cloud Build
 ```
-cd ./terraform_gcp/composer
-gcloud builds submit ./terraform --config cloudbuild_destroy.yaml
+cd ./terraform_gcp/cloud-composer
+gcloud builds submit . --config cloudbuild_destroy.yaml
 ```

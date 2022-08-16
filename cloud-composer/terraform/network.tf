@@ -2,13 +2,13 @@ module "vpc" {
   source       = "terraform-google-modules/network/google"
   version      = "~> 5.0"
   project_id   = var.project_id
-  network_name = "data-analytics-vpc"
+  network_name = "vpc-data-analytics"
   routing_mode = "GLOBAL"
 
   subnets = [
     {
       subnet_name           = local.composer_env_name
-      subnet_ip             = local.ip_ranges.nodes
+      subnet_ip             = local.composer_ip_ranges.nodes
       subnet_region         = var.region
       subnet_private_access = true
     },
@@ -18,32 +18,14 @@ module "vpc" {
     "${local.composer_env_name}" = [
       {
         range_name    = "pods"
-        ip_cidr_range = local.ip_ranges.pods
+        ip_cidr_range = local.composer_ip_ranges.pods
       },
       {
         range_name    = "services"
-        ip_cidr_range = local.ip_ranges.services
+        ip_cidr_range = local.composer_ip_ranges.services
       },
     ]
   }
-}
-
-resource "google_compute_firewall" "allow_ssh" {
-  name    = "${module.vpc.network_name}-allow-ssh-from-iap"
-  network = module.vpc.network_self_link
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-
-  source_ranges = [
-    "35.235.240.0/20"
-  ]
-
-  target_tags = [
-    "allow-ssh"
-  ]
 }
 
 resource "google_compute_global_address" "service_range" {
@@ -60,4 +42,3 @@ resource "google_service_networking_connection" "private_service_connection" {
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
 }
-

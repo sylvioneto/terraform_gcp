@@ -8,12 +8,14 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=terraform_gcp/cloud-composer"
+  dir: terraform
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - destroy
   - -auto-approve
+  dir: terraform
 
 options:
   env:

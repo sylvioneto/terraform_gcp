@@ -1,4 +1,5 @@
 steps:
+# terraform steps
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -8,17 +9,31 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=terraform_gcp/cloud-composer"
+  dir: terraform
       
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - plan
+  dir: terraform
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
   - -auto-approve
+  dir: terraform
+
+# gcloud steps
+- id: 'copy dags'
+  name: 'gcr.io/cloud-builders/gcloud-slim'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    export COMPOSER_BUCKET=$(gcloud composer environments describe composer-af2 --location us-east1 --format='value(config.dagGcsPrefix)')
+    gsutil cp -r * $$COMPOSER_BUCKET
+  dir: dags
 
 options:
   env:
