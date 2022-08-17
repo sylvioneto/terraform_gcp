@@ -1,6 +1,6 @@
 resource "google_storage_bucket" "data_raw" {
   name                        = "${var.project_id}-data-raw"
-  location                    = "us-east1"
+  location                    = var.region
   force_destroy               = true
   uniform_bucket_level_access = true
   labels                      = local.labels
@@ -8,7 +8,7 @@ resource "google_storage_bucket" "data_raw" {
 
 resource "google_storage_bucket" "data_lake" {
   name                        = "${var.project_id}-data-lake"
-  location                    = "us-east1"
+  location                    = var.region
   force_destroy               = true
   uniform_bucket_level_access = true
   labels                      = local.labels
@@ -16,7 +16,7 @@ resource "google_storage_bucket" "data_lake" {
 
 resource "google_storage_bucket" "data_warehouse" {
   name                        = "${var.project_id}-data-warehouse"
-  location                    = "us-east1"
+  location                    = var.region
   force_destroy               = true
   uniform_bucket_level_access = true
   labels                      = local.labels
@@ -24,7 +24,7 @@ resource "google_storage_bucket" "data_warehouse" {
 
 resource "google_storage_bucket" "dataflow_temp_warehouse" {
   name                        = "${var.project_id}-dataflow-temp"
-  location                    = "us-east1"
+  location                    = var.region
   force_destroy               = true
   uniform_bucket_level_access = true
   labels                      = local.labels

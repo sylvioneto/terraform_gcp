@@ -2,7 +2,7 @@
 
 ## Description
 
-This project demonstrates how to create a data pipeline with Dataflow and GCS.
+This project demonstrates how to create a data pipeline with Dataflow, GCS and BigQuery.
 
 This pipeline gets data from a raw bucket, process and save it into the Data Lake and Data Warehouse.
 
@@ -48,12 +48,8 @@ gcloud builds submit ./terraform --config cloudbuild.yaml --project $GOOGLE_CLOU
 ```
 
 ### Dataflow job
-1. Copy the input file to the raw data bucket.
-```
-gsutil cp ./data/order_ingest.csv gs://$GOOGLE_CLOUD_PROJECT-data-raw/
-```
 
-2. Prepare the environment.
+1. Prepare the environment.
 ```
 pip3 install virtualenv
 python3 -m virtualenv venv
@@ -61,21 +57,21 @@ source venv/bin/activate
 pip3 install apache-beam[gcp]
 ```
 
-3. (optional) Grant `roles/dataflow.worker`, `roles/storage.admin`, `roles/bigquery.admin` to `<project-number>-compute@developer.gserviceaccount.com` in case it's the first time you use Dataflow.
+2. (optional) Grant `roles/dataflow.worker`, `roles/storage.admin`, `roles/bigquery.admin` to `<project-number>-compute@developer.gserviceaccount.com` in case it's the first time you use Dataflow.
 
-4. Run the job.
+3. Run the job.
 
     3.1 On Dataflow
     Run:
     ```
     python3 ./job/order_ingest.py \
         --project=$GOOGLE_CLOUD_PROJECT \
-        --region=us-east1 \
+        --region=southamerica-east1 \
         --runner=DataflowRunner \
         --job_name=order-ingest \
         --save_main_session \
         --temp_location=gs://$GOOGLE_CLOUD_PROJECT-dataflow-temp/ \
-        --subnetwork=regions/us-east1/subnetworks/data-engineering \
+        --subnetwork=regions/southamerica-east1/subnetworks/dataflow \
         --gcs_raw=$GOOGLE_CLOUD_PROJECT-data-raw \
         --gcs_lake=$GOOGLE_CLOUD_PROJECT-data-lake \
         --gcs_dw=$GOOGLE_CLOUD_PROJECT-data-warehouse
@@ -86,7 +82,7 @@ pip3 install apache-beam[gcp]
     ```
     python3 ./job/order_ingest.py \
         --project=$GOOGLE_CLOUD_PROJECT \
-        --region=us-east1 \
+        --region=southamerica-east1 \
         --runner=DirectRunner \
         --job_name=order-ingest \
         --temp_location=gs://$GOOGLE_CLOUD_PROJECT-dataflow-temp/ \
@@ -95,10 +91,15 @@ pip3 install apache-beam[gcp]
         --gcs_dw=$GOOGLE_CLOUD_PROJECT-data-warehouse
     ```
 
+4. Check the job results:
+    - Data in GCS Data Lake bucket
+    - Data in GCE Data Warehouse bucket
+    - BQ ecommerce.orders table
+
 
 ## Destroy
 1. Execute Terraform using Cloud Build
 ```
 cd ./terraform_gcp/dataflow
-gcloud builds submit ./terraform --config cloudbuild_destroy.yaml
+gcloud builds submit . --config cloudbuild_destroy.yaml
 ```

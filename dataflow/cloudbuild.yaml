@@ -8,17 +8,29 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=terraform_gcp/dataflow"
-      
+  dir: terraform
+
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - plan
+  dir: terraform
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
   - -auto-approve
+  dir: terraform
+
+- id: 'copy sample file'
+  name: 'gcr.io/cloud-builders/gcloud-slim'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    gsutil cp * gs://$PROJECT_ID-data-raw
+  dir: data
 
 options:
   env:

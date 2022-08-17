@@ -5,12 +5,12 @@ module "vpc" {
   source       = "terraform-google-modules/network/google"
   version      = "~> 3.0"
   project_id   = var.project_id
-  network_name = "dev-vpc"
+  network_name = "data-engineering"
   routing_mode = "GLOBAL"
 
   subnets = [
     {
-      subnet_name           = "data-engineering"
+      subnet_name           = "dataflow"
       subnet_ip             = "10.1.0.0/22"
       subnet_region         = var.region
       subnet_private_access = true
@@ -28,5 +28,5 @@ resource "google_compute_firewall" "allow-vm-to-vm" {
     ports    = []
   }
 
-  source_ranges = ["10.1.0.0/22"]
+  source_ranges = ["10.0.0.0/16"]
 }

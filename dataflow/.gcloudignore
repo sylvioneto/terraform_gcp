@@ -11,3 +11,5 @@ tests
 *.tfplan
 *.tfstate
 *.backup
+
+venv

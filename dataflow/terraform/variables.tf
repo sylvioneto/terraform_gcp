@@ -5,7 +5,7 @@ variable "project_id" {
 
 variable "region" {
   description = "GCP Project ID"
-  default     = "us-east1"
+  default     = "southamerica-east1"
 }
 
 locals {
