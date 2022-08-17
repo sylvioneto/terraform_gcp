@@ -12,7 +12,7 @@ module "vpc" {
     {
       subnet_name           = local.cluster_name
       subnet_ip             = local.cluster_ip_ranges.nodes
-      subnet_region         = local.region
+      subnet_region         = var.region
       subnet_private_access = true
     },
   ]
