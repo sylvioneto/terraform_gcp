@@ -44,7 +44,7 @@ steps:
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
-    - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+    - 'CLOUDSDK_COMPUTE_REGION=southamerica-east1'
     - 'CLOUDSDK_CONTAINER_CLUSTER=gke-autopilot-sandbox'
 
 tags:

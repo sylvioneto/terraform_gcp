@@ -4,7 +4,7 @@ variable "project_id" {
 }
 
 locals {
-  region   = "us-central1"
+  region   = "southamerica-east1"
   vpc_name = "vpc-gke-std"
 
   cluster_name = "gke-autopilot-sandbox"
