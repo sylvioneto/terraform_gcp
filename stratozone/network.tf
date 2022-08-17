@@ -8,7 +8,7 @@ resource "google_compute_subnetwork" "subnet" {
   name          = "my-subnet"
   description   = "My Test subnet"
   ip_cidr_range = "10.1.0.0/16"
-  region        = "us-central1"
+  region        = "southamerica-east1"
   network       = google_compute_network.vpc_network.id
 }
 

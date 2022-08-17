@@ -8,7 +8,7 @@ resource "google_compute_subnetwork" "subnet" {
   name                     = "win-subnet"
   description              = "Subnet to host Windows Server VMs"
   ip_cidr_range            = "10.1.0.0/16"
-  region                   = "us-central1"
+  region                   = "southamerica-east1"
   network                  = google_compute_network.vpc.id
   private_ip_google_access = true
 }

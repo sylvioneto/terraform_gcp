@@ -1,7 +1,7 @@
 resource "google_compute_instance" "app1" {
   name         = "srv-app-001"
   machine_type = "n1-standard-2"
-  zone         = "us-central1-a"
+  zone         = "southamerica-east1-a"
 
   boot_disk {
     initialize_params {
@@ -29,7 +29,7 @@ resource "google_compute_instance" "app1" {
 resource "google_compute_instance" "app2" {
   name         = "srv-app-002"
   machine_type = "n1-standard-2"
-  zone         = "us-central1-a"
+  zone         = "southamerica-east1-a"
 
   boot_disk {
     initialize_params {
@@ -57,7 +57,7 @@ resource "google_compute_instance" "app2" {
 resource "google_compute_instance" "db1" {
   name         = "srv-db-001"
   machine_type = "n1-standard-4"
-  zone         = "us-central1-a"
+  zone         = "southamerica-east1-a"
 
   boot_disk {
     initialize_params {

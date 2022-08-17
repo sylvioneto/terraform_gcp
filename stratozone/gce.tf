@@ -8,7 +8,7 @@ locals {
 resource "google_compute_instance" "app_server_win" {
   name         = "app-server-001"
   machine_type = "e2-medium"
-  zone         = "us-central1-a"
+  zone         = "southamerica-east1-a"
   labels       = local.labels
   tags         = ["allow-rdp-ext"]
 
@@ -38,7 +38,7 @@ resource "google_compute_instance" "app_server_win" {
 resource "google_compute_instance" "db_server_linux" {
   name         = "db-server-001"
   machine_type = "e2-medium"
-  zone         = "us-central1-a"
+  zone         = "southamerica-east1-a"
   labels       = local.labels
 
   boot_disk {
@@ -63,7 +63,7 @@ resource "google_compute_instance" "db_server_linux" {
 resource "google_compute_instance" "stratozone_collector" {
   name         = "stratozone-collector"
   machine_type = "e2-standard-4"
-  zone         = "us-central1-a"
+  zone         = "southamerica-east1-a"
   labels       = local.labels
   tags         = ["stratozone", "allow-rdp-ext"]
 
