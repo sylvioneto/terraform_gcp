@@ -1,4 +1,4 @@
-region = "us-central1"
+region = "southamerica-east1"
 
 network_name       = "vpc-sandbox"
 front_end_cidr     = "10.0.0.0/24"
