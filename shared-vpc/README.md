@@ -31,7 +31,10 @@ gsutil mb gs://$GOOGLE_CLOUD_PROJECT-tf-state
 
 4. Enable the necessary APIs and give Cloud Build's SA permissions in case it's the first time you use it.
 ```
-gcloud services enable cloudbuild.googleapis.com compute.googleapis.com cloudresourcemanager.googleapis.com cloudbilling.googleapis.com
+gcloud services enable cloudbuild.googleapis.com \
+compute.googleapis.com \
+cloudresourcemanager.googleapis.com \
+cloudbilling.googleapis.com
 ```
 
 5. Navigate to `terraform_gcp/shared_vpc`, then set the env vars and execute Terraform.
