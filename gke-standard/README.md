@@ -56,7 +56,7 @@ gcloud builds submit . --config cloudbuild.yaml
 In case you use Cloud DNS, you can set the env vars below according to your settings:
 ```
 ZONE_NAME=your-public-zone-name
-NGINX_IP=1.2.3.4
+NGINX_IP=your-nginx-ip
 DOMAIN=your-domain.com.
 ```
 And run the command below on Cloud Shell terminal.
