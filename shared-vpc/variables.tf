@@ -7,7 +7,7 @@ variable "billing_account_id" {
 }
 
 variable "region" {
-  default = "us-central1"
+  default = "southamerica-east1"
 }
 
 variable "developers_group" {
