@@ -11,7 +11,7 @@
 #   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-private-cluster"
 
 #   project_id = var.project_id
-#   region     = local.region
+#   region     = var.region
 #   name       = local.cluster_name
 
 #   # networking
@@ -38,7 +38,7 @@
 
 resource "google_container_cluster" "primary" {
   name             = local.cluster_name
-  location         = local.region
+  location         = var.region
   resource_labels  = local.resource_labels
   enable_autopilot = true
 

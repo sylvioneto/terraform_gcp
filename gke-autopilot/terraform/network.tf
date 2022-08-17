@@ -12,14 +12,14 @@ module "vpc" {
     {
       subnet_name           = local.cluster_name
       subnet_ip             = local.cluster_ip_ranges.nodes
-      subnet_region         = local.region
+      subnet_region         = var.region
       subnet_private_access = true
     },
 
     {
       subnet_name   = "proxy-only-subnet"
       subnet_ip     = "10.129.0.0/23"
-      subnet_region = local.region
+      subnet_region = var.region
       purpose       = "REGIONAL_MANAGED_PROXY"
       role          = "ACTIVE"
     },
