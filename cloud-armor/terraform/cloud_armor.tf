@@ -145,7 +145,7 @@ resource "google_compute_security_policy" "policy" {
       ban_duration_sec = 600
       conform_action   = "allow"
       exceed_action    = "deny(429)"
-      enforce_on_key   = "XFF-IP"
+      enforce_on_key   = "ALL"
     }
   }
 
