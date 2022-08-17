@@ -11,7 +11,6 @@ from datetime import datetime
 
 from airflow import models
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
-from airflow.providers.google.cloud.operators.cloud_sql import CloudSQLExportInstanceOperator
 
 
 CONN_ID="DVDRENTAL_DB"
@@ -30,32 +29,34 @@ with models.DAG(
 
     task_customer = PostgresToGCSOperator(
         postgres_conn_id=CONN_ID,
-        task_id="get_customer_data",
+        task_id="get_customer",
         sql=SQL_QUERY.format("customer"),
         bucket=GCS_DATA_LAKE_BUCKET,
-        filename=FILE_PREFIX+"customer.json",
+        filename=FILE_PREFIX+"customer.csv",
+        export_format='csv',
         gzip=False,
         use_server_side_cursor=True,
     )
 
     task_rental = PostgresToGCSOperator(
         postgres_conn_id=CONN_ID,
-        task_id="get_rental_data",
+        task_id="get_rental",
         sql=SQL_QUERY.format("rental"),
         bucket=GCS_DATA_LAKE_BUCKET,
-        filename=FILE_PREFIX+"rental.json",
+        filename=FILE_PREFIX+"rental.csv",
+        export_format='csv',
         gzip=False,
         use_server_side_cursor=True,
     )
 
     task_film = PostgresToGCSOperator(
         postgres_conn_id=CONN_ID,
-        task_id="get_film_data",
+        task_id="get_film",
         sql=SQL_QUERY.format("film"),
         bucket=GCS_DATA_LAKE_BUCKET,
-        filename=FILE_PREFIX+"film.json",
+        filename=FILE_PREFIX+"film.csv",
+        export_format='csv',
         gzip=False,
         use_server_side_cursor=True,
     )
 
-task_customer >> task_rental >> task_film
