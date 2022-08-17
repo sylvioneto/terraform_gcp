@@ -50,5 +50,6 @@ options:
 tags:
   - terraform
   - gke-autopilot
+  - plan-apply
 
 timeout: 1200s

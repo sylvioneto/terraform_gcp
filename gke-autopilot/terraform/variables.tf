@@ -3,9 +3,13 @@ variable "project_id" {
   default     = null
 }
 
+variable "region" {
+  description = "GCP region"
+  default     = "southamerica-east1"
+}
+
 locals {
-  region   = "southamerica-east1"
-  vpc_name = "vpc-gke-std"
+  vpc_name = "gke-sandbox"
 
   cluster_name = "gke-autopilot-sandbox"
   cluster_ip_ranges = {
