@@ -43,13 +43,15 @@ steps:
   args: 
   - '-c'
   - | 
-    export COMPOSER_BUCKET=$(gcloud composer environments describe composer-af2 --location us-east1 --format='value(config.dagGcsPrefix)')
+    export COMPOSER_BUCKET=$(gcloud composer environments describe composer-af2 --location $$REGION --format='value(config.dagGcsPrefix)')
     gsutil cp * $$COMPOSER_BUCKET
   dir: dags
 
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
+    - REGION=southamerica-east1
+
 tags:
   - terraform
   - cloud-composer
