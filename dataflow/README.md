@@ -44,7 +44,7 @@ gcloud services enable cloudbuild.googleapis.com \
 7. Execute Terraform using Cloud Build
 ```
 cd ./terraform_gcp/dataflow
-gcloud builds submit ./terraform --config cloudbuild.yaml --project $GOOGLE_CLOUD_PROJECT
+gcloud builds submit . --config cloudbuild.yaml --project $GOOGLE_CLOUD_PROJECT
 ```
 
 ### Dataflow job
